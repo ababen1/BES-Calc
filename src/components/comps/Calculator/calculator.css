@@ -1,28 +1,44 @@
 .calculator{
     background-color: white;
     box-shadow: 0.5px 1px 1px 0.5px rgba(0, 0, 0, 0.06);
-    height: 60px;
+    height: 79px;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 12px;
     margin-bottom: 40px;
     margin-top: 40px;
+    z-index: 0;
 }
 .add{
     background: lightgray;
-    height: 100%;
-    width:1%;
+    height:auto;
+    width:6%;
     color: white;
     font-size: 50px;
-    padding-right: 30px;
-    padding-left: 30px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    text-align: center;
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: thin solid transparent;
 }
 .description
 {
     width: 15%;
     height: auto;
+    padding-top: 14px;
+    padding-bottom: 14px;
 
+}
+.input{
+    width: 15%;
+    height: auto;
+    padding-bottom: 14px;
+    padding-top: 14px;
+    padding-right: 7px;
+    padding-left: 7px;
+    margin-right: -4px;
+    margin-left: -4px;
 
 }
 .calculator-input{background-color: transparent; border: thin solid transparent; padding-bottom: 7px;
@@ -30,22 +46,25 @@
 .kilo-w{
     width: 15%;
     height: auto;
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 14px;
+    padding-bottom: 14px;
 }
 .KW{
     background-color: transparent;
     font-family: Arial;
     border: thin solid transparent;
+    padding-top: 18px;
+    padding-bottom: 18px;
+
 }
 
 .al-cu{
     width:19%;
     box-sizing: inherit;
-    border-right: thin solid whitesmoke;
     font-size: 14px;
     justify-content: center;
     border-spacing: 15px;
+
 
 }
 .al-cu label{
@@ -61,12 +80,28 @@
 .data{
     padding-top: 20px;
     padding-bottom: 20px;
-    border-right: thin solid whitesmoke;
 }
 
 
+ .rule-line{
+    height: 30px;
+    width: 0.5px;
+    position: relative;
+    top: -50px;
+    bottom: -50px;
+    left: 60px;
+     border: thin solid whitesmoke;
+}
 
-
+ .rule-line-2{
+     height: 30px;
+     width: 0.5px;
+     position: relative;
+     top: -50px;
+     bottom: -50px;
+     left: 92px;
+     border: thin solid whitesmoke;
+ }
 /* Switch design */
 
 
@@ -135,3 +170,4 @@ input:checked + .slider:before {
 
 
 .gray-text{color: rgba(0, 0, 0, 0.38);}
+.al-cu.form-control{margin-top: 0px; margin-bottom: 0px;}
