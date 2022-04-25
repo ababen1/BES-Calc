@@ -11,7 +11,13 @@ body{
 }
 .menu-title{justify-content: center; display:  block; }
 
-.form-control{width: 95%; height: 25px; border-radius: 100px; border: thin solid dodgerblue; margin-right: 10px; margin-left: 10px; margin-top:10px; margin-bottom: 10px;}
+.form-control{width: 95%; height: 25px; border-radius: 100px; border: thin solid transparent; font-weight: bold; margin-right: 10px; margin-left: 10px; margin-top:10px; margin-bottom: 10px;}
+.btn-secondary{ cursor: pointer; transition: 200ms ease-in-out; margin-left: 20px; margin-right: 20px; background-color: gray; color: white; border: thin solid transparent; border-radius: 10px; width: 120px; height: 50px; font-size: 20px;}
+.btn-secondary:hover{
+    background-color: #136a75;
+    color: white;
+}
+.btn-secondary-disabled{ cursor: pointer; margin-left: 20px; margin-right: 20px; background-color: lightgray; color: white; border: thin solid transparent; border-radius: 10px; width: 120px; height: 50px; font-size: 20px;}
 
 .container{
 
@@ -28,6 +34,15 @@ body{
 
 }
 
+.space{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.total-left{
+    position: relative;
+    left: 0;
+}
 
 .col-12{
     height: auto;
@@ -39,6 +54,6 @@ body{
     height: auto;
 }
 .col-6{ width: 50%; height: auto; }
-.calculator{
-
+.app{
+    margin: 0 auto;
 }

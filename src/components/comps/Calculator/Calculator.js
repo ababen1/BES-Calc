@@ -7,7 +7,7 @@ class Calculator extends Component
     {
         return(
             <div>
-                <div className={"calculator row"}>
+                <div className={"calculator  row"}>
                     <div className={"add col-1"}>
                         +
                     </div>
@@ -38,15 +38,16 @@ class Calculator extends Component
                         <label>Single</label>
 
                     </div>
-                    <div className={"data col-1"}>
-                       Reserve
+                    <div className={"data gray-text col-1"}>
+                       Reserve(%)
                     </div>
-                    <div className={"col-1 data"}>
+                    <div className={"col-1 gray-text data"}>
                         Imax
                     </div>
-                    <div className={"col-1 data"}>
-                        s[mm^2]
+                    <div className={"col-1 gray-text data"}>
+                        S[Mm^2]
                     </div>
+
                 </div>
 
             </div>
