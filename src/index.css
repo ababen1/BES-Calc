@@ -1,5 +1,6 @@
 body{
     background-color: whitesmoke;
+    font-family: Arial;
 }
 .menu{
     width: 100%;
@@ -32,6 +33,10 @@ body{
     height: auto;
     width: 100%;
 
+}
+.col-1{
+    width: 12.5%;
+    height: auto;
 }
 .col-6{ width: 50%; height: auto; }
 .calculator{
