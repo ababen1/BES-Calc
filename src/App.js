@@ -4,14 +4,12 @@ import LoginSignUp from "./components/comps/Modal/LoginSignUp";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import  logo from "./Assets/Group 35.svg";
-import {calculateNewValue} from "@testing-library/user-event/dist/utils";
-const  Section = lazy(() =>{return new Promise(resolve => {setTimeout (()=> resolve(import("./components/comps/Section")),2500)});
-});
-const  Calculator = lazy(() =>{return new Promise(resolve => {setTimeout (()=> resolve(import("./components/comps/Calculator/Calculator")),2500)});
-});
+ import Section from "./components/comps/Section";
+ import Calculator from "./components/comps/Calculator/Calculator";
+
 class App extends Component{
 
-    state = {nowDate:new  Date(), calculatorRepeatNumber: 0,arrCalculator:[] ,focusInputOne:"normal", focusInputTwo: "normal", focusInputThree:"normal", ampacity:0}
+    state = {nowDate:new  Date(), calculatorRepeatNumber: 0,arrCalculator:[], arrCalculatorNumber:[]  ,focusInputOne:"normal", focusInputTwo: "normal", focusInputThree:"normal", ampacity:0}
 
 OnFocusBolderFont(ev)
 {
@@ -25,19 +23,29 @@ OnFocusOut(){
 //clicking on calculator adding to arrray in state
 OnClickCalculator()
 {
+    let arr = [];
     let counter = this.state.calculatorRepeatNumber;
     counter += 1;
-
-
-
     this.setState({calculatorRepeatNumber: counter});
-    this.setState({arrCalculator:[..."",<Calculator/>]})
+    for(let i=0; i<=this.state.calculatorRepeatNumber; i++) {
+        arr.push(<Calculator count={i} />);
+    }
+    this.setState({arrCalculatorNumber: arr});
 
 }
- //displaying calculators
-DisplayCalculators(){
-        this.state.arrCalculator.map((counting)=><div>{}</div>);
+
+CalculatorNumber()
+{
+    let  counter = this.state.calculatorRepeatNumber;
+    for(let i=0; i<counter; i++)
+    {
+        this.state.arrCalculatorNumber.push(i)
+    }
+
 }
+
+ //displaying calculators
+
 
 Calculation()
 {
@@ -49,11 +57,7 @@ Calculation()
     return (
 
         <div className="App" >
-          <Suspense fallback={<div><Skeleton count={1}  height={100} />
-              <Skeleton count={1}  height={100} baseColor={"lightgray"} />
-              <Skeleton circle width={60} height={60} baseColor={"lightgray"} count={1} />
-              <Skeleton count={4} height={100} baseColor={"lightgray"} />
-          </div>}>
+
               <div className={"container"}>
 
                       <Section bg={"white"} color={"black"} content={<img src={logo} className={"logo"} title={"BES"} alt={"BES"} />}/>
@@ -83,8 +87,8 @@ Calculation()
                  </div>
                   <div className={"row"}>
                       <div className={"col-12"} onClick={this.OnClickCalculator.bind(this)}>
-                        <Calculator   />
-
+                          {this.state.arrCalculatorNumber.map((value, index, array) => <Calculator key={index} count={index+1} />)}
+                          <Calculator count={0}/>
                       </div>
                   </div>
                   <div className={"row"}>
@@ -97,7 +101,6 @@ Calculation()
                   </div>
 
               </div>
-          </Suspense>
         </div>
     );
 

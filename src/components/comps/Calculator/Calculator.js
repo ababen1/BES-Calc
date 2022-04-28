@@ -7,10 +7,10 @@ class Calculator extends Component
     {
         return(
             <div >
-                {this.props.counter}
+
                 <div   className={"calculator  row"}>
-                    <div className={"add col-1"}>
-                        +
+                    <div style={{backgroundColor:(this.props.count===0)?"lightgray":"#156982"}}  className={"add col-1"}>
+                        {(this.props.count === 0)?"+":this.props.count}
                     </div>
                     <div className={"description col-1"}>
                         <input className={"form-control calculator-input"} placeholder={"Description"}  />
