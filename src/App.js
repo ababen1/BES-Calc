@@ -1,15 +1,17 @@
 import './App.css';
 import {Component, lazy, Suspense} from "react";
+import LoginSignUp from "./components/comps/Modal/LoginSignUp";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import  logo from "./Assets/Group 35.svg";
+import {calculateNewValue} from "@testing-library/user-event/dist/utils";
 const  Section = lazy(() =>{return new Promise(resolve => {setTimeout (()=> resolve(import("./components/comps/Section")),2500)});
 });
 const  Calculator = lazy(() =>{return new Promise(resolve => {setTimeout (()=> resolve(import("./components/comps/Calculator/Calculator")),2500)});
 });
 class App extends Component{
 
-    state = {nowDate:new  Date(), focusInputOne:"normal", focusInputTwo: "normal", focusInputThree:"normal"}
+    state = {nowDate:new  Date(), calculatorRepeatNumber: 0,arrCalculator:[] ,focusInputOne:"normal", focusInputTwo: "normal", focusInputThree:"normal", ampacity:0}
 
 OnFocusBolderFont(ev)
 {
@@ -19,8 +21,33 @@ OnFocusBolderFont(ev)
 OnFocusOut(){
         this.setState({focus:"normal"});
 }
+
+//clicking on calculator adding to arrray in state
+OnClickCalculator()
+{
+    let counter = this.state.calculatorRepeatNumber;
+    counter += 1;
+
+
+
+    this.setState({calculatorRepeatNumber: counter});
+    this.setState({arrCalculator:[..."",<Calculator/>]})
+
+}
+ //displaying calculators
+DisplayCalculators(){
+        this.state.arrCalculator.map((counting)=><div>{}</div>);
+}
+
+Calculation()
+{
+
+}
+
   render(){
+
     return (
+
         <div className="App" >
           <Suspense fallback={<div><Skeleton count={1}  height={100} />
               <Skeleton count={1}  height={100} baseColor={"lightgray"} />
@@ -28,6 +55,7 @@ OnFocusOut(){
               <Skeleton count={4} height={100} baseColor={"lightgray"} />
           </div>}>
               <div className={"container"}>
+
                       <Section bg={"white"} color={"black"} content={<img src={logo} className={"logo"} title={"BES"} alt={"BES"} />}/>
                       <Section bg={"#156982"} color={"white"} content={<h1 style={{textAlign: "center"}} >Electric Cables Cross Section Calculation</h1>}/>
 
@@ -54,8 +82,9 @@ OnFocusOut(){
                      </div>
                  </div>
                   <div className={"row"}>
-                      <div className={"col-12"}>
-                        <Calculator/>
+                      <div className={"col-12"} onClick={this.OnClickCalculator.bind(this)}>
+                        <Calculator   />
+
                       </div>
                   </div>
                   <div className={"row"}>
@@ -66,6 +95,7 @@ OnFocusOut(){
                       </div>
 
                   </div>
+
               </div>
           </Suspense>
         </div>

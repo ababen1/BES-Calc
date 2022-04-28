@@ -2,12 +2,13 @@ import {Component} from "react";
 import "./calculator.css";
 class Calculator extends Component
 {
-    state ={};
+
     render()
     {
         return(
-            <div>
-                <div className={"calculator  row"}>
+            <div >
+                {this.props.counter}
+                <div   className={"calculator  row"}>
                     <div className={"add col-1"}>
                         +
                     </div>

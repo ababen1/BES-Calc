@@ -1,0 +1,13 @@
+<svg id="login" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="67" height="64" viewBox="0 0 67 64">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_46" data-name="Rectangle 46" width="45" height="44.997" transform="translate(0 0)" fill="#828282"/>
+    </clipPath>
+  </defs>
+  <g id="login_icon" data-name="login icon" transform="translate(11)">
+    <g id="login-2" data-name="login" transform="translate(0 0)" clip-path="url(#clip-path)">
+      <path id="Path_35" data-name="Path 35" d="M22.5,0A22.5,22.5,0,0,0,9.314,40.732l.021.014,0,0a22.508,22.508,0,0,0,26.32,0l.022-.015A22.5,22.5,0,0,0,22.5,0M10.652,39.609V38.153A10.956,10.956,0,0,1,21.6,27.19h1.79A10.957,10.957,0,0,1,34.349,38.145v1.464A20.805,20.805,0,0,1,10.652,39.609Zm11.9-14.1h-.111a7.468,7.468,0,0,1-7.437-7.46c0-.192.008-.388.024-.584a7.494,7.494,0,0,1,14.937.006c.016.192.024.385.024.577a7.469,7.469,0,0,1-7.437,7.46ZM36.033,38.3v-.15a12.639,12.639,0,0,0-9.057-12.127,9.126,9.126,0,0,0,4.7-7.979c0-.24-.01-.481-.03-.714a9.178,9.178,0,0,0-18.294-.006c-.02.237-.03.479-.03.722a9.123,9.123,0,0,0,4.7,7.977A12.637,12.637,0,0,0,8.968,38.153v.15a20.813,20.813,0,1,1,27.065,0" fill="#828282"/>
+    </g>
+  </g>
+  <text id="login-3" data-name="login" transform="translate(0 45)" fill="#828282" font-size="14" font-family="Open Sans"><tspan x="-15" y="15">login</tspan></text>
+</svg>
