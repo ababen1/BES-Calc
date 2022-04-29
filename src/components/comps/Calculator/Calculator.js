@@ -2,12 +2,16 @@ import {Component} from "react";
 import "./calculator.css";
 class Calculator extends Component {
 
-    state = {description: ""};
+    state = {description: "", ampacity: ""};
 
     OnChangeHandler(ev) {
-        this.setState({description: ev.target.value})
+        this.setState(prevstate=>({...prevstate,[ev.target.name]: [ev.target.value]}));
     }
 
+    Calculation()
+    {
+
+    }
 
 
     render() {
@@ -20,9 +24,7 @@ class Calculator extends Component {
                             {(this.props.count === 0) ? "+" : this.props.count}
                         </div>
                         <div className={"description col-1"}>
-                            <input name={"description"} onChange={this.OnChangeHandler.bind(this)}
-                                   className={"form-control calculator-input"} placeholder={"Description"}/>
-                            <hr className={"rule-line"}/>
+                            <input value={this.state.description} type={"text"} name={"description"} onChange={this.OnChangeHandler.bind(this)} className={"form-control calculator-input"} placeholder={"Description"}/>
                         </div>
 
                         <div className={"input kilo-w col-1"}>
@@ -30,42 +32,40 @@ class Calculator extends Component {
                                 <option>power KW</option>
 
                             </select>
-                            <hr className={"rule-line"}/>
 
                         </div>
                         <div className={"input al-cu  col-1"}>
-                            <label>AI</label>
+                            <span>AI</span>
                             <label className="switch">
                                 <input type="checkbox"/>
                                 <span className="slider round"></span>
                             </label>
-                            <label>Cu</label>
-                            <hr className={"rule-line"}/>
+                            <span>Cu</span>
 
                         </div>
                         <div className={"input al-cu col-1"}>
-                            <label>3 Wire</label>
+                            <span>3 Wire</span>
                             <label className="switch">
                                 <input type="checkbox"/>
                                 <span className="slider round"></span>
                             </label>
-                            <label>Single</label>
-                            <hr className={"rule-line-2"}/>
+                            <span>Single</span>
 
                         </div>
                         <div className={"input data gray-text col-1"}>
-                            <input className={"form-control "} placeholder={"Reserve(%)"}/>
-                            <hr className={"rule-line"}/>
+                            <input value={this.state.ampacity} onChange={this.OnChangeHandler.bind(this)} type={"number"} name={"ampacity"} placeholder={"Ampacity"} className={"form-control"} />
+
+                        </div>
+                        <div className={"input data gray-text col-1"}>
+                            <p>Reserve(%)</p>
 
                         </div>
                         <div className={"input col-1 gray-text data"}>
-                            <input className={"form-control "} placeholder={"Imax"}/>
-                            <hr className={"rule-line"}/>
+                            <p>Imax</p>
 
                         </div>
                         <div className={"input col-1 gray-text data"}>
-                            <input className={"form-control "} placeholder={"S[Mm^2]"}/>
-                            <hr className={"rule-line"}/>
+                            <p>S[Mm^2]</p>
 
                         </div>
 
