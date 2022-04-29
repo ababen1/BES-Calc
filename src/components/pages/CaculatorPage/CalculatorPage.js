@@ -1,6 +1,7 @@
 import {Component} from "react";
 import Calculator from "../../comps/Calculator/Calculator";
 import Section from "../../comps/Section";
+import "./CalculatorPage.css";
 import logo from "../../../Assets/Group 35.svg";
 import loginImage from "../../../Assets/login.svg";
 class CalculatorPage extends Component
@@ -55,7 +56,7 @@ class CalculatorPage extends Component
 
                 <div className={"container"}>
 
-                    <Section bg={"white"} color={"black"} content={()=>{<img src={logo} className={"logo"} title={"BES"} alt={"BES"} />; <img src={loginImage} className={""} alt=""/>}} />
+                    <Section bg={"white"} color={"black"} content={<img src={logo} className={"logo"} title={"BES"} alt={"BES"} /> } loginIcon={<img src={loginImage} className={"login-icon"} alt=""/>} />
                     <Section bg={"#156982"} color={"white"} content={<h1 style={{textAlign: "center"}} >Electric Cables Cross Section Calculation</h1>}/>
 
                     <div className={"row"}>
