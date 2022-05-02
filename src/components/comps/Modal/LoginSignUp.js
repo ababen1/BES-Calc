@@ -6,8 +6,11 @@ class LoginSignUp extends Component
     {
         return(
 
-              <div className={"login-modal"}>
-
+              <div className={"login-shadow"}>
+                    <div className={"login-modal"}>
+                        Welcome, back please
+                        <h3>Login</h3>
+                    </div>
               </div>
         );
     }

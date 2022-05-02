@@ -3,11 +3,11 @@ import Calculator from "../../comps/Calculator/Calculator";
 import Section from "../../comps/Section";
 import "./CalculatorPage.css";
 import logo from "../../../Assets/Group 35.svg";
-import loginImage from "../../../Assets/login.svg";
+import loginImage from "../../../Assets/login_icon.svg";
 class CalculatorPage extends Component
 {
 
-    state = {description:"" ,nowDate:new  Date(), calculatorRepeatNumber: 0,arrCalculator:[], arrCalculatorNumber:[]  ,focusInputOne:"normal", focusInputTwo: "normal", focusInputThree:"normal", ampacity:0}
+    state = {nowDate:new  Date(), calculatorRepeatNumber: 0,arrCalculator:[], arrCalculatorNumber:[]  ,focusInputOne:"normal", focusInputTwo: "normal", focusInputThree:"normal", ampacity:0}
 
     OnFocusBolderFont(ev)
     {
@@ -17,6 +17,7 @@ class CalculatorPage extends Component
     OnFocusOut(){
         this.setState({focus:"normal"});
     }
+
 
 //clicking on calculator adding to array in state
     OnClickCalculator()
@@ -56,8 +57,7 @@ class CalculatorPage extends Component
 
                 <div className={"container"}>
 
-                    <Section bg={"white"} color={"black"} content={<img src={logo} className={"logo"} title={"BES"} alt={"BES"} /> } loginIcon={<img src={loginImage} className={"login-icon"} alt=""/>} />
-                    <Section bg={"#156982"} color={"white"} content={<h1 style={{textAlign: "center"}} >Electric Cables Cross Section Calculation</h1>}/>
+                    <Section bg={"white"} color={"black"} content={<img src={logo} className={"logo"} title={"BES"} alt={"BES"}  /> } info={<h1>Electric Cables Cross Section Calculations</h1>} loginIcon={ <img src={loginImage}  className={"login-icon"} width={67} height={64} alt="Login" title={"Login"} />} title={<span>login</span>} />
 
                     <div className={"row"}>
                         <div className={"col-12"}>
@@ -84,19 +84,17 @@ class CalculatorPage extends Component
                     <div className={"row"}>
                         <div className={"col-12"} >
                             {this.state.arrCalculatorNumber.map((value, index, array) => <div><Calculator  key={index} count={index+1} /></div>)}
-
+                            <div  className={"col-12"} onClick={this.OnClickCalculator.bind(this)}>
+                                <Calculator  count={0}/>
+                            </div>
                         </div>
 
                     </div>
-                    <div className={"row"}>
-                        <div  className={"col-12"} onClick={this.OnClickCalculator.bind(this)}>
-                            <Calculator  count={0}/>
-                        </div>
-                    </div>
+
                     <div className={"row"}>
                         <div className={"col-12 space "}>
 
-                            <button className={"btn-secondary-disabled total-left"} type={"button"}>Calculate</button>
+                            <button   className={"btn-secondary-disabled total-left"} type={"button"}>Calculate</button>
                             <button className={"btn-secondary"} type={"button"}>Save</button>
                         </div>
 

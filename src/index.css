@@ -14,6 +14,7 @@ body{
     position: relative;
     left: 210px;
     bottom: 33.51px;
+    text-align: left;
 }
 
 .menu{
@@ -73,4 +74,20 @@ body{
 .col-6{ width: 50%; height: auto; }
 .app{
     margin: 0 auto;
+}
+
+.grouped-items{
+    display: flex;
+    flex-flow: row-reverse;
+    margin: 0;
+    padding: 0;
+
+}
+.login-text
+{
+    text-align: right;
+    display: block;
+    position: relative;
+    left: 50px;
+    top: 30px;
 }

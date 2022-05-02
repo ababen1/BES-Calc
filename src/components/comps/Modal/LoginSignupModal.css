@@ -1,8 +1,28 @@
 .login-modal{
-    width: 600px;
-    height: 600px;
-    background: black;
+    width: 908px;
+    height: 608px;
+    background: white;
+    position: absolute;
+    margin: 0 auto;
+    right: 25%;
+    left: 25%;
+    z-index: 10;
+}
+
+.login-shadow{
+
+    background: #000000C2;
+    z-index:5;
+    width:100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
 
 }
 
+.modal-input-login{
 
+
+
+
+}
