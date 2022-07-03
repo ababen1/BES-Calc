@@ -11,7 +11,7 @@
 .info{
     background: #156982;
     text-align: center;
+    align-items: center;
     color: #ffff;
-    height: 143px;
-
+    height: 100px;
 }

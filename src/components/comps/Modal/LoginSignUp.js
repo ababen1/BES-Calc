@@ -8,7 +8,7 @@ class LoginSignUp extends Component
 
               <div className={"login-shadow"}>
                     <div className={"login-modal"}>
-                        Welcome, back please
+                        Welcome back, please
                         <h3>Login</h3>
                     </div>
               </div>

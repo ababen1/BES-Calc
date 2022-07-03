@@ -6,7 +6,7 @@ class Section extends Component{
         return(
             <div>
             <div className={"row"}>
-                <div className={" col-6"} style={{ fontWeight:"normal", width: "100%" ,background:this.props.bg, height:this.props.height, color:this.props.color }}>{this.props.content}</div>
+            <div className={" col-6"} style={{ fontWeight:"normal", width: "100%" ,background:this.props.bg, height:this.props.height, color:this.props.color }}>{this.props.content}</div>
                 <div className={" col-6"} style={{ fontWeight:"normal", width: "100%" ,background:this.props.bg, height:this.props.height, color:this.props.color }}>{this.props.loginIcon}<span className={"login-text"} >{this.props.title}</span></div>
 
             </div>
