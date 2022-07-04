@@ -5,20 +5,18 @@ import { Container, Stack, Image } from "react-bootstrap";
 class Header extends Component {
     render() {
         return (
-            <Container>
+            <Container className="bg-transparent">
                 <Stack direction="horizontal">
                     <div>
                         <Image src={this.props.logo} />
                     </div>
                     <div className="ms-auto" style={{ "text-align": "center" }}>
-                        <Image src={this.props.login_icon} roundedCircle="true" width="75" /> <br /> <span>Login</span>
+                        <Image className="login-icon" src={this.props.login_icon} roundedCircle="true" width="75" /> <br /> <span>Login</span>
                     </div>
                 </Stack>
-                <div className={"row"}>
-                    <div className={"info"} >
-                        <h1>Electric Cables Cross Section Calculations</h1>
-                    </div>
-                </div>
+                <Stack className='info menu-title' >
+                    <h1>Electric Cables Cross Section Calculations</h1>
+                </Stack>
             </Container>
         );
     }

@@ -1,0 +1,26 @@
+/* make the customizations */
+
+$bes-blue-color: #056e8f;
+$page-background: #edf0f0;
+$dark-gray: #828282;
+$light-gray: #c6c6c6;
+$white: #ffffff;
+
+$theme-colors: (
+    "primary": $bes-blue-color,
+    "light": $light-gray,
+    "dark": $dark-gray,
+);
+
+$border-radius: 15px;
+$border-radius-lg: 15px;
+$border-radius-sm: 15px;
+$input-btn-border-width: 0.75px;
+$input-border-radius: 4px;
+$input-border-radius-lg: 4px;
+$input-border-radius-sm: 4px;
+$body-bg: $page-background;
+$input-bg: $white;
+
+/* import bootstrap to set changes */
+@import "../node_modules/bootstrap/scss/bootstrap";

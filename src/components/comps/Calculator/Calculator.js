@@ -1,39 +1,36 @@
-import {Component} from "react";
+import { Component } from "react";
 import "./calculator.css";
 import loginClose from "../../../Assets/login close icon.svg";
+import { Row, Col, Button, ListGroup, Form, FormControl } from "react-bootstrap";
+
 class Calculator extends Component {
 
-    state = {description: "", ampacity: "", ampacityResult:0};
+    state = { description: "", ampacity: "", ampacityResult: 0 };
 
 
-    OnClickDelete()
-    {
+    OnClickDelete() {
 
 
     }
 
     OnChangeHandlerDescription(ev) {
-        this.setState({description: ev.target.value});
+        this.setState({ description: ev.target.value });
     }
 
-    OnChangeHandlerImax(ev){
-        this.setState({ampacity: ev.target.value});
+    OnChangeHandlerImax(ev) {
+        this.setState({ ampacity: ev.target.value });
     }
-    Calculation()
-    {
+    Calculation() {
         let ampacityArr = [111, 143, 173, 205, 252, 303, 346, 390, 441, 511];
         let imax = parseFloat(this.state.ampacity);
         let calculationAmpacity = 0;
-        for(let i=0; i<ampacityArr.length; i++)
-        {
-            if(imax>ampacityArr[i])
-            {
-               calculationAmpacity = ampacityArr[i+1];
-                this.setState({ampacityResult:calculationAmpacity});
+        for (let i = 0; i < ampacityArr.length; i++) {
+            if (imax > ampacityArr[i]) {
+                calculationAmpacity = ampacityArr[i + 1];
+                this.setState({ ampacityResult: calculationAmpacity });
             }
-            if(imax === ampacityArr[i])
-            {
-                this.setState({ampacityResult: ampacityArr[i]});
+            if (imax === ampacityArr[i]) {
+                this.setState({ ampacityResult: ampacityArr[i] });
             }
 
         }
@@ -41,72 +38,65 @@ class Calculator extends Component {
     }
 
 
-
     render() {
-            return (
-                <div>
+        return (
+            <Form>
+                <ListGroup horizontal className="calculator">
+                    <ListGroup.Item className={"add"} style={{ backgroundColor: (this.props.count === 0) ? "lightgray" : "#156982" }}>
+                        <span style={{ color: "white", verticalAlign: "middle" }}>{(this.props.count === 0) ? "+" : this.props.count}</span>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <Form.Control as="textarea" style={{"overflow": "auto", "resize": "none"}} type="text" value={this.state.description} name={"description"} onChange={this.OnChangeHandlerDescription.bind(this)} placeholder={"Description"} />
+                    </ListGroup.Item>
 
-                    <div className={"calculator  row"}>
+                    <ListGroup.Item>
+                        <Form.Select>
+                            <option>power KW</option>
 
-                        <div style={{backgroundColor: (this.props.count === 0) ? "lightgray" : "#156982"}}
-                             className={"add col-1"}>
-                            {(this.props.count === 0) ? "+" : this.props.count}
-                        </div>
-                        <div className={"description col-1"}>
-                            <input value={this.state.description} type={"text"} name={"description"} onChange={this.OnChangeHandlerDescription.bind(this)} className={"form-control calculator-input"} placeholder={"Description"}/>
-                        </div>
+                        </Form.Select>
 
-                        <div className={"input kilo-w col-1"}>
-                            <select className={"KW"}>
-                                <option>power KW</option>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <span>AI</span>
+                        <label className="switch">
+                            <input type="checkbox" />
+                            <span className="slider round"></span>
+                        </label>
+                        <span>Cu</span>
 
-                            </select>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <span>3 Wire</span>
+                        <label className="switch">
+                            <input type="checkbox" />
+                            <span className="slider round"></span>
+                        </label>
+                        <span>Single</span>
 
-                        </div>
-                        <div className={"input al-cu  col-1"}>
-                            <span>AI</span>
-                            <label className="switch">
-                                <input type="checkbox"/>
-                                <span className="slider round"></span>
-                            </label>
-                            <span>Cu</span>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <FormControl type={"number"} name={"ampacity"} placeholder={"Ampacity"} value={this.state.ampacity} onFocus={this.Calculation.bind(this)} onChange={this.OnChangeHandlerImax.bind(this)}/>
 
-                        </div>
-                        <div className={"input al-cu col-1"}>
-                            <span>3 Wire</span>
-                            <label className="switch">
-                                <input type="checkbox"/>
-                                <span className="slider round"></span>
-                            </label>
-                            <span>Single</span>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <p>Reserve(%)</p>
 
-                        </div>
-                        <div className={"input data gray-text col-1"}>
-                            <input value={this.state.ampacity} onFocus={this.Calculation.bind(this)} onChange={this.OnChangeHandlerImax.bind(this)} type={"number"} name={"ampacity"} placeholder={"Ampacity"} className={"form-control"} />
+                    </ListGroup.Item>
+                    <ListGroup.Item>
 
-                        </div>
-                        <div className={"input data gray-text col-1"}>
-                            <p>Reserve(%)</p>
+                        <p>{(this.state.ampacityResult !== 0) ? this.state.ampacityResult : "Imax"}</p>
 
-                        </div>
-                        <div className={"input col-1 gray-text data"}>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <p>S[Mm^2]</p>
 
-                            <p>{(this.state.ampacityResult !== 0 )?this.state.ampacityResult:"Imax"}</p>
-
-                        </div>
-                        <div className={"input col-1 gray-text data"}>
-                            <p>S[Mm^2]</p>
-
-                        </div>
-                        {(this.props.count !== 0)? <div className={" delete-element"}><img src={loginClose} alt={"delete"} width={"10px"} height={"10px"}  /></div>:""}
-                    </div>
-
-                </div>
-
-            );
-
-
+                    </ListGroup.Item>
+                    <ListGroup.Item >
+                        {(this.props.count !== 0) ? <div className="delete-element"><img src={loginClose} alt={"delete"} width={"10px"} height={"10px"} /></div> : ""}
+                    </ListGroup.Item>
+                </ListGroup>
+            </Form>
+        );
     }
-
 }
 export default Calculator;

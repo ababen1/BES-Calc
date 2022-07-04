@@ -1,4 +1,3 @@
-import './App.css';
 import {Component} from "react";
 import 'react-loading-skeleton/dist/skeleton.css';
 import CalculatorPage from "./components/pages/CaculatorPage/CalculatorPage";

@@ -1,25 +1,21 @@
 .calculator{
     background-color: white;
-    box-shadow: 0.5px 1px 1px 0.5px rgba(0, 0, 0, 0.06);
     height: 79px;
     width: 100%;
     border-radius: 12px;
-    margin-bottom: 40px;
-    margin-top: 40px;
-    z-index: 0;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 .add{
     background: #C3C1C1;
     height:auto;
-    width:6%;
+    width:auto;
     color: white;
-    font-size: 50px;
+    font-size: 32px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     text-align: center;
     position: relative;
-    padding-top: 15px;
-    padding-bottom: 15px;
     border: thin solid transparent;
 }
 .description
@@ -172,6 +168,7 @@ input:checked + .slider:before {
 .gray-text{color: rgba(0, 0, 0, 0.38);}
 .al-cu.form-control{margin-top: 0px; margin-bottom: 0px;}
 .delete-element{
-    position: relative; left: 50px; top:30px;
+    position: relative;
+    top:30px;
     cursor: pointer;
 }

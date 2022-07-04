@@ -1,42 +1,38 @@
-import {Component} from "react";
+import { Component } from "react";
 import Calculator from "../../comps/Calculator/Calculator";
 import "./CalculatorPage.css";
+import { Form, Container, Row, Col, Button, Stack } from "react-bootstrap";
 
-class CalculatorPage extends Component
-{
+class CalculatorPage extends Component {
 
-    state = {nowDate:new  Date(), calculatorRepeatNumber: 0,arrCalculator:[], arrCalculatorNumber:[]  ,focusInputOne:"normal", focusInputTwo: "normal", focusInputThree:"normal", ampacity:0}
+    state = { nowDate: new Date(), calculatorRepeatNumber: 0, arrCalculator: [], arrCalculatorNumber: [], focusInputOne: "normal", focusInputTwo: "normal", focusInputThree: "normal", ampacity: 0 }
 
-    OnFocusBolderFont(ev)
-    {
-        this.setState({name:"bold"});
+    OnFocusBolderFont(ev) {
+        this.setState({ name: "bold" });
     }
 
-    OnFocusOut(){
-        this.setState({focus:"normal"});
+    OnFocusOut() {
+        this.setState({ focus: "normal" });
     }
 
 
-//clicking on calculator adding to array in state
-    OnClickCalculator()
-    {
+    //clicking on calculator adding to array in state
+    OnClickCalculator() {
         let arr = [];
         let counter = this.state.calculatorRepeatNumber;
         counter += 1;
-        this.setState({calculatorRepeatNumber: counter});
+        this.setState({ calculatorRepeatNumber: counter });
 
         for (let i = 0; i <= this.state.calculatorRepeatNumber; i++) {
-            arr.push(<Calculator  count={i}/>);
+            arr.push(<Calculator count={i} />);
         }
-        this.setState({arrCalculatorNumber: arr});
+        this.setState({ arrCalculatorNumber: arr });
 
     }
 
-    CalculatorNumber()
-    {
-        let  counter = this.state.calculatorRepeatNumber;
-        for(let i=0; i<counter; i++)
-        {
+    CalculatorNumber() {
+        let counter = this.state.calculatorRepeatNumber;
+        for (let i = 0; i < counter; i++) {
             this.state.arrCalculatorNumber.push(i)
         }
 
@@ -47,59 +43,54 @@ class CalculatorPage extends Component
 
 
 
-    render(){
+    render() {
 
         return (
+            <Container>
+                <Row>
+                    <Col>
 
-            <div className="App" >
+                        <h3>{this.state.nowDate.toLocaleDateString()}</h3>
 
-                <div className={"container"}>
+                    </Col>
+                </Row>
+                <Form>
+                    <Row>
+                        <Col>
+                            <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer: "} />
+                        </Col>
+                        <Col>
+                            <Form.Control type="text" size="lg" name={"facilityName"} placeholder={"Facility Name"} />
+                        </Col>
+                    </Row>
 
-                    
-
-                    <div className={"row"}>
-                        <div className={"col-12"}>
-
-                            <h3>{this.state.nowDate.toLocaleDateString()}</h3>
-
-                        </div>
-                    </div>
-
-                    <div className={"row"}>
-                        <div className={"col-6"}>
-                            <input name={"CustomerName"} onFocus={(e)=>{this.OnFocusBolderFont()}} onMouseOut={()=>{this.OnFocusOut()}} style={{fontWeight:this.state.focusInputOne}} className={"form-control"} placeholder={" Customer Name"} />
-                        </div>
-                        <div className={"col-6"}>
-                            <input name={"facilityName"} onFocus={this.OnFocusBolderFont.bind(this)} onMouseOut={this.OnFocusOut.bind(this)} style={{fontWeight:this.state.focusInputThree}}  className={"form-control"} placeholder={"Facility Name"} />
-                        </div>
-
-                    </div>
-                    <div className={"row"}>
-                        <div className={"col-12"}>
-                            <input name={"Remarks"} onFocus={this.OnFocusBolderFont.bind(this)} onMouseOut={this.OnFocusOut.bind(this)}  className={"form-control"} style={{width: "100%", fontWeight:this.state.focusInputThree}} placeholder={"Remarks"} />
-                        </div>
-                    </div>
-                    <div className={"row"}>
-                        <div className={"col-12"} >
-                            {this.state.arrCalculatorNumber.map((value, index, array) => <div><Calculator  key={index} count={index+1} /></div>)}
-                            <div  className={"col-12"} onClick={this.OnClickCalculator.bind(this)}>
-                                <Calculator  count={0}/>
+                    <Row>
+                        <Col>
+                            <Form.Control type="text" size="lg" name={"Remarks"} placeholder={"Remarks"} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            {this.state.arrCalculatorNumber.map((value, index, array) => <div><Calculator key={index} count={index + 1} /></div>)}
+                            <div onClick={this.OnClickCalculator.bind(this)}>
+                                <Calculator count={0} />
                             </div>
-                        </div>
+                        </Col>
 
-                    </div>
+                    </Row>
 
-                    <div className={"row"}>
-                        <div className={"col-12 space "}>
+                    <Row>
+                        <Col>
+                            <Stack direction="horizontal" gap={"3"}>
+                                <Button variant="light" size="lg" id="calculate_btn">Calculate</Button>
+                                <Button variant="light" size="lg" id="save_calculation_btn">Save</Button>
+                            </Stack>
+                        </Col>
 
-                            <button   className={"btn-secondary-disabled total-left"} type={"button"}>Calculate</button>
-                            <button className={"btn-secondary"} type={"button"}>Save</button>
-                        </div>
+                    </Row>
+                </Form>
 
-                    </div>
-
-                </div>
-            </div>
+            </Container>
         );
 
     }
