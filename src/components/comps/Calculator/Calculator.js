@@ -1,16 +1,28 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import "./calculator.css";
 import loginClose from "../../../Assets/login close icon.svg";
-import { Row, Col, Button, ListGroup, Form, FormControl } from "react-bootstrap";
+import { Row, Col, Button, ListGroup, Form, FormControl, ButtonGroup, ToggleButton, Container } from "react-bootstrap";
 
 class Calculator extends Component {
+    
+    constructor(props) {
+        super(props)
+        this.calc_form = React.createRef();
+    }
 
-    state = { description: "", ampacity: "", ampacityResult: 0 };
+    state = { 
+        description: "",
+        ampacity: "",
+        power: "",
+        ampacityResult: 0, 
+        currently_editing: false, 
+        cable: "", 
+        wire: "" };
 
 
-    OnClickDelete() {
-
-
+    ResetCalc() {
+        const form = this.calc_form.current;
+        form.reset();
     }
 
     OnChangeHandlerDescription(ev) {
@@ -20,6 +32,7 @@ class Calculator extends Component {
     OnChangeHandlerImax(ev) {
         this.setState({ ampacity: ev.target.value });
     }
+
     Calculation() {
         let ampacityArr = [111, 143, 173, 205, 252, 303, 346, 390, 441, 511];
         let imax = parseFloat(this.state.ampacity);
@@ -37,65 +50,63 @@ class Calculator extends Component {
 
     }
 
-
     render() {
         return (
-            <Form>
-                <ListGroup horizontal className="calculator">
-                    <ListGroup.Item className={"add"} style={{ backgroundColor: (this.props.count === 0) ? "lightgray" : "#156982" }}>
-                        <span style={{ color: "white", verticalAlign: "middle" }}>{(this.props.count === 0) ? "+" : this.props.count}</span>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <Form.Control as="textarea" style={{"overflow": "auto", "resize": "none"}} type="text" value={this.state.description} name={"description"} onChange={this.OnChangeHandlerDescription.bind(this)} placeholder={"Description"} />
-                    </ListGroup.Item>
 
-                    <ListGroup.Item>
-                        <Form.Select>
-                            <option>power KW</option>
+            <Container fluid>
+                <Form ref={this.calc_form}>
+                    <ListGroup horizontal className="calculator">
+                        <ListGroup.Item className={"add"} style={{ backgroundColor: (this.props.count === 0) ? "lightgray" : "#156982" }}>
+                            <span style={{ color: "white", verticalAlign: "middle" }}>{(this.props.count === 0) ? "+" : this.props.count}</span>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <Form.Control as="textarea" style={{ "overflow": "auto", "resize": "none" }} type="text" value={this.state.description} name={"description"} onChange={this.OnChangeHandlerDescription.bind(this)} placeholder={"Description"} />
+                        </ListGroup.Item>
 
-                        </Form.Select>
+                        <ListGroup.Item>
+                            <Form.Select className="KW">
+                                <option>power KW</option>
+                            </Form.Select>
 
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <span>AI</span>
-                        <label className="switch">
-                            <input type="checkbox" />
-                            <span className="slider round"></span>
-                        </label>
-                        <span>Cu</span>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <div key="inline-radio" onChange={(ev) => {this.setState({"cable": ev.target.value});}}>
+                                <Form.Check name="cable" inline value="al" label="Al" type="radio" />
+                                <Form.Check name="cable" inline value="cu" label="Cu" type="radio" />
+                            </div>
 
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <span>3 Wire</span>
-                        <label className="switch">
-                            <input type="checkbox" />
-                            <span className="slider round"></span>
-                        </label>
-                        <span>Single</span>
 
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <FormControl type={"number"} name={"ampacity"} placeholder={"Ampacity"} value={this.state.ampacity} onFocus={this.Calculation.bind(this)} onChange={this.OnChangeHandlerImax.bind(this)}/>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <div key="inline-radio" onChange={(ev) => {this.setState({"wire": ev.target.value}); console.log(this.state)}}>
+                                <Form.Check name="wire" inline value ="single" label="Single" type="radio" />
+                                <Form.Check name="wire" inline value="3_wire" label="3 Wire" type="radio" />
+                            </div>
 
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <p>Reserve(%)</p>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <FormControl type={"number"} name={"ampacity"} placeholder={"Ampacity"} value={this.state.ampacity} onFocus={this.Calculation.bind(this)} onChange={this.OnChangeHandlerImax.bind(this)} />
 
-                    </ListGroup.Item>
-                    <ListGroup.Item>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <p>Reserve(%)</p>
 
-                        <p>{(this.state.ampacityResult !== 0) ? this.state.ampacityResult : "Imax"}</p>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
 
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <p>S[Mm^2]</p>
+                            <p>{(this.state.ampacityResult !== 0) ? this.state.ampacityResult : "Imax"}</p>
 
-                    </ListGroup.Item>
-                    <ListGroup.Item >
-                        {(this.props.count !== 0) ? <div className="delete-element"><img src={loginClose} alt={"delete"} width={"10px"} height={"10px"} /></div> : ""}
-                    </ListGroup.Item>
-                </ListGroup>
-            </Form>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <p>S[Mm^2]</p>
+
+                        </ListGroup.Item>
+                        <ListGroup.Item >
+                            {(this.props.count !== 0) ? <div className="delete-element"><img src={loginClose} alt={"delete"} width={"10px"} height={"10px"} /></div> : ""}
+                        </ListGroup.Item>
+                    </ListGroup>
+                </Form>
+            </Container>
         );
     }
 }

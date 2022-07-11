@@ -16,7 +16,7 @@ body{
     padding-bottom: 10px;
     font-family: open-sans-light !important;
 }
-.menu-title{justify-content: center; display:  block; }
+
 
 .form-control{width: 95%; height: 25px; border-radius: 100px; border: thin solid transparent; font-weight: normal; margin-right: 10px; margin-left: 10px; margin-top:10px; margin-bottom: 10px;}
 .form-control:hover{border: thin solid transparent;}
@@ -63,9 +63,7 @@ body{
     height: auto;
 }
 .col-6{ width: 50%; height: auto; }
-.app{
-    margin: 0 auto;
-}
+
 
 .grouped-items{
     display: flex;

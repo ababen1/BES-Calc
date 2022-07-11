@@ -16,11 +16,40 @@ $border-radius: 15px;
 $border-radius-lg: 15px;
 $border-radius-sm: 15px;
 $input-btn-border-width: 0.75px;
-$input-border-radius: 4px;
-$input-border-radius-lg: 4px;
-$input-border-radius-sm: 4px;
+$input-border-radius: 15px;
+$input-border-radius-lg: 15px;
+$input-border-radius-sm: 15px;
 $body-bg: $page-background;
 $input-bg: $white;
+
+.BES-header {
+    background-color: $white
+}
+
+.main-btn {
+    $border-radius: 15px;
+}
+
+.BES-header-info {
+    background: $bes-blue-color;
+    text-align: center;
+    align-items: center;
+    color: $white;
+    height: 100px;
+}
+
+.menu-title{
+    justify-content: center; 
+    display:  block; 
+}
+
+.login-icon{
+    cursor: pointer;
+}
+
+/*.customer-info {
+    
+}*/
 
 /* import bootstrap to set changes */
 @import "../node_modules/bootstrap/scss/bootstrap";

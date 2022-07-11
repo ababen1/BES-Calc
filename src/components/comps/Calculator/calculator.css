@@ -8,14 +8,13 @@
 }
 .add{
     background: #C3C1C1;
-    height:auto;
-    width:auto;
+    height:100%;
+    width:5%;
     color: white;
     font-size: 32px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     text-align: center;
-    position: relative;
     border: thin solid transparent;
 }
 .description
