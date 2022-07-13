@@ -8,7 +8,8 @@ class CalculatorPage extends Component {
     constructor(props) {
         super(props);
         this.main_calc_ref = React.createRef();
-      }
+        this.OnDeleteCalc = this.OnDeleteCalc.bind(this);
+    }
 
     state = {
         nowDate: new Date(),
@@ -28,21 +29,21 @@ class CalculatorPage extends Component {
     //clicking on calculator adding to array in state
     OnAddCalculator() {
         const main_calc = this.main_calc_ref.current;
-        let arr = [];
-        let counter = this.state.calculatorRepeatNumber;
-        counter += 1;
-        this.setState({ calculatorRepeatNumber: counter });
-
-        for (let i = 0; i <= this.state.calculatorRepeatNumber; i++) {
-            arr.push(<Calculator count={i} />);
-        }
-        this.setState({ arrCalculators: arr });
-
+        let calcs = this.state.arrCalculators;
+        calcs.push(main_calc.state)
+        console.log(calcs)
+        this.setState({ arrCalculators: calcs });
     }
 
     OnResetCalculator() {
         const main_calc = this.main_calc_ref.current;
         main_calc.ResetCalc()
+    }
+
+    OnDeleteCalc(idx) {
+        let array = this.state.arrCalculators;
+        array.splice(idx, 1);
+        this.setState({arrCalculators: array});
     }
 
     CalculatorNumber() {
@@ -53,7 +54,6 @@ class CalculatorPage extends Component {
 
     }
 
-    //displaying calculators
 
 
 
@@ -96,16 +96,16 @@ class CalculatorPage extends Component {
                     <br></br>
                     <Row>
                         <Col>
-                            {this.state.arrCalculators.map((value, index, array) => <div><Calculator key={index} count={index + 1} /></div>)}
+                            {this.state.arrCalculators.map((value, index, array) => <div><Calculator key={index} OnDeleteCalc={this.OnDeleteCalc} count={index + 1} data={value} /></div>)}
                         </Col>
                     </Row>
                     <Row>
                         <Col md={10}></Col>
                         <Col>
-                        <Stack direction="horizontal" gap={2}>
-                            <Button variant="light" size="lg" id="calculate_btn">Calculate</Button>
-                            <Button variant="primary" size="lg" id="save_calculation_btn">Save</Button>
-                        </Stack>
+                            <Stack direction="horizontal" gap={2}>
+                                <Button variant="light" size="lg" id="calculate_btn">Calculate</Button>
+                                <Button variant="primary" size="lg" id="save_calculation_btn">Save</Button>
+                            </Stack>
                         </Col>
 
                     </Row>

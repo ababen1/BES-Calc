@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import "./calculator.css";
 import loginClose from "../../../Assets/login close icon.svg";
-import { Row, Col, Button, ListGroup, Form, FormControl, ButtonGroup, ToggleButton, Container } from "react-bootstrap";
+import { Row, Col, Button, ListGroup, Form, FormControl, ButtonGroup, ToggleButton, Container, InputGroup } from "react-bootstrap";
 
 class Calculator extends Component {
-    
-    constructor(props) {
-        super(props)
-        this.calc_form = React.createRef();
-    }
 
     state = { 
         description: "",
@@ -18,6 +13,15 @@ class Calculator extends Component {
         currently_editing: false, 
         cable: "", 
         wire: "" };
+    
+    constructor(props) {
+        super(props)
+        this.calc_form = React.createRef();
+    }
+
+    componentDidMount() {
+        this.setState(this.props.data);
+    }
 
 
     ResetCalc() {
@@ -31,6 +35,14 @@ class Calculator extends Component {
 
     OnChangeHandlerImax(ev) {
         this.setState({ ampacity: ev.target.value });
+    }
+
+    OnWireChange(ev) {
+        this.setState({"wire": ev.target.id})
+    }
+
+    OnCableChange(ev) {
+        this.setState({"cable": ev.target.id})
     }
 
     Calculation() {
@@ -64,24 +76,24 @@ class Calculator extends Component {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <Form.Select className="KW" onChange={(ev) => {this.setState({"power": ev.target.value});}}>
+                            <Form.Select className="KW" value={this.state.power} onChange={(ev) => {this.setState({"power": ev.target.value});}}>
                                 <option>power KW</option>
                             </Form.Select>
 
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <div key="inline-radio" onChange={(ev) => {this.setState({"cable": ev.target.value});}}>
-                                <Form.Check name="cable" inline value="al" label="Al" type="radio" />
-                                <Form.Check name="cable" inline value="cu" label="Cu" type="radio" />
-                            </div>
+                            <InputGroup>
+                                <Form.Check name="cable" inline id="al" label="Al" type="radio" checked={this.state.cable === "al"} onChange={this.OnCableChange.bind(this)}/>
+                                <Form.Check name="cable" inline id="cu" label="Cu" type="radio" checked={this.state.cable === "cu"} onChange={this.OnCableChange.bind(this)}/>
+                            </InputGroup>
 
 
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <div key="inline-radio" onChange={(ev) => {this.setState({"wire": ev.target.value}); console.log(this.state)}}>
-                                <Form.Check name="wire" inline value ="single" label="Single" type="radio" />
-                                <Form.Check name="wire" inline value="3_wire" label="3 Wire" type="radio" />
-                            </div>
+                            <InputGroup>
+                                <Form.Check name="wire" inline id ="single" label="Single" type="radio" checked={this.state.wire === "single"} onChange={this.OnWireChange.bind(this)}/>
+                                <Form.Check name="wire" inline id="3_wire" label="3 Wire" type="radio" checked={this.state.wire === "3_wire"} onChange={this.OnWireChange.bind(this)}/>
+                            </InputGroup>
 
                         </ListGroup.Item>
                         <ListGroup.Item>
@@ -102,7 +114,7 @@ class Calculator extends Component {
 
                         </ListGroup.Item>
                         <ListGroup.Item >
-                            {(this.props.count !== 0) ? <div className="delete-element"><img src={loginClose} alt={"delete"} width={"10px"} height={"10px"} /></div> : ""}
+                            {(this.props.count !== 0) ? <div className="delete-element" onClick={e => (this.props.OnDeleteCalc(this.props.count - 1))}><img src={loginClose} alt={"delete"} width={"10px"} height={"10px"} /></div> : ""}
                         </ListGroup.Item>
                     </ListGroup>
                 </Form>
