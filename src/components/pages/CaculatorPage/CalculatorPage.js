@@ -27,6 +27,7 @@ class CalculatorPage extends Component {
 
     //clicking on calculator adding to array in state
     OnAddCalculator() {
+        const main_calc = this.main_calc_ref.current;
         let arr = [];
         let counter = this.state.calculatorRepeatNumber;
         counter += 1;

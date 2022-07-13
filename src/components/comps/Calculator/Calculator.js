@@ -51,8 +51,8 @@ class Calculator extends Component {
     }
 
     render() {
-        return (
 
+        return (
             <Container fluid>
                 <Form ref={this.calc_form}>
                     <ListGroup horizontal className="calculator">
@@ -64,7 +64,7 @@ class Calculator extends Component {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <Form.Select className="KW">
+                            <Form.Select className="KW" onChange={(ev) => {this.setState({"power": ev.target.value});}}>
                                 <option>power KW</option>
                             </Form.Select>
 
