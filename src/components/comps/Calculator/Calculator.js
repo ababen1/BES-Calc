@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./calculator.css";
 import loginClose from "../../../Assets/login close icon.svg";
-import { Row, Col, Button, ListGroup, Form, FormControl, ButtonGroup, ToggleButton, Container, InputGroup } from "react-bootstrap";
+import { Row, Col, Button, ListGroup, Form, FormControl, ButtonGroup, ToggleButton, Container, InputGroup, CloseButton } from "react-bootstrap";
 
 class Calculator extends Component {
 
@@ -114,7 +114,7 @@ class Calculator extends Component {
 
                         </ListGroup.Item>
                         <ListGroup.Item >
-                            {(this.props.count !== 0) ? <div className="delete-element" onClick={e => (this.props.OnDeleteCalc(this.props.count - 1))}><img src={loginClose} alt={"delete"} width={"10px"} height={"10px"} /></div> : ""}
+                            {(this.props.count !== 0) ? <CloseButton onClick={this.props.OnDeleteCalc.bind(this, this.props.count - 1)}></CloseButton> : ""}
                         </ListGroup.Item>
                     </ListGroup>
                 </Form>

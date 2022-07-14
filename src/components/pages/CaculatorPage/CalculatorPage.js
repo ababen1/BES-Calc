@@ -31,7 +31,6 @@ class CalculatorPage extends Component {
         const main_calc = this.main_calc_ref.current;
         let calcs = this.state.arrCalculators;
         calcs.push(main_calc.state)
-        console.log(calcs)
         this.setState({ arrCalculators: calcs });
     }
 
@@ -44,6 +43,7 @@ class CalculatorPage extends Component {
         let array = this.state.arrCalculators;
         array.splice(idx, 1);
         this.setState({arrCalculators: array});
+        console.log(this.state.arrCalculators);
     }
 
     CalculatorNumber() {
@@ -85,7 +85,7 @@ class CalculatorPage extends Component {
                         </Row>
                     </Form>
                     <br />
-                    <Calculator ref={this.main_calc_ref} count={0}></Calculator>
+                    <Calculator key="main" ref={this.main_calc_ref} count={0}></Calculator>
                     <br />
                     <Row>
                         <Col md={10}>
@@ -96,7 +96,7 @@ class CalculatorPage extends Component {
                     <br></br>
                     <Row>
                         <Col>
-                            {this.state.arrCalculators.map((value, index, array) => <div><Calculator key={index} OnDeleteCalc={this.OnDeleteCalc} count={index + 1} data={value} /></div>)}
+                            {this.state.arrCalculators.map((value, index) => <Calculator key={index} OnDeleteCalc={this.OnDeleteCalc.bind(this, index)} count={index + 1} data={value} />)}
                         </Col>
                     </Row>
                     <Row>
