@@ -10,7 +10,6 @@ class Calculator extends Component {
         ampacity: "",
         power: "",
         ampacityResult: 0, 
-        currently_editing: false, 
         cable: "", 
         wire: "" };
     

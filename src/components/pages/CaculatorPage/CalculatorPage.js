@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Calculator from "../../comps/Calculator/Calculator";
 import "./CalculatorPage.css";
 import { Form, Container, Row, Col, Button, Stack } from "react-bootstrap";
+import CalculatorContainer from "../../comps/Calculator/CalculatorsContainer";
 
 class CalculatorPage extends Component {
 
     constructor(props) {
         super(props);
         this.main_calc_ref = React.createRef();
+        this.calculators_container_ref = React.createRef();
         this.OnDeleteCalc = this.OnDeleteCalc.bind(this);
     }
 
@@ -25,13 +27,14 @@ class CalculatorPage extends Component {
         this.setState({ focus: "normal" });
     }
 
+    OnCalculatePress() {
+        this.calculators_container_ref.Calculate();
+    }
 
     //clicking on calculator adding to array in state
     OnAddCalculator() {
-        const main_calc = this.main_calc_ref.current;
-        let calcs = this.state.arrCalculators;
-        calcs.push(main_calc.state)
-        this.setState({ arrCalculators: calcs });
+        const data = this.main_calc_ref.current.state;
+        this.calculators_container_ref.current.AddCalculator(data);
     }
 
     OnResetCalculator() {
@@ -40,10 +43,7 @@ class CalculatorPage extends Component {
     }
 
     OnDeleteCalc(idx) {
-        let array = this.state.arrCalculators;
-        array.splice(idx, 1);
-        this.setState({arrCalculators: array});
-        console.log(this.state.arrCalculators);
+        this.calculators_container_ref.current.DeleteCalculator(idx);
     }
 
     CalculatorNumber() {
@@ -96,14 +96,14 @@ class CalculatorPage extends Component {
                     <br></br>
                     <Row>
                         <Col>
-                            {this.state.arrCalculators.map((value, index) => <Calculator key={index} OnDeleteCalc={this.OnDeleteCalc.bind(this, index)} count={index + 1} data={value} />)}
+                            <CalculatorContainer ref={this.calculators_container_ref}/>
                         </Col>
                     </Row>
                     <Row>
                         <Col md={10}></Col>
                         <Col>
                             <Stack direction="horizontal" gap={2}>
-                                <Button variant="light" size="lg" id="calculate_btn">Calculate</Button>
+                                <Button onClick={this.OnCalculatePress.bind(this)} variant="light" size="lg" id="calculate_btn">Calculate</Button>
                                 <Button variant="primary" size="lg" id="save_calculation_btn">Save</Button>
                             </Stack>
                         </Col>

@@ -10,7 +10,7 @@ class Header extends Component {
                     <div>
                         <Image src={this.props.logo} />
                     </div>
-                    <div className="ms-auto" style={{ "text-align": "center" }}>
+                    <div className="ms-auto" style={{ "textAlign": "center" }}>
                         <Image className="login-icon" src={this.props.login_icon} roundedCircle="true" width="75" /> <br /> <span>Login</span>
                     </div>
                 </Stack>
