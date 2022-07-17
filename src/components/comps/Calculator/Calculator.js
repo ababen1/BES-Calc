@@ -44,23 +44,6 @@ class Calculator extends Component {
         this.setState({"cable": ev.target.id})
     }
 
-    Calculation() {
-        let ampacityArr = [111, 143, 173, 205, 252, 303, 346, 390, 441, 511];
-        let imax = parseFloat(this.state.ampacity);
-        let calculationAmpacity = 0;
-        for (let i = 0; i < ampacityArr.length; i++) {
-            if (imax > ampacityArr[i]) {
-                calculationAmpacity = ampacityArr[i + 1];
-                this.setState({ ampacityResult: calculationAmpacity });
-            }
-            if (imax === ampacityArr[i]) {
-                this.setState({ ampacityResult: ampacityArr[i] });
-            }
-
-        }
-
-    }
-
     render() {
 
         return (

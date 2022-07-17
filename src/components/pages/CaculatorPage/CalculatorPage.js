@@ -28,7 +28,7 @@ class CalculatorPage extends Component {
     }
 
     OnCalculatePress() {
-        this.calculators_container_ref.Calculate();
+        this.calculators_container_ref.current.CalculateAll();
     }
 
     //clicking on calculator adding to array in state
