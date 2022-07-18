@@ -21,6 +21,8 @@ $input-border-radius-lg: 15px;
 $input-border-radius-sm: 15px;
 $body-bg: $page-background;
 $input-bg: $white;
+$modal-content-bg: transparent;
+$modal-content-border-color: transparent;
 
 .BES-header {
     background-color: $white
@@ -53,7 +55,8 @@ $input-bg: $white;
     border-radius: 2px;
     color: $white;
     font-family: Helvetica;
-
+    position: relative;
+    text-align: center;
     .login-title {
         text-align: center;
         height: 100px;
@@ -99,6 +102,7 @@ $input-bg: $white;
         border-width: 1px;
         border-color: $white;
         border-radius: 3px;
+        margin-top: 30%;
     }
 
 }

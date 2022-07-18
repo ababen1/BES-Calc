@@ -30,7 +30,7 @@ class Login extends Component {
                         <Form.Check type="checkbox" label="Keep me logged in" />
                         <a className="ms-auto">Reset password</a>
                     </Stack>
-                    <Button  className="login-btn">Log me in</Button>
+                    <Button size="lg" className="login-btn">Log me in</Button>
                 </Form>
             </Container>
         )
