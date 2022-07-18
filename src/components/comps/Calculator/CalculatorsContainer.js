@@ -29,27 +29,6 @@ class CalculatorContainer extends Component {
         this.setState({ calculators_data: [] }, () => { this.AddCalculators(filtered_calcs_list); });
     }
 
-    Calculate(data) {
-        let ampacityArr = [111, 143, 173, 205, 252, 303, 346, 390, 441, 511];
-        let imax = parseFloat(data.ampacity);
-        let calculationAmpacity = 0;
-        for (let i = 0; i < ampacityArr.length; i++) {
-            if (imax > ampacityArr[i]) {
-                calculationAmpacity = ampacityArr[i + 1];
-                data.ampacityResult = calculationAmpacity;
-            }
-            if (imax === ampacityArr[i]) {
-                data.ampacityResult = ampacityArr[i];
-            }
-        }
-    }
-
-    CalculateAll() {
-        for (let data of this.state.calculators_data) {
-            this.Calculate(data);
-        }
-    }
-
 
     render() {
         return (

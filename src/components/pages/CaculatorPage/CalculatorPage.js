@@ -103,7 +103,7 @@ class CalculatorPage extends Component {
                         <Col md={10}></Col>
                         <Col>
                             <Stack direction="horizontal" gap={2}>
-                                <Button onClick={this.OnCalculatePress.bind(this)} variant="light" size="lg" id="calculate_btn">Calculate</Button>
+                                <Button variant="light" size="lg" id="calculate_btn">Calculate</Button>
                                 <Button variant="primary" size="lg" id="save_calculation_btn">Save</Button>
                             </Stack>
                         </Col>
