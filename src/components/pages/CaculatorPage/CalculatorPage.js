@@ -16,7 +16,7 @@ class CalculatorPage extends Component {
     state = {
         nowDate: new Date(),
         calculatorRepeatNumber: 0,
-        arrCalculators: []
+        arrCalculators: [],
     }
 
     OnFocusBolderFont(ev) {
@@ -53,10 +53,6 @@ class CalculatorPage extends Component {
         }
 
     }
-
-
-
-
 
     render() {
 

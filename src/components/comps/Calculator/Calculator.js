@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./calculator.css";
-import loginClose from "../../../Assets/login close icon.svg";
-import { Row, Col, Button, ListGroup, Form, FormControl, ButtonGroup, ToggleButton, Container, InputGroup, CloseButton } from "react-bootstrap";
+import { ListGroup, Form, FormControl, Container, InputGroup, CloseButton } from "react-bootstrap";
 
 class Calculator extends Component {
 
@@ -51,10 +50,10 @@ class Calculator extends Component {
         for (let i = 0; i < ampacityArr.length; i++) {
             if (imax > ampacityArr[i]) {
                 calculationAmpacity = ampacityArr[i + 1];
-                this.state.ampacityResult = calculationAmpacity;
+                this.setState({ampacityResult: calculationAmpacity});
             }
             if (imax === ampacityArr[i]) {
-                this.state.ampacityResult = ampacityArr[i];
+                this.setState({ampacityResult: ampacityArr[i]});
             }
         }
     }
