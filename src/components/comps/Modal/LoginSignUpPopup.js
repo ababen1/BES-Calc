@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Modal, Row, Col } from "react-bootstrap";
+import { Modal, Row, Col, Container } from "react-bootstrap";
 import Login from "./Login";
+import Signup from "./Signup";
+
 class LoginSignUp extends Component {
 
     constructor(props) {
@@ -18,13 +20,19 @@ class LoginSignUp extends Component {
 
     render() {
         return (
-            <Modal show={this.state.visible} onHide={this.toggle_modal.bind(this)} size="lg" centered>
+            <Modal show={this.state.visible} onHide={this.toggle_modal.bind(this)} centered dialogClassName="modal-dialog">
                 <Modal.Body>
-                    <Row>
-                        <Col>
-                            <Login ref={this.login_ref}/>
-                        </Col>
-                    </Row>
+                    <Container className="login-signup-modal">
+                        <Row>
+                            <Col>
+                                <Login ref={this.login_ref} />
+                            </Col>
+                            <Col>
+                                <Signup />
+                            </Col>
+                        </Row>
+                    </Container>
+
                 </Modal.Body>
             </Modal>
         );

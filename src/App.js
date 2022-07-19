@@ -1,7 +1,6 @@
 import {Component} from "react";
 import 'react-loading-skeleton/dist/skeleton.css';
 import CalculatorPage from "./components/pages/CaculatorPage/CalculatorPage";
-import "./components/comps/Modal/LoginSignupModal.css";
 import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/comps/Header';

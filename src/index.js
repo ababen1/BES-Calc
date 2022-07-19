@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // Importing Sass with Bootstrap CSS
-import './custom.scss';
+import './theme.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,0 +1,97 @@
+@use 'src/theme.scss';
+
+.modal-dialog {
+    min-width: 60%;
+}
+
+.login-signup-modal {
+    height: 600px;
+    border-radius: 2px;
+    color: theme.$white;
+    font-family: Helvetica;
+    position: relative;
+    text-align: center;
+    background-color: transparent;
+    
+    .container {
+        background-color: transparent;
+    }
+
+    @mixin panels {
+        position: absolute;
+        height: 100%;
+        width: 50%;
+    }
+
+    @mixin titles {
+        text-align: center;
+    }
+
+    @mixin input($color :theme.$white) {
+        border-radius: 3px;
+        background-color: transparent;
+        border-color: $color;
+        border-width: 1px;
+    }
+
+    @mixin btns {
+        border-width: 1px;
+        border-radius: 3px;
+        background-color: transparent;
+    }
+    
+
+    .signup-panel {
+        @include panels;
+        background-color: theme.$white;
+        color: theme.$bes-blue-color;
+        .signup-title {
+            @include titles;
+        }
+
+        input, input:focus, input:hover {
+            @include input;
+            border-color: theme.$bes-blue-color;
+        }
+
+        .signup-btn {
+            @include btns;
+            color: theme.$bes-blue-color;
+        }
+    }
+
+    .login-panel {
+        @include panels;
+        background-color: theme.$bes-blue-color;
+
+
+        .login-title {
+            @include titles;
+        }
+
+        input, input:focus, input:hover {
+            @include input;
+        }
+
+        a {
+            color: theme.$white;
+        }
+
+        a:hover {
+            color: theme.$white;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .email-password {
+            label {
+                opacity: .8;
+            }
+        }
+
+        .login-btn {
+            @include btns;
+            border-color: theme.$white;
+        }
+    }
+}

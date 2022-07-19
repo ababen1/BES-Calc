@@ -49,64 +49,6 @@ $modal-content-border-color: transparent;
     cursor: pointer;
 }
 
-.login-modal {
-    background-color: $bes-blue-color;
-    height: 600px;
-    border-radius: 2px;
-    color: $white;
-    font-family: Helvetica;
-    position: relative;
-    text-align: center;
-    .login-title {
-        text-align: center;
-        height: 100px;
-        padding: 25px;
-    }
-
-    @mixin input {
-        border-radius: 3px;
-        background-color: transparent;
-        border-color: $white;
-        border-width: 1px;
-    }
-
-    input {
-        @include input;
-    }
-    input:focus {
-        @include input;
-    }
-
-    input:hover {
-        @include input;
-    }
-
-    a {
-        color: $white;
-    }
-
-    a:hover {
-        color: $white;
-        cursor: pointer;
-        text-decoration: none;
-    }
-
-    .email-password {
-       
-        label { 
-            opacity: .8;
-        }
-    }
-
-    .login-btn{
-        border-width: 1px;
-        border-color: $white;
-        border-radius: 3px;
-        margin-top: 30%;
-    }
-
-}
-
 /*.customer-info {
     
 }*/

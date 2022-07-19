@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { FloatingLabel, Form, Container, Stack, Button } from "react-bootstrap";
+import './LoginSignupModal.scss'
 
 class Login extends Component {
     state = {
@@ -8,13 +9,13 @@ class Login extends Component {
 
     render() {
         return (
-            <Container className="login-modal">
-                <div className="login-title">
+            <Container className="login-panel">
+                <Container className="login-title">
                     welcome back, please
-                    <h3>Login</h3>
-                </div>
+                    <h2>Login</h2>
+                </Container>
                 <Form>
-                    <div className="email-password">
+                    <Container className="email-password">
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Your Email"
@@ -25,12 +26,14 @@ class Login extends Component {
                         <FloatingLabel controlId="floatingPassword" label="Password">
                             <Form.Control type="password" placeholder="Password" />
                         </FloatingLabel>
-                    </div>
-                    <Stack gap={2} direction="horizontal">
-                        <Form.Check type="checkbox" label="Keep me logged in" />
-                        <a className="ms-auto">Reset password</a>
-                    </Stack>
-                    <Button size="lg" className="login-btn">Log me in</Button>
+                        <Stack gap={2} direction="horizontal">
+                            <Form.Check type="checkbox" label="Keep me logged in" />
+                            <a href="#" className="ms-auto">Reset password</a>
+                        </Stack>
+                    </Container>
+                    <Container className="btn-container">
+                        <Button size="lg" className="login-btn">Log me in</Button>
+                    </Container>
                 </Form>
             </Container>
         )
