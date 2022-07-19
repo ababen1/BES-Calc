@@ -10,12 +10,12 @@ class Signup extends Component {
     render() {
         return (
             <Container className="signup-panel">
-                <Container className="signup-title">
+                <Container className="title">
                     In order to save your calculations, please
                     <h2>Sign up</h2>
                 </Container>
-                <Form>
-                    <Container className="signup-form">
+                <Form className="signup-form">
+                    <Container>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Your Email"
@@ -35,9 +35,7 @@ class Signup extends Component {
                             <Form.Control type="password" placeholder="pass" />
                         </FloatingLabel>
                     </Container>
-                    <Container className="btn-container">
-                        <Button size="lg" className="signup-btn">Sign me up</Button>
-                    </Container>
+                    <Button size="lg" className="signup-btn">Sign me up</Button>
                 </Form>
 
             </Container>

@@ -10,12 +10,12 @@ class Login extends Component {
     render() {
         return (
             <Container className="login-panel">
-                <Container className="login-title">
+                <Container className="title">
                     welcome back, please
                     <h2>Login</h2>
                 </Container>
-                <Form>
-                    <Container className="email-password">
+                <Form className="login-form">
+                    <Container>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Your Email"
@@ -28,12 +28,10 @@ class Login extends Component {
                         </FloatingLabel>
                         <Stack gap={2} direction="horizontal">
                             <Form.Check type="checkbox" label="Keep me logged in" />
-                            <a href="#" className="ms-auto">Reset password</a>
+                            <Button href="#" className="ms-auto">Reset Password </Button>
                         </Stack>
                     </Container>
-                    <Container className="btn-container">
                         <Button size="lg" className="login-btn">Log me in</Button>
-                    </Container>
                 </Form>
             </Container>
         )

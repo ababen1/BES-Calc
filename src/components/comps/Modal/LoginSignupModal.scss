@@ -17,14 +17,15 @@
         background-color: transparent;
     }
 
-    @mixin panels {
+    @mixin panels($color: theme.$white, $bg_color: theme.$bes-blue-color) {
         position: absolute;
         height: 100%;
         width: 50%;
-    }
-
-    @mixin titles {
-        text-align: center;
+        background-color: $bg_color;
+        color: $color;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
     }
 
     @mixin input($color :theme.$white) {
@@ -34,64 +35,46 @@
         border-width: 1px;
     }
 
-    @mixin btns {
+    @mixin btns($color: theme.$white) {
         border-width: 1px;
         border-radius: 3px;
         background-color: transparent;
+        color: $color;
+        border-color: $color;
+    }
+
+    .title {
+        align-items: center;
+    }
+
+    .login-form, .signup-form {
+        flex-grow: 1;
+        button {
+            vertical-align: bottom;
+        }
     }
     
-
-    .signup-panel {
-        @include panels;
-        background-color: theme.$white;
-        color: theme.$bes-blue-color;
-        .signup-title {
-            @include titles;
-        }
-
-        input, input:focus, input:hover {
-            @include input;
-            border-color: theme.$bes-blue-color;
-        }
-
-        .signup-btn {
-            @include btns;
-            color: theme.$bes-blue-color;
-        }
-    }
-
     .login-panel {
         @include panels;
-        background-color: theme.$bes-blue-color;
-
-
-        .login-title {
-            @include titles;
-        }
 
         input, input:focus, input:hover {
             @include input;
-        }
-
-        a {
-            color: theme.$white;
-        }
-
-        a:hover {
-            color: theme.$white;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .email-password {
-            label {
-                opacity: .8;
-            }
         }
 
         .login-btn {
             @include btns;
-            border-color: theme.$white;
+        }
+    }
+    
+    .signup-panel {
+        @include panels(theme.$bes-blue-color, theme.$white);
+
+        input, input:focus, input:hover {
+            @include input(theme.$bes-blue-color);
+        }
+
+        .signup-btn {
+            @include btns(theme.$bes-blue-color);
         }
     }
 }

@@ -3,28 +3,30 @@ import "./calculator.css";
 import { ListGroup, Form, FormControl, Container, InputGroup, CloseButton } from "react-bootstrap";
 
 class Calculator extends Component {
-
-    state = { 
-        description: "",
-        ampacity: "",
-        power: "",
-        ampacityResult: 0, 
-        cable: "", 
-        wire: "" };
     
     constructor(props) {
-        super(props)
+        super(props);
         this.calc_form = React.createRef();
+        this.state = this.getInitialState();
     }
 
     componentDidMount() {
         this.setState(this.props.data);
     }
 
+    getInitialState() {
+        return {
+            description: "",
+            ampacity: "",
+            power: "",
+            ampacityResult: 0, 
+            cable: "", 
+            wire: "" 
+        }
+    }
 
     ResetCalc() {
-        const form = this.calc_form.current;
-        form.reset();
+        this.setState(this.getInitialState());
     }
 
     OnChangeHandlerDescription(ev) {
