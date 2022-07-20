@@ -5,14 +5,14 @@
 }
 
 .login-signup-modal {
-    height: 600px;
+    height: 608px;
+    width: 908px;
     border-radius: 2px;
     color: theme.$white;
-    font-family: Helvetica;
     position: relative;
     text-align: center;
     background-color: transparent;
-    
+
     .container {
         background-color: transparent;
     }
@@ -23,9 +23,7 @@
         width: 50%;
         background-color: $bg_color;
         color: $color;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+
     }
 
     @mixin input($color :theme.$white) {
@@ -33,48 +31,89 @@
         background-color: transparent;
         border-color: $color;
         border-width: 1px;
+
+        input[type=text] {
+            top: 446px;
+            left: 563px;
+            width: 341px;
+            height: 50px;
+        }
     }
 
-    @mixin btns($color: theme.$white) {
+    @mixin btns($color_text: theme.$white, $color_bg: theme.$bes-blue-color) {
+        top: 736px;
+        left: 636px;
+        width: 196px;
+        height: 50px;
         border-width: 1px;
         border-radius: 3px;
-        background-color: transparent;
-        color: $color;
-        border-color: $color;
+        background-color: $color_bg;
+        color: $color_text;
+        border-color: $color_text;
+
+        &:active {
+            background-color: $color_text;
+            color: $color_bg
+        }
+
+        &:hover {
+            font-weight: bold;
+        }
     }
 
     .title {
-        align-items: center;
+        text-align: center;
     }
 
-    .login-form, .signup-form {
+    .login-form,
+    .signup-form {
         flex-grow: 1;
+
         button {
             vertical-align: bottom;
         }
     }
-    
+
     .login-panel {
         @include panels;
 
-        input, input:focus, input:hover {
+        input,
+        input:focus,
+        input:hover {
             @include input;
         }
 
         .login-btn {
-            @include btns;
+            @include btns(theme.$bes-blue-color, theme.$white);
+        }
+
+        .keep-logged-in {
+            text-align: left;
+            font: normal normal 300 14px/19px;
+            letter-spacing: 0px;
+            opacity: 1;
+        }
+
+        .reset-password {
+            text-align: right;
+            text-decoration: underline;
+            font: normal normal 300 14px/19px;
+            letter-spacing: 0px;
+            opacity: 1;
         }
     }
-    
+
     .signup-panel {
         @include panels(theme.$bes-blue-color, theme.$white);
 
-        input, input:focus, input:hover {
+        input,
+        input:focus,
+        input:hover {
             @include input(theme.$bes-blue-color);
         }
 
         .signup-btn {
-            @include btns(theme.$bes-blue-color);
+            @include btns(theme.$white, theme.$bes-blue-color);
         }
     }
 }

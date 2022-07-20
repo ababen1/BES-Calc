@@ -1,10 +1,21 @@
 import { Component } from "react";
-import { FloatingLabel, Form, Container, Stack, Button } from "react-bootstrap";
+import { FloatingLabel, Form, Container, Button } from "react-bootstrap";
 import './LoginSignupModal.scss'
 
 class Signup extends Component {
     state = {
+        validated: false,
+    }
 
+    handleSubmit(event) {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else {
+            this.setState({validated: true});
+        }
     }
 
     render() {
@@ -14,28 +25,28 @@ class Signup extends Component {
                     In order to save your calculations, please
                     <h2>Sign up</h2>
                 </Container>
-                <Form className="signup-form">
+                <Form validated={this.state.validated} onSubmit={this.handleSubmit.bind(this)} className="signup-form">
                     <Container>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Your Email"
                             className="mb-3">
-                            <Form.Control type="email" placeholder="name@example.com" />
+                            <Form.Control required type="email" placeholder="name@example.com" />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Create Username"
                             className="mb-3">
-                            <Form.Control type="text" placeholder="username" />
+                            <Form.Control required type="text" placeholder="username" />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Create Password"
                             className="mb-3">
-                            <Form.Control type="password" placeholder="pass" />
+                            <Form.Control required type="password" placeholder="pass" />
                         </FloatingLabel>
                     </Container>
-                    <Button size="lg" className="signup-btn">Sign me up</Button>
+                    <Button size="lg" className="signup-btn" type="submit">Sign me up</Button>
                 </Form>
 
             </Container>

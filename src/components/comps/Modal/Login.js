@@ -4,7 +4,18 @@ import './LoginSignupModal.scss'
 
 class Login extends Component {
     state = {
+        validated: false
+    }
 
+    handleSubmit(event) {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else {
+            this.setState({validated: true});
+        }
     }
 
     render() {
@@ -14,24 +25,24 @@ class Login extends Component {
                     welcome back, please
                     <h2>Login</h2>
                 </Container>
-                <Form className="login-form">
+                <Form validated={this.state.validated} onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <Container>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Your Email"
                             className="mb-3"
                         >
-                            <Form.Control type="email" placeholder="name@example.com" />
+                            <Form.Control required type="email" placeholder="name@example.com" />
                         </FloatingLabel>
                         <FloatingLabel controlId="floatingPassword" label="Password">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control required type="password" placeholder="Password" />
                         </FloatingLabel>
                         <Stack gap={2} direction="horizontal">
-                            <Form.Check type="checkbox" label="Keep me logged in" />
-                            <Button href="#" className="ms-auto">Reset Password </Button>
+                            <Form.Check className="keep-logged-in" type="checkbox" label="Keep me logged in" />
+                            <Button href="#" className="ms-auto reset-password">Reset Password </Button>
                         </Stack>
                     </Container>
-                        <Button size="lg" className="login-btn">Log me in</Button>
+                    <Button size="lg" type="submit" className="login-btn">Log me in</Button>
                 </Form>
             </Container>
         )
