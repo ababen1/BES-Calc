@@ -10,19 +10,22 @@ import login_icon from "./Assets/login_icon.svg";
 class App extends Component {
     state = {
         data: null,
-    };
+    }
 
     componentDidMount() {
+        this.connectToExpress()
+    }
+
+    connectToExpress() {
         this.callBackendAPI()
-        .then((res) => {
-            this.setState({data: res.express});
-            console.log(this.state.data);
-        })
-        .catch((err) => console.log(err));
+            .then((res) => {
+                console.log("res")
+            })
+            .catch((err) => console.log(err))
     }
 
     callBackendAPI = async () => {
-        const response = await fetch('/express_backend');
+        const response = await fetch('#');
         const body = await response.json();
 
         if (response.status !== 200) {

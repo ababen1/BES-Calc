@@ -1,9 +1,34 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const env = require('dotenv').config()
 const app = express();
-const port = process.env.port || 5000;
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.use(express.json())
 
-app.get('/express_backend', (req, res) => {
-    res.send({express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT'});
-});
+mongoose.connect(
+    process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => {
+        require('./models/Calculator');
+        require('./models/User');
+        require('./models/SavedCalculation');
+        console.log("conntected to db");
+        populate()
+    })
+    .catch(console.error);
+
+app.listen(5000, () => console.log(`listening on port 5000`));
+
+function populate() {
+    var Calculator = mongoose.model('Calculator');
+    var new_calc = new Calculator({
+        description: "blabla",
+        imax: 99,
+    })
+    new_calc.save().then(() => {
+        console.log("Saved!");
+    })
+        .catch(console.error)
+}

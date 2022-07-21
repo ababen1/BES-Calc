@@ -60,6 +60,16 @@ class Calculator extends Component {
         }
     }
 
+    /*SetImax() {
+        const ampacityArr = [111, 143, 173, 205, 252, 303, 346, 390, 441, 511];
+        let ampacity = parseFloat(this.state.ampacity);
+        let closest_amp = ampacityArr[0];
+        let difference = 0;
+        for (amp_value in ampacityArr) {
+            
+        }
+    }*/
+
     render() {
 
         return (
