@@ -1,15 +1,17 @@
+const env = require('dotenv').config({ path: "C:/Users/Ben/Documents/ENTER/bes-calculator/.env"});
 const express = require('express');
 const cors = require('cors')
 const mongoose = require('mongoose');
-const env = require('dotenv').config()
 const app = express();
 
 var corsOptions = {
-    origin: "http://localhost:8081"
+    origin: "http://localhost:3000"
   };
 app.use(cors(corsOptions));
 
 app.use(express.json())
+
+console.log(env)
 
 mongoose.connect(
     process.env.MONGO_URI, {
@@ -27,7 +29,15 @@ mongoose.connect(
     
 // simple route
 app.get("/", (req, res) => {
+    console.log(req);
     res.json({ message: "Welcome" });
+  });
+
+app.post("/signup", (req, res) => {
+    let data = req.body;
+    const User = mongoose.model('User');
+    let new_user = new User(data);
+    new_user.save();
   });
 
 app.listen(5000, () => console.log(`listening on port 5000`));
