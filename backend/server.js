@@ -24,7 +24,8 @@ app.listen(5000, () => console.log(`listening on port 5000`));
 function populate() {
     var Calculator = mongoose.model('Calculator');
     var new_calc = new Calculator({
-        description: "blabla",
+        description: "test",
+        powerKW: 100,
         imax: 99,
     })
     new_calc.save().then(() => {

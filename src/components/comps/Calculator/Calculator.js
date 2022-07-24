@@ -3,7 +3,7 @@ import "./calculator.css";
 import { ListGroup, Form, FormControl, Container, InputGroup, CloseButton } from "react-bootstrap";
 
 class Calculator extends Component {
-    
+
     constructor(props) {
         super(props);
         this.calc_form = React.createRef();
@@ -19,9 +19,9 @@ class Calculator extends Component {
             description: "",
             ampacity: "",
             power: "",
-            ampacityResult: 0, 
-            cable: "", 
-            wire: "" 
+            ampacityResult: 0,
+            cable: "",
+            wire: ""
         }
     }
 
@@ -38,11 +38,11 @@ class Calculator extends Component {
     }
 
     OnWireChange(ev) {
-        this.setState({"wire": ev.target.id})
+        this.setState({ "wire": ev.target.id })
     }
 
     OnCableChange(ev) {
-        this.setState({"cable": ev.target.id})
+        this.setState({ "cable": ev.target.id })
     }
 
     Calculation() {
@@ -52,10 +52,10 @@ class Calculator extends Component {
         for (let i = 0; i < ampacityArr.length; i++) {
             if (imax > ampacityArr[i]) {
                 calculationAmpacity = ampacityArr[i + 1];
-                this.setState({ampacityResult: calculationAmpacity});
+                this.setState({ ampacityResult: calculationAmpacity });
             }
             if (imax === ampacityArr[i]) {
-                this.setState({ampacityResult: ampacityArr[i]});
+                this.setState({ ampacityResult: ampacityArr[i] });
             }
         }
     }
@@ -84,23 +84,40 @@ class Calculator extends Component {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <Form.Select className="KW" value={this.state.power} onChange={(ev) => {this.setState({"power": ev.target.value});}}>
+                            <Form.Select className="KW" value={this.state.power} onChange={(ev) => { this.setState({ "power": ev.target.value }); }}>
                                 <option>power KW</option>
+                                <option>15</option>
+                                <option>18.5</option>
+                                <option>22</option>
+                                <option>30</option>
+                                <option>37</option>
+                                <option>45</option>
+                                <option>55</option>
+                                <option>75</option>
+                                <option>90</option>
+                                <option>110</option>
+                                <option>132</option>
+                                <option>160</option>
+                                <option>200</option>
+                                <option>250</option>
+                                <option>280</option>
+                                <option>315</option>
+                                <option>355</option>
                             </Form.Select>
 
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <InputGroup>
-                                <Form.Check name="cable" inline id="al" label="Al" type="radio" checked={this.state.cable === "al"} onChange={this.OnCableChange.bind(this)}/>
-                                <Form.Check name="cable" inline id="cu" label="Cu" type="radio" checked={this.state.cable === "cu"} onChange={this.OnCableChange.bind(this)}/>
+                                <Form.Check name="cable" inline id="al" label="Al" type="radio" checked={this.state.cable === "al"} onChange={this.OnCableChange.bind(this)} />
+                                <Form.Check name="cable" inline id="cu" label="Cu" type="radio" checked={this.state.cable === "cu"} onChange={this.OnCableChange.bind(this)} />
                             </InputGroup>
 
 
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <InputGroup>
-                                <Form.Check name="wire" inline id ="single" label="Single" type="radio" checked={this.state.wire === "single"} onChange={this.OnWireChange.bind(this)}/>
-                                <Form.Check name="wire" inline id="3_wire" label="3 Wire" type="radio" checked={this.state.wire === "3_wire"} onChange={this.OnWireChange.bind(this)}/>
+                                <Form.Check name="wire" inline id="single" label="Single" type="radio" checked={this.state.wire === "single"} onChange={this.OnWireChange.bind(this)} />
+                                <Form.Check name="wire" inline id="3_wire" label="3 Wire" type="radio" checked={this.state.wire === "3_wire"} onChange={this.OnWireChange.bind(this)} />
                             </InputGroup>
 
                         </ListGroup.Item>
