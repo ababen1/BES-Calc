@@ -28,19 +28,16 @@ class Signup extends Component {
                 <Form validated={this.state.validated} onSubmit={this.handleSubmit.bind(this)} className="signup-form">
                     <Container>
                         <FloatingLabel
-                            controlId="floatingInput"
                             label="Your Email"
                             className="mb-3">
                             <Form.Control required type="email" placeholder="name@example.com" />
                         </FloatingLabel>
                         <FloatingLabel
-                            controlId="floatingInput"
                             label="Create Username"
                             className="mb-3">
                             <Form.Control required type="text" placeholder="username" />
                         </FloatingLabel>
                         <FloatingLabel
-                            controlId="floatingInput"
                             label="Create Password"
                             className="mb-3">
                             <Form.Control required type="password" placeholder="pass" />

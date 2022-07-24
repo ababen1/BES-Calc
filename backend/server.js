@@ -1,7 +1,13 @@
 const express = require('express');
+const cors = require('cors')
 const mongoose = require('mongoose');
 const env = require('dotenv').config()
 const app = express();
+
+var corsOptions = {
+    origin: "http://localhost:8081"
+  };
+app.use(cors(corsOptions));
 
 app.use(express.json())
 
@@ -15,13 +21,18 @@ mongoose.connect(
         require('./models/User');
         require('./models/SavedCalculation');
         console.log("conntected to db");
-        populate()
     })
     .catch(console.error);
 
+    
+// simple route
+app.get("/", (req, res) => {
+    res.json({ message: "Welcome" });
+  });
+
 app.listen(5000, () => console.log(`listening on port 5000`));
 
-function populate() {
+/*function populate() {
     var Calculator = mongoose.model('Calculator');
     var new_calc = new Calculator({
         description: "test",
@@ -32,4 +43,4 @@ function populate() {
         console.log("Saved!");
     })
         .catch(console.error)
-}
+}*/

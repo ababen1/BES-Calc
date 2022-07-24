@@ -19,7 +19,7 @@ class App extends Component {
     connectToExpress() {
         this.callBackendAPI()
             .then((res) => {
-                console.log("res")
+                console.log(res)
             })
             .catch((err) => console.log(err))
     }

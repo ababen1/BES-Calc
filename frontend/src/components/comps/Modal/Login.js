@@ -28,7 +28,6 @@ class Login extends Component {
                 <Form validated={this.state.validated} onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <Container>
                         <FloatingLabel
-                            controlId="floatingInput"
                             label="Your Email"
                             className="mb-3"
                         >
