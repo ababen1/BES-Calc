@@ -12,13 +12,13 @@ class Signup extends Component {
 
     handleSubmit(event) {
         const form = event.currentTarget;
-        event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            event.preventDefault();
         }
         else {
-            this.setState({ validated: true });
-            this.callBackendSignup();
+            this.setState({ validated: true },
+                this.callBackendSignup());
         }
     }
 
@@ -28,14 +28,14 @@ class Signup extends Component {
             headers: {
                 "content-type": "application/json",
                 "accept": "application/json"
-              },
+            },
             body: JSON.stringify({
                 email: this.state.email,
                 username: this.state.username,
                 password: this.state.password,
             })
         }).then(response => response.json()).then(data => {
-            console.log(data);
+            sessionStorage.setItem("token", data.token);
         })
 
     }
