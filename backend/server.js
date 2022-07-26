@@ -1,7 +1,10 @@
-const env = require('dotenv').config({ path: "C:/Users/Ben/Documents/ENTER/bes-calculator/.env" });
+const path = require('path');
+require("dotenv").config({ path: path.resolve(__dirname, '..', '.env') });
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken')
+
 const app = express();
 
 require('./models/Calculator');
@@ -34,6 +37,30 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome" });
 });
 
+function fetchUserByToken(req) {
+    return new Promise((resolve, reject) => {
+        if (req.headers && req.headers.authorization) {
+            let auth = req.headers.authorization;
+            let decoded;
+            try {
+                decoded = jwt.verify(authorization, process.env.JWT_SECRET_KEY);
+            } catch (ex) {
+                reject("invalid token");
+                return 
+            }
+
+            User.findOne({email: decoded.email})
+            .then((user) => {
+                resolve(user)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+        } else {
+            reject("token not found");
+        }
+    })
+}
 app.post("/signup", (req, res) => {
     let data = req.body;
     if (!data.email || !data.password || !data.username) {
@@ -84,6 +111,17 @@ app.post("/login", (req, res) => {
             })
     }
 
+})
+
+app.get("/logged_user", (req, res) => {
+    fetchUserByToken(req)
+    .then((user) => {
+        res.json(user)
+    })
+    .catch((err) => {
+        console.log(err);
+        res.send(err);
+    })
 })
 
 app.listen(5000, () => console.log(`listening on port 5000`));

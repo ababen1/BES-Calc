@@ -5,9 +5,33 @@ import LoginSignUp from "./Modal/LoginSignUpPopup";
 
 class Header extends Component {
 
+    state = {
+        logged_user: {}
+    }
+
+    getLoggedUser() {
+        fetch('http://localhost:5000/logged_user', {
+            method: 'get',
+            headers: {
+                "content-type": "application/json",
+                "accept": "application/json",
+                "authorization": sessionStorage.getItem("token")
+            }
+        }).then(response => response.json()).then(user => {
+            this.setState({logged_user: user})
+        })
+        .catch((err) => {
+            this.setState({logged_user: {}})
+        })
+    }
+
     constructor(props) {
         super(props);
         this.login_signup_ref = React.createRef();
+    }
+
+    componentDidMount() {
+        this.getLoggedUser();
     }
 
     render() {
@@ -21,7 +45,7 @@ class Header extends Component {
                     <div className="ms-auto" style={{ "textAlign": "center" }}>
                         <Image className="login-icon" src={this.props.login_icon} roundedCircle="true" width="75"
                             onClick={(e) => { this.login_signup_ref.current.toggle_modal() }} /> <br />
-                        <span>Login</span>
+                        <span>{(this.state.logged_user != {}) ? "Login" : this.state.logged_user.username}</span>
                     </div>
                 </Stack>
                 <Stack fluid className='BES-header-info menu-title' >

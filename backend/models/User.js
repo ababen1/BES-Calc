@@ -34,15 +34,10 @@ UserSchema.methods.validPassword = function (password) {
 }
 
 UserSchema.methods.generateJWT = function () {
-  var today = new Date();
-  var exp = new Date(today);
-  exp.setDate(today.getDate + 60);
-
   return jwt.sign(
     {
       id: this._id,
       username: this.username,
-      exp: parseInt(exp.getTime() / 1000)
     },
     process.env.JWT_SECRET_KEY
   )

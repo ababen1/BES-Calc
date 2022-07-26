@@ -12,9 +12,9 @@ class Signup extends Component {
 
     handleSubmit(event) {
         const form = event.currentTarget;
+        event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
-            event.preventDefault();
         }
         else {
             this.setState({ validated: true },
