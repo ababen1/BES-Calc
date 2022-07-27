@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Component } from "react";
 import { FloatingLabel, Form, Container, Button } from "react-bootstrap";
 import './LoginSignupModal.scss'
@@ -12,6 +13,7 @@ class Signup extends Component {
 
     handleSubmit(event) {
         const form = event.currentTarget;
+
         event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
@@ -23,21 +25,18 @@ class Signup extends Component {
     }
 
     callBackendSignup() {
-        fetch('http://localhost:5000/signup', {
-            method: 'post',
-            headers: {
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify({
-                email: this.state.email,
+        const configs = {
+            method: "POST",
+            url: "http://localhost:5000/signup",
+            data: {
                 username: this.state.username,
-                password: this.state.password,
-            })
-        }).then(response => response.json()).then(data => {
-            sessionStorage.setItem("token", data.token);
-        })
-
+                email: this.state.email,
+                password: this.state.password
+            }
+        }
+        axios(configs)
+        .then((result) => {console.log(result)})
+        .catch((error) => {console.log(error)})
     }
 
     render() {

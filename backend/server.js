@@ -4,8 +4,9 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken')
-
 const app = express();
+const auth = require("./auth");
+
 
 require('./models/Calculator');
 require('./models/User');
@@ -30,6 +31,19 @@ mongoose.connect(
     })
     .catch(console.error);
 
+// Curb Cores Error by adding a header here
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    );
+    next();
+  });
 
 // simple route
 app.get("/", (req, res) => {
@@ -37,30 +51,6 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome" });
 });
 
-function fetchUserByToken(req) {
-    return new Promise((resolve, reject) => {
-        if (req.headers && req.headers.authorization) {
-            let auth = req.headers.authorization;
-            let decoded;
-            try {
-                decoded = jwt.verify(authorization, process.env.JWT_SECRET_KEY);
-            } catch (ex) {
-                reject("invalid token");
-                return 
-            }
-
-            User.findOne({email: decoded.email})
-            .then((user) => {
-                resolve(user)
-            })
-            .catch((err) => {
-                reject(err)
-            })
-        } else {
-            reject("token not found");
-        }
-    })
-}
 app.post("/signup", (req, res) => {
     let data = req.body;
     if (!data.email || !data.password || !data.username) {
@@ -113,16 +103,14 @@ app.post("/login", (req, res) => {
 
 })
 
-app.get("/logged_user", (req, res) => {
-    fetchUserByToken(req)
-    .then((user) => {
-        res.json(user)
-    })
-    .catch((err) => {
-        console.log(err);
-        res.send(err);
-    })
-})
+app.get("/auth-endpoint", auth, (request, response) => {
+    response.json({ message: "You are authorized to access me" });
+});
+
+// free endpoint
+app.get("/free-endpoint", (request, response) => {
+    response.json({ message: "You are free to access me anytime" });
+});
 
 app.listen(5000, () => console.log(`listening on port 5000`));
 

@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { FloatingLabel, Form, Container, Stack, Button } from "react-bootstrap";
 import './LoginSignupModal.scss'
+import axios from "axios"
 
 class Login extends Component {
     state = {
@@ -11,6 +12,7 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
+
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
@@ -36,6 +38,9 @@ class Login extends Component {
         }).then(response => response.json()).then(data => {
             console.log(data);
             sessionStorage.setItem("token", data.token);
+        })
+        .catch(err => {
+            sessionStorage.removeItem("token")
         })
     }
 
