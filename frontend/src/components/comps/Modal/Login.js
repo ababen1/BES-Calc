@@ -2,6 +2,9 @@ import { Component } from "react";
 import { FloatingLabel, Form, Container, Stack, Button } from "react-bootstrap";
 import './LoginSignupModal.scss'
 import axios from "axios"
+import Cookies from "universal-cookie"
+
+const cookies = new Cookies();
 
 class Login extends Component {
     state = {
@@ -12,10 +15,9 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
-
+        event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
-            event.preventDefault();
             event.stopPropagation();
         }
         else {
@@ -35,7 +37,11 @@ class Login extends Component {
             }
         }
         axios(configs)
-        .then((result) => {console.log(result)})
+        .then((result) => {
+            cookies.set("token", result.data.token, {
+                path: "/"
+            })
+        })
         .catch((error) => {console.log(error)})
     }
 

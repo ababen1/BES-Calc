@@ -87,7 +87,7 @@ app.post("/login", (req, res) => {
                 if (!user) {
                     res.json({ success: false, error: "User not found." })
                 } else {
-                    if (user.validPassword(user_data.password)) {
+                    if (!user.validPassword(user_data.password)) {
                         res.json({ "success": false, error: "Wrong password." })
                     } else {
                         console.log("logged in")

@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Container, Stack, Image } from "react-bootstrap";
+import UserContext from "../context";
 import LoginSignUp from "./Modal/LoginSignUpPopup";
 
 
 class Header extends Component {
-
-    state = {
-        logged_user: {}
-    }
 
     constructor(props) {
         super(props);
@@ -28,7 +25,15 @@ class Header extends Component {
                     <div className="ms-auto" style={{ "textAlign": "center" }}>
                         <Image className="login-icon" src={this.props.login_icon} roundedCircle="true" width="75"
                             onClick={(e) => { this.login_signup_ref.current.toggle_modal() }} /> <br />
-                        <span>{(this.state.logged_user != {}) ? "Login" : this.state.logged_user.username}</span>
+                        <UserContext.Consumer>
+                            {value => {
+                                let text = "Login"
+                                if (value & value !== "") {
+                                    text = value.username
+                                }
+                                return <span>{text}</span>
+                            }}
+                        </UserContext.Consumer>
                     </div>
                 </Stack>
                 <Stack fluid className='BES-header-info menu-title' >

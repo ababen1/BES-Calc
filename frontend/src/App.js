@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, React } from "react";
 import 'react-loading-skeleton/dist/skeleton.css';
 import CalculatorPage from "./components/pages/CaculatorPage/CalculatorPage";
 import Container from 'react-bootstrap/Container'
@@ -6,12 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/comps/Header';
 import logo from './Assets/Group 35.svg'
 import login_icon from "./Assets/login_icon.svg";
+import UserContext from "./components/context";
+import {Switch, Route} from "react-router-dom"
 
 class App extends Component {
     state = {
         data: null,
     }
-
     componentDidMount() {
         this.connectToExpress()
     }
@@ -25,7 +26,7 @@ class App extends Component {
     }
 
     callBackendAPI = async () => {
-        const response = await fetch('#');
+        const response = await fetch('/');
         const body = await response.json();
 
         if (response.status !== 200) {
@@ -36,11 +37,13 @@ class App extends Component {
 
     render() {
         return (
-            <Container fluid className='App'>
-                <Header logo={logo} login_icon={login_icon} />
-                <CalculatorPage />
+            <UserContext.Provider value={{username: undefined}}>
+                <Container fluid className='App'>
+                    <Header logo={logo} login_icon={login_icon} />
+                    <CalculatorPage />
 
-            </Container>
+                </Container>
+            </UserContext.Provider>
         );
     }
 
