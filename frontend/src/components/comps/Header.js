@@ -9,29 +9,12 @@ class Header extends Component {
         logged_user: {}
     }
 
-    getLoggedUser() {
-        fetch('http://localhost:5000/logged_user', {
-            method: 'get',
-            headers: {
-                "content-type": "application/json",
-                "accept": "application/json",
-                "authorization": sessionStorage.getItem("token")
-            }
-        }).then(response => response.json()).then(user => {
-            this.setState({logged_user: user})
-        })
-        .catch((err) => {
-            this.setState({logged_user: {}})
-        })
-    }
-
     constructor(props) {
         super(props);
         this.login_signup_ref = React.createRef();
     }
 
     componentDidMount() {
-        this.getLoggedUser();
     }
 
     render() {

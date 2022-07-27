@@ -24,24 +24,19 @@ class Login extends Component {
     }
 
     callBackendLogin() {
-        fetch('http://localhost:5000/login', {
-            method: 'post',
-            headers: {
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify({
+       
+        const configs = {
+            method: "POST",
+            url: "http://localhost:5000/login",
+            data: {
                 email: this.state.email,
                 password: this.state.password,
                 keep_logged_in: this.state.keep_logged_in
-            })
-        }).then(response => response.json()).then(data => {
-            console.log(data);
-            sessionStorage.setItem("token", data.token);
-        })
-        .catch(err => {
-            sessionStorage.removeItem("token")
-        })
+            }
+        }
+        axios(configs)
+        .then((result) => {console.log(result)})
+        .catch((error) => {console.log(error)})
     }
 
     render() {
