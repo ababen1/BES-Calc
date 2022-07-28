@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import "./calculator.css";
 import { ListGroup, Form, FormControl, Container, InputGroup, CloseButton } from "react-bootstrap";
 
+const IMAX_VALUES = {
+    111: 5 * 16,
+    143: 3 * 25 + 16,
+    173: 3 * 35 + 16,
+    205: 3 * 50 + 25,
+    252: 3 * 70 + 35,
+    303: 3 * 95 + 50,
+    346: 3 * 120 + 70,
+    390: 3 * 150 + 70,
+    441: 3 * 185 + 95,
+    551: 3 * 240 + 120
+}
+
 class Calculator extends Component {
 
     constructor(props) {
@@ -19,9 +32,11 @@ class Calculator extends Component {
             description: "",
             ampacity: "",
             power: "",
-            ampacityResult: 0,
             cable: "",
-            wire: ""
+            wire: "",
+            imax: "",
+            reserve: "",
+            smm2: "",
         }
     }
 
@@ -33,8 +48,13 @@ class Calculator extends Component {
         this.setState({ description: ev.target.value });
     }
 
-    OnChangeHandlerImax(ev) {
-        this.setState({ ampacity: ev.target.value });
+    OnChangeHandlerAmp(ev) {
+        this.setState({ ampacity: ev.target.value }, () => {
+            let imax = this.CalculateIMAX();
+            let reserve = (Math.abs(this.state.ampacity - imax) / imax) * 100;
+            let smm2 = this.CalculateSmm2(imax);
+            this.setState({ imax: imax, reserve: reserve, smm2: smm2 })
+        });
     }
 
     OnWireChange(ev) {
@@ -45,36 +65,49 @@ class Calculator extends Component {
         this.setState({ "cable": ev.target.id })
     }
 
-    Calculation() {
-        let ampacityArr = [111, 143, 173, 205, 252, 303, 346, 390, 441, 511];
-        let imax = parseFloat(this.state.ampacity);
-        let calculationAmpacity = 0;
-        for (let i = 0; i < ampacityArr.length; i++) {
-            if (imax > ampacityArr[i]) {
-                calculationAmpacity = ampacityArr[i + 1];
-                this.setState({ ampacityResult: calculationAmpacity });
-            }
-            if (imax === ampacityArr[i]) {
-                this.setState({ ampacityResult: ampacityArr[i] });
+    CalculateIMAX() {
+        const imaxValues = Object.keys(IMAX_VALUES)
+        let imax;
+        if (isNaN(this.state.ampacity)) {
+            return
+        }
+
+        // steps to calculate imax:
+        // 1. copy the imaxValues array and insert the user's input (amp) into it
+        // 2. sort the copied array, and get the index of amp
+        // 3. if amp is not the last element or the first element: 
+        //      the target imax is neither the prvious item or the next item in the copied array. we take the one that is closest to the user's
+        //      input, rounded down.
+        // 4. otherwise:
+        //      the target imax is the smallest/largest value in the imaxValues array (smallest if index is 0 and vice versa)
+        imax = parseFloat(this.state.ampacity);
+        let tempCopy = [...imaxValues]
+        tempCopy.push(imax)
+        tempCopy = tempCopy.sort((a, b) => a - b);
+        let index = Math.min(tempCopy.indexOf(imax), imaxValues.length - 1)
+        if (index === 0 || index === imaxValues.length - 1) {
+            imax = imaxValues[index]
+        } else {
+            let prevImax = tempCopy[index - 1]
+            let nextImax = tempCopy[index + 1]
+            if (Math.abs(this.state.ampacity - prevImax) <= Math.abs(this.state.ampacity - nextImax)) {
+                imax = prevImax
+            } else {
+                imax = nextImax
             }
         }
+        return imax
     }
 
-    /*SetImax() {
-        const ampacityArr = [111, 143, 173, 205, 252, 303, 346, 390, 441, 511];
-        let ampacity = parseFloat(this.state.ampacity);
-        let closest_amp = ampacityArr[0];
-        let difference = 0;
-        for (amp_value in ampacityArr) {
-            
-        }
-    }*/
+    CalculateSmm2(imax) {
+        return parseFloat(IMAX_VALUES[parseFloat(imax)])
+    }
 
     render() {
 
         return (
             <Container fluid>
-                <Form ref={this.calc_form}>
+                <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()}>
                     <ListGroup horizontal className="calculator">
                         <ListGroup.Item className={"add"} style={{ backgroundColor: (this.props.count === 0) ? "lightgray" : "#156982" }}>
                             <span style={{ color: "white", verticalAlign: "middle" }}>{(this.props.count === 0) ? "+" : this.props.count}</span>
@@ -122,20 +155,19 @@ class Calculator extends Component {
 
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <FormControl type={"number"} name={"ampacity"} placeholder={"Ampacity"} value={this.state.ampacity} onFocus={this.Calculation.bind(this)} onChange={this.OnChangeHandlerImax.bind(this)} />
+                            <FormControl type={"number"} name={"ampacity"} placeholder={"Ampacity"} value={this.state.ampacity} onChange={this.OnChangeHandlerAmp.bind(this)} />
 
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <p>Reserve(%)</p>
+                            <p>Reserve(%) <br /> {String(this.state.reserve).substring(0, 8)}</p>
 
                         </ListGroup.Item>
                         <ListGroup.Item>
-
-                            <p>{(this.state.ampacityResult !== 0) ? this.state.ampacityResult : "Imax"}</p>
+                            <p>Imax <br />{this.state.imax}</p>
 
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <p>S[Mm^2]</p>
+                            <p>S[Mm^2] <br/> {this.state.smm2}</p>
 
                         </ListGroup.Item>
                         <ListGroup.Item >
