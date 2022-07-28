@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import Calculator from "./Calculator";
 
+const FACTOR_CORRECTION_VALUES = [
+    1,
+    0.79,
+    0.67,
+    0.61,
+    0.56,
+    0.53
+]
+
 class CalculatorContainer extends Component {
 
     constructor(props) {
@@ -10,6 +19,13 @@ class CalculatorContainer extends Component {
 
     state = {
         calculators_data: []
+    }
+
+    GetFactorCorrection() {
+        const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+        var num_of_calcs = this.state.calculators_data.length;
+        num_of_calcs = clamp(num_of_calcs, 1, 6);
+        return parseFloat(FACTOR_CORRECTION_VALUES[num_of_calcs - 1]);
     }
 
     AddCalculator(data) {
@@ -33,7 +49,12 @@ class CalculatorContainer extends Component {
     render() {
         return (
             this.state.calculators_data.map((value, index) =>
-                <Calculator key={index} OnDeleteCalc={this.DeleteCalculator} count={index + 1} data={value} />)
+                <Calculator 
+                key={index} 
+                OnDeleteCalc={this.DeleteCalculator} 
+                count={index + 1} 
+                data={value} 
+                factor={this.GetFactorCorrection()}/>)
         );
     }
 }

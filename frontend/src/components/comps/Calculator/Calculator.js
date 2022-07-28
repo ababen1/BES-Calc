@@ -25,6 +25,7 @@ class Calculator extends Component {
 
     componentDidMount() {
         this.setState(this.props.data);
+        console.log(this.props.factor)
     }
 
     getInitialState() {
@@ -49,12 +50,14 @@ class Calculator extends Component {
     }
 
     OnChangeHandlerAmp(ev) {
-        this.setState({ ampacity: ev.target.value }, () => {
-            let imax = this.CalculateIMAX();
-            let reserve = (Math.abs(this.state.ampacity - imax) / imax) * 100;
-            let smm2 = this.CalculateSmm2(imax);
-            this.setState({ imax: imax, reserve: reserve, smm2: smm2 })
-        });
+        this.setState({ ampacity: ev.target.value }, this.Calculation);
+    }
+
+    Calculation() {
+        let imax = this.CalculateIMAX();
+        let reserve = (Math.abs(this.state.ampacity - imax) / imax) * 100;
+        let smm2 = this.CalculateSmm2(imax);
+        this.setState({ imax: imax * (this.props.factor == undefined ? 1 : this.props.factor), reserve: reserve, smm2: smm2 })
     }
 
     OnWireChange(ev) {
