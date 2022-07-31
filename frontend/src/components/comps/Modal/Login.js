@@ -16,8 +16,9 @@ class Login extends Component {
 
     handleSubmit(event) {
         const form = event.currentTarget;
+        event.preventDefault();
         if (form.checkValidity() === false) {
-            event.preventDefault();
+            
             event.stopPropagation();
         }
         else {
@@ -29,7 +30,7 @@ class Login extends Component {
        
         const configs = {
             method: "POST",
-            base_url: process.env.DEBUG_URL,
+            base_url: "localhost:8080",
             url: "/login",
             data: {
                 email: this.state.email,

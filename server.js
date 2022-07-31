@@ -21,6 +21,8 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, "frontend", "build")))
+
 mongoose.connect(
     process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -123,7 +125,11 @@ app.get("/user", (req, res) => {
 //     response.json({ message: "You are free to access me anytime" });
 // });
 
-app.listen(5000, () => console.log(`listening on port 5000`));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
+
+app.listen(process.env.PORT || 5000, (port) => console.log(`listening on port ${port}`));
 
 /*function populate() {
     var Calculator = mongoose.model('Calculator');
