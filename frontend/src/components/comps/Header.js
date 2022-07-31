@@ -2,9 +2,14 @@ import React, { Component } from "react";
 import { Container, Stack, Image } from "react-bootstrap";
 import UserContext from "../context";
 import LoginSignUp from "./Modal/LoginSignUpPopup";
-
+import Cookies from "universal-cookie";
+import axios from "axios";
 
 class Header extends Component {
+
+    state = {
+        username: ""
+    }
 
     constructor(props) {
         super(props);
@@ -12,6 +17,20 @@ class Header extends Component {
     }
 
     componentDidMount() {
+        const configs = {
+            method: "GET",
+            url: "http://localhost:5000/user",
+            headers: {
+                "auth": sessionStorage.getItem("token")
+            }
+        }
+        axios(configs)
+            .then((result) => {
+                if (result.data.success) {
+                    this.setState({username: result.data.data.username})
+                }
+            })
+            .catch((error) => { console.log(error) })
     }
 
     render() {
@@ -25,15 +44,7 @@ class Header extends Component {
                     <div className="ms-auto" style={{ "textAlign": "center" }}>
                         <Image className="login-icon" src={this.props.login_icon} roundedCircle="true" width="75"
                             onClick={(e) => { this.login_signup_ref.current.toggle_modal() }} /> <br />
-                        <UserContext.Consumer>
-                            {value => {
-                                let text = "Login"
-                                if (value & value !== "") {
-                                    text = value.username
-                                }
-                                return <span>{text}</span>
-                            }}
-                        </UserContext.Consumer>
+                        <span>{this.state.username != "" ? this.state.username : "Login"}</span>
                     </div>
                 </Stack>
                 <Stack fluid className='BES-header-info menu-title' >

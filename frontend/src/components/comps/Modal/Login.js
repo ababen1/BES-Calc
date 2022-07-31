@@ -38,9 +38,7 @@ class Login extends Component {
         }
         axios(configs)
         .then((result) => {
-            cookies.set("token", result.data.token, {
-                path: "/"
-            })
+            sessionStorage.setItem("token", result.data.data.token);
         })
         .catch((error) => {console.log(error)})
     }

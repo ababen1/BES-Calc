@@ -103,14 +103,25 @@ app.post("/login", (req, res) => {
 
 })
 
-app.get("/auth-endpoint", auth, (request, response) => {
-    response.json({ message: "You are authorized to access me" });
-});
+app.get("/user", (req, res) => {
+    let token = req.headers.auth;
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
+        res.json({"success": true, data: decoded})
+    } catch(err) {
+        res.json({"success": false, error: err})
+    }
+})
 
-// free endpoint
-app.get("/free-endpoint", (request, response) => {
-    response.json({ message: "You are free to access me anytime" });
-});
+// app.get("/auth-endpoint", auth, (request, response) => {
+//     response.json({ message: "You are authorized to access me" });
+// });
+
+// // free endpoint
+// app.get("/free-endpoint", (request, response) => {
+//     response.json({ message: "You are free to access me anytime" });
+// });
 
 app.listen(5000, () => console.log(`listening on port 5000`));
 
