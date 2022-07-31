@@ -82,7 +82,7 @@ app.post("/login", (req, res) => {
         return res.status(422).json({ errors: { password: "can't be blank" } });
     }
     else {
-        let user = User.findOne({ email: user_data.email })
+        User.findOne({ email: user_data.email })
             .then((user) => {
                 if (!user) {
                     res.json({ success: false, error: "User not found." })
