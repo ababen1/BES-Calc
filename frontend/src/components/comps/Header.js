@@ -19,7 +19,8 @@ class Header extends Component {
     componentDidMount() {
         const configs = {
             method: "GET",
-            url: "http://localhost:5000/user",
+            base_url: process.env.DEBUG_URL,
+            url: "/user",
             headers: {
                 "auth": sessionStorage.getItem("token")
             }

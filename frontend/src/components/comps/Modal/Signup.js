@@ -26,7 +26,8 @@ class Signup extends Component {
     callBackendSignup() {
         const configs = {
             method: "POST",
-            url: "http://localhost:5000/signup",
+            base_url: process.env.DEBUG_URL,
+            url: "/signup",
             data: {
                 username: this.state.username,
                 email: this.state.email,
