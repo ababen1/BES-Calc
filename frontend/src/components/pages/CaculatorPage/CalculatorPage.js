@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Calculator from "../../comps/Calculator/Calculator";
-import "./CalculatorPage.css";
+import "./CalculatorPage.scss";
 import { Form, Container, Row, Col, Button, Stack } from "react-bootstrap";
 import CalculatorContainer from "../../comps/Calculator/CalculatorsContainer";
 
@@ -51,14 +51,19 @@ class CalculatorPage extends Component {
         for (let i = 0; i < counter; i++) {
             this.state.arrCalculators.push(i)
         }
-
     }
+
+    OnCalculateClick() {
+        
+    }
+
+    
 
     render() {
 
         return (
             <Container fluid>
-                <Container>
+                <Container fluid className="main-container">
                     <Form className="customer-info">
                         <Row>
                             <Col>
@@ -80,27 +85,24 @@ class CalculatorPage extends Component {
                             </Col>
                         </Row>
                     </Form>
+                
                     <br />
                     <Calculator key="main" ref={this.main_calc_ref} count={0}></Calculator>
                     <br />
                     <Row>
                         <Col md={10}>
-                            <Button variant="light" size="lg" id="reset_calculation_btn" onClick={this.OnResetCalculator.bind(this)}>Reset</Button>
+                            <Button variant="light" className="reset" size="lg" id="reset_calculation_btn" onClick={this.OnResetCalculator.bind(this)}>Reset</Button>
                         </Col>
-                        <Col><Button size="lg" id="add_row_btn" onClick={this.OnAddCalculator.bind(this)}>Add Row</Button></Col>
+                        <Col><Button className="add-row" size="lg" id="add_row_btn" onClick={this.OnAddCalculator.bind(this)}>Add Row</Button></Col>
                     </Row>
                     <br></br>
-                    <Row>
-                        <Col>
-                            <CalculatorContainer ref={this.calculators_container_ref}/>
-                        </Col>
-                    </Row>
+                    <CalculatorContainer ref={this.calculators_container_ref} />
                     <Row>
                         <Col md={10}></Col>
                         <Col>
                             <Stack direction="horizontal" gap={2}>
-                                <Button variant="light" size="lg" id="calculate_btn">Calculate</Button>
-                                <Button variant="primary" size="lg" id="save_calculation_btn">Save</Button>
+                                <Button onClick={this.OnCalculateClick.bind(this)} className="" variant="primary" size="lg" id="calculate_btn">Calculate</Button>
+                                <Button className="" variant="primary" size="lg" id="save_calculation_btn">Save</Button>
                             </Stack>
                         </Col>
 

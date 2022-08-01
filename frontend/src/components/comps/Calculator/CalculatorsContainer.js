@@ -48,6 +48,7 @@ class CalculatorContainer extends Component {
 
     render() {
         return (
+
             this.state.calculators_data.map((value, index) =>
                 <Calculator 
                 key={index} 
