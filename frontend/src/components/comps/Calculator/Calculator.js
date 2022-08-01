@@ -107,7 +107,6 @@ class Calculator extends Component {
     }
 
     render() {
-
         return (
             <Container fluid className="calculator" style={{}}>
                 <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()}>
