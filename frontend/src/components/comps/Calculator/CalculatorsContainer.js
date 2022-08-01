@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import Calculator from "./Calculator";
+import "./Calculator.scss"
 
 const FACTOR_CORRECTION_VALUES = [
     1,
@@ -48,14 +50,29 @@ class CalculatorContainer extends Component {
 
     render() {
         return (
+            <div style={{ "textAlign": "center" }}>
+                {(this.state.calculators_data.length !== 0) ?
+                    <Row className="reference-row">
+                        <Col md={2} style={{ width: "20%" }}>Description</Col>
+                        <Col >Power [Kw]</Col>
+                        <Col md={1}>Al / Cu</Col>
+                        <Col md={2}>3 wire / single</Col>
+                        <Col md={2}>ampacity [A]</Col>
+                        <Col >Reserve (%)</Col>
+                        <Col >Imax</Col>
+                        <Col >S [mm^2]</Col>
 
-            this.state.calculators_data.map((value, index) =>
-                <Calculator 
-                key={index} 
-                OnDeleteCalc={this.DeleteCalculator} 
-                count={index + 1} 
-                data={value} 
-                factor={this.GetFactorCorrection()}/>)
+                    </Row> : ""}
+
+
+                {this.state.calculators_data.map((value, index) =>
+                    <Calculator
+                        key={index}
+                        OnDeleteCalc={this.DeleteCalculator}
+                        count={index + 1}
+                        data={value}
+                        factor={this.GetFactorCorrection()} />)}
+            </div>
         );
     }
 }
