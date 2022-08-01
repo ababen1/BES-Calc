@@ -1,14 +1,17 @@
 @use 'src/theme.scss';
 
 
-
 .calculator {
-
-
-    /* UI Properties */
-    background: theme.$white 0% 0% no-repeat padding-box;
+    background: transparent 0% 0% no-repeat padding-box;
     border-radius: 15px 15px 15px 0px;
     opacity: 1;
+    text-align: center;
+}
+
+.calc-form {
+    width: 95%;
+    padding-left: 5%;
+    
 }
 
 .add {

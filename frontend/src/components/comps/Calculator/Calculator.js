@@ -108,8 +108,8 @@ class Calculator extends Component {
 
     render() {
         return (
-            <Container fluid className="calculator" style={{}}>
-                <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()}>
+            <Container fluid className="calculator">
+                <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()} className="calc-form">
                     <ListGroup horizontal>
                         <ListGroup.Item style={{ "background-color": "#156982" }}>
                             <span className="add">{(this.props.count === 0) ? "+" : this.props.count}</span>
