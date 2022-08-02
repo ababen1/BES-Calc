@@ -20,20 +20,29 @@ class CalculatorContainer extends Component {
     }
 
     state = {
-        calculators_data: []
+        calculators_data: [],
+        factor: 1,
     }
 
-    GetFactorCorrection() {
+    UpdateFactorCorrection() {
         const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-        var num_of_calcs = this.state.calculators_data.length;
-        num_of_calcs = clamp(num_of_calcs, 1, 6);
-        return parseFloat(FACTOR_CORRECTION_VALUES[num_of_calcs - 1]);
+        let facor_idx = parseInt(clamp(this.state.calculators_data.length, 0, 5));
+        this.setState({ factor: parseFloat(FACTOR_CORRECTION_VALUES[facor_idx]) });
     }
 
     AddCalculator(data) {
         let updated_calcs = this.state.calculators_data;
+
+        ;
+        // update the data to be correct with the current calc's index
+        let count = updated_calcs.length + 1
+        if (data['wire'] !== '')
+            data[`wire`] = data[`wire`].substring(0, data['wire'].indexOf('#')) + '#' + count
+        if (data['cable'] !== '')
+            data[`cable`] = data[`cable`].substring(0, data['cable'].indexOf('#')) + '#' + count
+
         updated_calcs.push(data);
-        this.setState({ calculators_data: updated_calcs });
+        this.setState({ calculators_data: updated_calcs }, this.UpdateFactorCorrection);
     }
 
     AddCalculators(data_array) {
@@ -71,7 +80,8 @@ class CalculatorContainer extends Component {
                         OnDeleteCalc={this.DeleteCalculator}
                         count={index + 1}
                         data={value}
-                        factor={this.GetFactorCorrection()} />)}
+                        factor={this.state.factor}
+                    />)}
             </Container>
         );
     }

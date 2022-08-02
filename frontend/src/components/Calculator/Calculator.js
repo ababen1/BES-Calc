@@ -25,7 +25,16 @@ class Calculator extends Component {
 
     componentDidMount() {
         this.setState(this.props.data);
-        console.log(this.props.factor)
+        if (this.props.factor) {
+            this.setState({factor: this.props.factor});
+            console.log(this.props.factor);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.factor !== this.props.factor) {
+            this.setState({ factor: this.props.factor }, this.Calculation);
+        }
     }
 
     getInitialState() {
@@ -38,6 +47,7 @@ class Calculator extends Component {
             imax: "",
             reserve: "",
             smm2: "",
+            factor: 1,
         }
     }
 
@@ -57,7 +67,7 @@ class Calculator extends Component {
         let imax = this.CalculateIMAX();
         let reserve = (Math.abs(this.state.ampacity - imax) / imax) * 100;
         let smm2 = this.CalculateSmm2(imax);
-        this.setState({ imax: imax * (this.props.factor == undefined ? 1 : this.props.factor), reserve: reserve, smm2: smm2 })
+        this.setState({ imax: imax * (this.state.factor), reserve: reserve, smm2: smm2 })
     }
 
     OnWireChange(ev) {
@@ -152,17 +162,17 @@ class Calculator extends Component {
                                 <Form.Check
                                     name="cable"
                                     inline
-                                    id={`al-${this.props.count}`}
+                                    id={`al#${this.props.count}`}
                                     label="Al"
                                     type="radio"
-                                    checked={this.state.cable === `al-${this.props.count}`} onChange={this.OnCableChange.bind(this)} />
+                                    checked={this.state.cable === `al#${this.props.count}`} onChange={this.OnCableChange.bind(this)} />
                                 <Form.Check
                                     name="cable"
                                     inline
-                                    id={`cu-${this.props.count}`}
+                                    id={`cu#${this.props.count}`}
                                     label="Cu"
                                     type="radio"
-                                    checked={this.state.cable === `cu-${this.props.count}`}
+                                    checked={this.state.cable === `cu#${this.props.count}`}
                                     onChange={this.OnCableChange.bind(this)} />
                             </InputGroup>
 
@@ -173,18 +183,18 @@ class Calculator extends Component {
                                 <Form.Check
                                     name="wire"
                                     inline
-                                    id={`single-${this.props.count}`}
+                                    id={`single#${this.props.count}`}
                                     label="Single"
                                     type="radio"
-                                    checked={this.state.wire === `single-${this.props.count}`}
+                                    checked={this.state.wire === `single#${this.props.count}`}
                                     onChange={this.OnWireChange.bind(this)} />
                                 <Form.Check
                                     name="wire"
                                     inline
-                                    id={`3-wire-${this.props.count}`}
+                                    id={`3-wire#${this.props.count}`}
                                     label="3 Wire"
                                     type="radio"
-                                    checked={this.state.wire === `3-wire-${this.props.count}`}
+                                    checked={this.state.wire === `3-wire#${this.props.count}`}
                                     onChange={this.OnWireChange.bind(this)} />
                             </InputGroup>
 
@@ -204,11 +214,11 @@ class Calculator extends Component {
                             <p className="data-result-text">{String(this.state.reserve).substring(0, 8)}</p>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <p className="data-result-title">Imax(%)</p>
-                            <p className="data-result-text">{String(this.state.imax)}</p>
+                            <p className="data-result-title">Imax</p>
+                            <p className="data-result-text">{String(this.state.imax).substring(0, 8)}</p>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <p className="data-result-title">S[mm^2] (%)</p>
+                            <p className="data-result-title">S[mm^2]</p>
                             <p className="data-result-text">{String(this.state.smm2)}</p>
 
                         </ListGroup.Item>

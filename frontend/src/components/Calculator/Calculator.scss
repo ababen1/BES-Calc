@@ -1,18 +1,30 @@
 @use 'src/theme.scss';
 
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/variables";
 
 .calculator {
     background: transparent 0% 0% no-repeat padding-box;
     border-radius: 15px 15px 15px 0px;
     opacity: 1;
     text-align: center;
+    display: flex;
+    align-self: center;
 }
 
 .calc-form {
-    width: 95%;
-    padding-left: 5%;
-    
+    display: flex;
+    align-items: center;
 }
+
+.main-container {
+    @include make-container();
+    padding-top: 3%;
+    width: 90%;
+    align-items: center;
+}
+
 
 .add {
     /* UI Properties */
@@ -89,7 +101,7 @@
     width: 1585px;
     height: 28px;
     padding-bottom: 1%;
-    padding-left: 85px;
+    padding-left: 60px;
 
     /* UI Properties */
     text-align: center;
@@ -100,84 +112,39 @@
     opacity: 1;
 }
 
-// /* Switch design */
 
+.add-row-btn {
+    /* Layout Properties */
 
-// /* The switch - the box around the slider */
-// .switch {
-//     position: relative;
-//     display: inline-block;
-//     width: 35px;
-//     height: 18px;
-// }
+    top: 886px;
+    left: 1510px;
+    width: 200px;
+    height: 60px;
 
-// /* Hide default HTML checkbox */
-// .switch input {
-//     opacity: 0;
-//     width: 0;
-//     height: 0;
-// }
+    /* UI Properties */
 
-// /* The slider */
-// .slider {
-//     position: absolute;
-//     cursor: pointer;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     bottom: 0;
-//     background-color: #ccc;
-//     -webkit-transition: .4s;
-//     transition: .4s;
-// }
+    background: #828282 0% 0% no-repeat padding-box;
+    border: 0.699999988079071px solid #888787;
+    border-radius: 15px;
+    opacity: 1;
+    text-align: center;
+    font: normal normal normal 24px/33px Open Sans;
+    letter-spacing: 0px;
+}
 
-// .slider:before {
-//     position: absolute;
-//     content: "";
-//     height: 12px;
-//     width: 12px;
-//     left: 4px;
-//     bottom: 3.5px;
-//     background-color: white;
-//     -webkit-transition: .4s;
-//     transition: .4s;
-// }
+.reset-btn {
+    text-align: center;
+    font: normal normal medium 24px/33px Open Sans;
+    letter-spacing: 0px;
+    opacity: 1;
+}
 
-// input:checked+.slider {
-//     background-color: #156982;
-// }
-
-// input:focus+.slider {
-//     box-shadow: 0 0 1px #156982;
-// }
-
-// input:checked+.slider:before {
-//     -webkit-transform: translateX(26px);
-//     -ms-transform: translateX(26px);
-//     transform: translateX(26px);
-// }
-
-// /* Rounded sliders */
-// .slider.round {
-//     border-radius: 34px;
-// }
-
-// .slider.round:before {
-//     border-radius: 50%;
-// }
-
-
-// .gray-text {
-//     color: rgba(0, 0, 0, 0.38);
-// }
-
-// .al-cu.form-control {
-//     margin-top: 0px;
-//     margin-bottom: 0px;
-// }
-
-// .delete-element {
-//     position: relative;
-//     top: 30px;
-//     cursor: pointer;
-// }
+.calculate-btn {
+    background: #156982 0% 0% no-repeat padding-box;
+    border: 0.699999988079071px solid #156982;
+    opacity: 1;
+    text-align: center;
+    font: normal normal bold 24px/33px Open Sans;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+}
