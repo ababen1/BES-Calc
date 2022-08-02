@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Container, Stack, Image } from "react-bootstrap";
-import UserContext from "../context";
-import LoginSignUp from "./Modal/LoginSignUpPopup";
+import LoginSignUp from "./ModalLoginSignup/LoginSignUpPopup";
 import Cookies from "universal-cookie";
 import axios from "axios";
 

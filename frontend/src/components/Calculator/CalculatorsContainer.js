@@ -50,7 +50,7 @@ class CalculatorContainer extends Component {
 
     render() {
         return (
-            <div style={{ "textAlign": "center" }}>
+            <Container fluid style={{ "textAlign": "center" }}>
                 {(this.state.calculators_data.length !== 0) ?
                     <Row className="reference-row">
                         <Col md={2} style={{ width: "20%" }}>Description</Col>
@@ -72,7 +72,7 @@ class CalculatorContainer extends Component {
                         count={index + 1}
                         data={value}
                         factor={this.GetFactorCorrection()} />)}
-            </div>
+            </Container>
         );
     }
 }
