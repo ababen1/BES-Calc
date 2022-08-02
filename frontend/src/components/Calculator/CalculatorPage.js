@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Calculator from "../../comps/Calculator/Calculator";
+import Calculator from "./Calculator";
 import "./CalculatorPage.scss";
 import { Form, Container, Row, Col, Button, Stack } from "react-bootstrap";
-import CalculatorContainer from "../../comps/Calculator/CalculatorsContainer";
+import CalculatorContainer from "./CalculatorsContainer";
 
 class CalculatorPage extends Component {
 
