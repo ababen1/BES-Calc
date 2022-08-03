@@ -67,7 +67,7 @@ class Calculator extends Component {
         let imax = this.CalculateIMAX();
         let reserve = (Math.abs(this.state.ampacity - imax) / imax) * 100;
         let smm2 = this.CalculateSmm2(imax);
-        this.setState({ imax: imax * (this.state.factor), reserve: reserve, smm2: smm2 })
+        this.setState({ imax: imax, reserve: reserve, smm2: smm2 })
     }
 
     OnWireChange(ev) {
@@ -119,7 +119,7 @@ class Calculator extends Component {
     render() {
         return (
             <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()} className="calc-form">
-                <div className="calculator">
+                <Container fluid className="calculator">
                     <ListGroup horizontal>
                         <ListGroup.Item style={{ "background-color": "#156982" }}>
                             <span className="add">{(this.props.count === 0) ? "+" : this.props.count}</span>
@@ -200,7 +200,7 @@ class Calculator extends Component {
 
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <FormControl
+                            <Form.Control
                                 className="ampacity"
                                 type={"number"}
                                 name={"ampacity"}
@@ -228,7 +228,7 @@ class Calculator extends Component {
                             </ListGroup.Item > : ""}
 
                     </ListGroup>
-                </div >
+                </Container >
             </Form>
         );
     }

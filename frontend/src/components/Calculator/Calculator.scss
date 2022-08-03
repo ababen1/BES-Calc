@@ -12,6 +12,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .list-group-horizontal {
+        height: 5rem;
+    }
 }
 
 
@@ -51,7 +55,15 @@
     color: #181818;
     text-transform: capitalize;
     opacity: 1;
+
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+
 }
+
 
 .ampacity {
     /* UI Properties */
