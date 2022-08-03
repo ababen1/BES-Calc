@@ -118,118 +118,118 @@ class Calculator extends Component {
 
     render() {
         return (
-            <Container fluid className="calculator">
-                <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()} className="calc-form">
+            <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()} className="calc-form">
+                <div className="calculator">
                     <ListGroup horizontal>
-                            <ListGroup.Item style={{ "background-color": "#156982" }}>
-                                <span className="add">{(this.props.count === 0) ? "+" : this.props.count}</span>
-                            </ListGroup.Item>
-                            <ListGroup.Item >
-                                <Form.Control as="textarea"
-                                    type="text" value={this.state.description}
-                                    className={"description"}
-                                    onChange={this.OnChangeHandlerDescription.bind(this)}
-                                    placeholder={"Description"} />
-                            </ListGroup.Item>
+                        <ListGroup.Item style={{ "background-color": "#156982" }}>
+                            <span className="add">{(this.props.count === 0) ? "+" : this.props.count}</span>
+                        </ListGroup.Item>
+                        <ListGroup.Item >
+                            <Form.Control as="textarea"
+                                type="text" value={this.state.description}
+                                className={"description"}
+                                onChange={this.OnChangeHandlerDescription.bind(this)}
+                                placeholder={"Description"} />
+                        </ListGroup.Item>
 
-                            <ListGroup.Item>
-                                <Form.Select
-                                    className="power-kw"
-                                    value={this.state.power}
-                                    onChange={(ev) => { this.setState({ "power": ev.target.value }); }}>
-                                    <option>power KW</option>
-                                    <option>15</option>
-                                    <option>18.5</option>
-                                    <option>22</option>
-                                    <option>30</option>
-                                    <option>37</option>
-                                    <option>45</option>
-                                    <option>55</option>
-                                    <option>75</option>
-                                    <option>90</option>
-                                    <option>110</option>
-                                    <option>132</option>
-                                    <option>160</option>
-                                    <option>200</option>
-                                    <option>250</option>
-                                    <option>280</option>
-                                    <option>315</option>
-                                    <option>355</option>
-                                </Form.Select>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <InputGroup className="radio-btns">
-                                    <Form.Check
-                                        name="cable"
-                                        inline
-                                        id={`al#${this.props.count}`}
-                                        label="Al"
-                                        type="radio"
-                                        checked={this.state.cable === `al#${this.props.count}`} onChange={this.OnCableChange.bind(this)} />
-                                    <Form.Check
-                                        name="cable"
-                                        inline
-                                        id={`cu#${this.props.count}`}
-                                        label="Cu"
-                                        type="radio"
-                                        checked={this.state.cable === `cu#${this.props.count}`}
-                                        onChange={this.OnCableChange.bind(this)} />
-                                </InputGroup>
+                        <ListGroup.Item>
+                            <Form.Select
+                                className="power-kw"
+                                value={this.state.power}
+                                onChange={(ev) => { this.setState({ "power": ev.target.value }); }}>
+                                <option>power KW</option>
+                                <option>15</option>
+                                <option>18.5</option>
+                                <option>22</option>
+                                <option>30</option>
+                                <option>37</option>
+                                <option>45</option>
+                                <option>55</option>
+                                <option>75</option>
+                                <option>90</option>
+                                <option>110</option>
+                                <option>132</option>
+                                <option>160</option>
+                                <option>200</option>
+                                <option>250</option>
+                                <option>280</option>
+                                <option>315</option>
+                                <option>355</option>
+                            </Form.Select>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <InputGroup className="radio-btns">
+                                <Form.Check
+                                    name="cable"
+                                    inline
+                                    id={`al#${this.props.count}`}
+                                    label="Al"
+                                    type="radio"
+                                    checked={this.state.cable === `al#${this.props.count}`} onChange={this.OnCableChange.bind(this)} />
+                                <Form.Check
+                                    name="cable"
+                                    inline
+                                    id={`cu#${this.props.count}`}
+                                    label="Cu"
+                                    type="radio"
+                                    checked={this.state.cable === `cu#${this.props.count}`}
+                                    onChange={this.OnCableChange.bind(this)} />
+                            </InputGroup>
 
 
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <InputGroup className="radio-btns">
-                                    <Form.Check
-                                        name="wire"
-                                        inline
-                                        id={`single#${this.props.count}`}
-                                        label="Single"
-                                        type="radio"
-                                        checked={this.state.wire === `single#${this.props.count}`}
-                                        onChange={this.OnWireChange.bind(this)} />
-                                    <Form.Check
-                                        name="wire"
-                                        inline
-                                        id={`3-wire#${this.props.count}`}
-                                        label="3 Wire"
-                                        type="radio"
-                                        checked={this.state.wire === `3-wire#${this.props.count}`}
-                                        onChange={this.OnWireChange.bind(this)} />
-                                </InputGroup>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <InputGroup className="radio-btns">
+                                <Form.Check
+                                    name="wire"
+                                    inline
+                                    id={`single#${this.props.count}`}
+                                    label="Single"
+                                    type="radio"
+                                    checked={this.state.wire === `single#${this.props.count}`}
+                                    onChange={this.OnWireChange.bind(this)} />
+                                <Form.Check
+                                    name="wire"
+                                    inline
+                                    id={`3-wire#${this.props.count}`}
+                                    label="3 Wire"
+                                    type="radio"
+                                    checked={this.state.wire === `3-wire#${this.props.count}`}
+                                    onChange={this.OnWireChange.bind(this)} />
+                            </InputGroup>
 
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <FormControl
-                                    className="ampacity"
-                                    type={"number"}
-                                    name={"ampacity"}
-                                    placeholder={"Ampacity"}
-                                    value={this.state.ampacity}
-                                    onChange={this.OnChangeHandlerAmp.bind(this)} />
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <FormControl
+                                className="ampacity"
+                                type={"number"}
+                                name={"ampacity"}
+                                placeholder={"Ampacity"}
+                                value={this.state.ampacity}
+                                onChange={this.OnChangeHandlerAmp.bind(this)} />
 
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <p className="data-result-title">Reserve(%)</p>
-                                <p className="data-result-text">{String(this.state.reserve).substring(0, 8)}</p>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <p className="data-result-title">Imax</p>
-                                <p className="data-result-text">{String(this.state.imax).substring(0, 8)}</p>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <p className="data-result-title">S[mm^2]</p>
-                                <p className="data-result-text">{String(this.state.smm2)}</p>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <p className="data-result-title">Reserve(%)</p>
+                            <p className="data-result-text">{String(this.state.reserve).substring(0, 8)}</p>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <p className="data-result-title">Imax</p>
+                            <p className="data-result-text">{String(this.state.imax).substring(0, 8)}</p>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <p className="data-result-title">S[mm^2]</p>
+                            <p className="data-result-text">{String(this.state.smm2)}</p>
 
-                            </ListGroup.Item>
-                            {(this.props.count !== 0) ?
-                                <ListGroup.Item>
-                                    <CloseButton onClick={this.props.OnDeleteCalc.bind(this, this.props.count - 1)}></CloseButton>
-                                </ListGroup.Item > : ""}
+                        </ListGroup.Item>
+                        {(this.props.count !== 0) ?
+                            <ListGroup.Item>
+                                <CloseButton onClick={this.props.OnDeleteCalc.bind(this, this.props.count - 1)}></CloseButton>
+                            </ListGroup.Item > : ""}
 
                     </ListGroup>
-                </Form>
-            </Container>
+                </div >
+            </Form>
         );
     }
 }

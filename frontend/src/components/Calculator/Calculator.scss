@@ -9,12 +9,11 @@
     border-radius: 15px 15px 15px 0px;
     opacity: 1;
     text-align: center;
-    display: flex;
-    align-self: center;
-    align-items: baseline;
-    flex-direction: row;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
 }
+
 
 .main-container {
     @include make-container();
