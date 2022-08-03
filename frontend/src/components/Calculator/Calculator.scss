@@ -11,17 +11,15 @@
     text-align: center;
     display: flex;
     align-self: center;
-}
-
-.calc-form {
-    display: flex;
-    align-items: center;
+    align-items: baseline;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .main-container {
     @include make-container();
     padding-top: 3%;
-    width: 1500px;
+    width: 1600px;
     align-items: center;
 }
 
@@ -38,7 +36,6 @@
 .description {
     /* UI Properties */
     text-align: left;
-    font: normal normal medium 18px/24px Open Sans;
     letter-spacing: 0px;
     color: #181818;
     text-transform: capitalize;
@@ -51,7 +48,6 @@
 .power-kw {
     /* UI Properties */
     text-align: left;
-    font: normal normal medium 18px/24px Open Sans;
     letter-spacing: 0px;
     color: #181818;
     text-transform: capitalize;
@@ -61,7 +57,6 @@
 .ampacity {
     /* UI Properties */
     text-align: center;
-    font: normal normal normal 18px/24px Open Sans;
     letter-spacing: 0px;
     color: #181818;
     text-transform: capitalize;
@@ -70,7 +65,6 @@
 .radio-btns {
     /* UI Properties */
     text-align: center;
-    font: normal normal normal 18px/22px Open Sans;
     letter-spacing: 0px;
     color: #181818;
     text-transform: capitalize;
@@ -82,7 +76,6 @@
     /* UI Properties */
 
     text-align: center;
-    font: normal normal normal 18px/24px Open Sans;
     letter-spacing: 0px;
     color: #828282;
     text-transform: capitalize;
@@ -91,7 +84,6 @@
 
 .data-result-text {
     text-align: center;
-    font: normal normal normal 18px Open Sans;
 }
 
 .reference-row {
@@ -107,7 +99,6 @@
 
     /* UI Properties */
     text-align: center;
-    font: normal normal normal 16px/22px Open Sans;
     letter-spacing: 0px;
     color: #828282;
     text-transform: capitalize;
@@ -130,13 +121,11 @@
     border-radius: 15px;
     opacity: 1;
     text-align: center;
-    font: normal normal normal 24px/33px Open Sans;
     letter-spacing: 0px;
 }
 
 .reset-btn {
     text-align: center;
-    font: normal normal medium 24px/33px Open Sans;
     letter-spacing: 0px;
     opacity: 1;
 }
@@ -146,7 +135,6 @@
     border: 0.699999988079071px solid #156982;
     opacity: 1;
     text-align: center;
-    font: normal normal bold 24px/33px Open Sans;
     letter-spacing: 0px;
     color: #FFFFFF;
 }
