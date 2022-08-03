@@ -80,7 +80,7 @@ class CalculatorPage extends Component {
                 <br />
                 <Row>
                     <Col md={10}>
-                        <Button variant="light" className="reset-btn" size="lg" id="reset_calculation_btn" onClick={this.OnResetCalculator.bind(this)}>Reset</Button>
+                        <Button variant="outline-secondary" className="reset-btn" size="lg" id="reset_calculation_btn" onClick={this.OnResetCalculator.bind(this)}>Reset</Button>
                     </Col>
                     <Col><Button className="add-row-btn" size="lg" id="add_row_btn" onClick={this.OnAddCalculator.bind(this)}>Add Row</Button></Col>
                 </Row>

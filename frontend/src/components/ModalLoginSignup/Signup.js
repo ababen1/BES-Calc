@@ -41,7 +41,7 @@ class Signup extends Component {
 
     render() {
         return (
-            <Container className="signup-panel">
+            <Container fluid className="signup-panel">
                 <Container className="title">
                     In order to save your calculations, please
                     <h2>Sign up</h2>

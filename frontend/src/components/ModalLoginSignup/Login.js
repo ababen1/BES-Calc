@@ -47,7 +47,7 @@ class Login extends Component {
 
     render() {
         return (
-            <Container className="login-panel">
+            <Container fluid className="login-panel">
                 <Container className="title">
                     welcome back, please
                     <h2>Login</h2>

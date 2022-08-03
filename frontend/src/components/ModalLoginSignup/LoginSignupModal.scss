@@ -17,6 +17,11 @@
         background-color: transparent;
     }
 
+    .login-modal-header {
+        background-color: theme.$bes-blue-color;
+        color: white;
+    }
+
     @mixin panels($color: theme.$white, $bg_color: theme.$bes-blue-color) {
         position: absolute;
         height: 100%;

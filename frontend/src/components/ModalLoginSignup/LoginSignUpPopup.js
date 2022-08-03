@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Row, Col, Container } from "react-bootstrap";
+import { Modal, Row, Col, Container, CloseButton } from "react-bootstrap";
 import Login from "./Login";
 import Signup from "./Signup";
 
@@ -21,8 +21,10 @@ class LoginSignUp extends Component {
     render() {
         return (
             <Modal show={this.state.visible} onHide={this.toggle_modal.bind(this)} centered dialogClassName="modal-dialog">
+                <Modal.Header className="login-modal-header" closeButton>
+                </Modal.Header>
                 <Modal.Body>
-                    <Container className="login-signup-modal">
+                    <Container fluid className="login-signup-modal">
                         <Row>
                             <Col>
                                 <Login ref={this.login_ref} />
