@@ -61,17 +61,17 @@ class CalculatorContainer extends Component {
         return (
             <Container fluid style={{ "textAlign": "center" }}>
                 {(this.state.calculators_data.length !== 0) ?
-                    <Row className="reference-row">
-                        <Col md={2} style={{ width: "20%" }}>Description</Col>
-                        <Col >Power [Kw]</Col>
-                        <Col md={1}>Al / Cu</Col>
-                        <Col md={2}>3 wire / single</Col>
-                        <Col md={2}>ampacity [A]</Col>
-                        <Col >Reserve (%)</Col>
-                        <Col >Imax</Col>
-                        <Col >S [mm^2]</Col>
+                    <row className="reference-row">
+                        <column style={{"width": "253px"}} >Description</column>
+                        <column style={{width: "150px"}}>Power [Kw]</column>
+                        <column style={{width: "143px"}}>Al / Cu</column>
+                        <column style={{width: "168px"}}>3 wire / single</column>
+                        <column style={{width: "250px"}}>ampacity [A]</column>
+                        <column style={{width: "150px"}}>Reserve (%)</column>
+                        <column style={{width: "80px"}}>Imax</column>
+                        <column style={{width: "100px"}}>S [mm^2]</column>
 
-                    </Row> : ""}
+                    </row> : ""}
 
 
                 {this.state.calculators_data.map((value, index) =>

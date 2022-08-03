@@ -21,7 +21,7 @@
 .main-container {
     @include make-container();
     padding-top: 3%;
-    width: 90%;
+    width: 1500px;
     align-items: center;
 }
 
@@ -98,10 +98,12 @@
     /* Layout Properties */
     top: 1033px;
     left: 287px;
-    width: 1585px;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
     height: 28px;
     padding-bottom: 1%;
-    padding-left: 60px;
+    padding-left: 75px;
 
     /* UI Properties */
     text-align: center;

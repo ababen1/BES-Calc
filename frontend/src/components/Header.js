@@ -39,10 +39,10 @@ class Header extends Component {
                 <LoginSignUp ref={this.login_signup_ref} />
                 <Stack direction="horizontal" className="BES-header">
                     <div>
-                        <Image src={this.props.logo} />
+                        <Image src={this.props.logo} width="50%" />
                     </div>
                     <div className="ms-auto" style={{ "textAlign": "center" }}>
-                        <Image className="login-icon" src={this.props.login_icon} roundedCircle="true" width="75"
+                        <Image className="login-icon" src={this.props.login_icon} roundedCircle="true" width="100%"
                             onClick={(e) => { this.login_signup_ref.current.toggle_modal() }} /> <br />
                         <span>{this.state.username != "" ? this.state.username : "Login"}</span>
                     </div>
