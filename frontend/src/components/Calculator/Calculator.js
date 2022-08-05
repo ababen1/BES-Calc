@@ -64,9 +64,9 @@ class Calculator extends Component {
     }
 
     Calculation() {
-        let imax = this.CalculateIMAX();
-        let reserve = (Math.abs(this.state.ampacity - imax) / imax) * 100;
-        let smm2 = this.CalculateSmm2(imax);
+        let imax = this.GetImax();
+        let reserve = (Math.abs(imax - this.state.ampacity) / imax) * 100;
+        let smm2 = this.CalculateSmm2(this.GetImax(this.state.ampacity, 1));
         this.setState({ imax: imax, reserve: reserve, smm2: smm2 })
     }
 
@@ -78,42 +78,28 @@ class Calculator extends Component {
         this.setState({ "cable": ev.target.id })
     }
 
-    CalculateIMAX() {
-        const imaxValues = Object.keys(IMAX_VALUES)
-        let imax;
-        if (isNaN(this.state.ampacity)) {
-            return
+    GetImax(amp = this.state.ampacity, factor = this.state.factor) {
+        if (isNaN(amp)) {
+            return NaN
         }
 
-        // steps to calculate imax:
-        // 1. copy the imaxValues array and insert the user's input (amp) into it
-        // 2. sort the copied array, and get the index of amp
-        // 3. if amp is not the last element or the first element: 
-        //      the target imax is neither the prvious item or the next item in the copied array. we take the one that is closest to the user's
-        //      input, rounded down.
-        // 4. otherwise:
-        //      the target imax is the smallest/largest value in the imaxValues array (smallest if index is 0 and vice versa)
-        imax = parseFloat(this.state.ampacity);
-        let tempCopy = [...imaxValues]
-        tempCopy.push(imax)
-        tempCopy = tempCopy.sort((a, b) => a - b);
-        let index = Math.min(tempCopy.indexOf(imax), imaxValues.length - 1)
-        if (index === 0 || index === imaxValues.length - 1) {
-            imax = imaxValues[index]
-        } else {
-            let prevImax = tempCopy[index - 1]
-            let nextImax = tempCopy[index + 1]
-            if (Math.abs(this.state.ampacity - prevImax) <= Math.abs(this.state.ampacity - nextImax)) {
-                imax = prevImax
-            } else {
-                imax = nextImax
+        // search for imax value that can contain the given ampacity 
+        const imaxValues = Object.keys(IMAX_VALUES)
+        for (const val of imaxValues) {
+            let valWithFactor = val * factor;
+            if (valWithFactor >= amp) {
+                return valWithFactor
             }
         }
-        return imax
+
+        // if nothing was found, return the biggest imax for now.
+        // in the future, divide the amp into parts and return multiple imax values.
+        // (the imax list is sorted)
+        return imaxValues[imaxValues.length - 1] * factor;
     }
 
     CalculateSmm2(imax) {
-        return (IMAX_VALUES[parseFloat(imax)])
+        return (IMAX_VALUES[parseInt(imax)])
     }
 
     render() {
