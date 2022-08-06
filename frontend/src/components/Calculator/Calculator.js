@@ -105,10 +105,10 @@ class Calculator extends Component {
     render() {
         return (
             <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()} className="calc-form">
-                <Container fluid className="calculator">
+                <div className="calculator">
                     <ListGroup horizontal>
-                        <ListGroup.Item style={{ "background-color": "#156982" }}>
-                            <span className="add">{(this.props.count === 0) ? "+" : this.props.count}</span>
+                        <ListGroup.Item className="add" style={{backgroundColor: "#056e8f", "color": "white"}}>
+                            <span >{(this.props.count === 0) ? "+" : this.props.count}</span>
                         </ListGroup.Item>
                         <ListGroup.Item >
                             <Form.Control as="textarea"
@@ -214,7 +214,7 @@ class Calculator extends Component {
                             </ListGroup.Item > : ""}
 
                     </ListGroup>
-                </Container >
+                </div >
             </Form>
         );
     }
