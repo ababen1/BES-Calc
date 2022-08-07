@@ -110,17 +110,15 @@ class Calculator extends Component {
                         <ListGroup.Item className="add" style={{backgroundColor: "#056e8f", "color": "white"}}>
                             <span >{(this.props.count === 0) ? "+" : this.props.count}</span>
                         </ListGroup.Item>
-                        <ListGroup.Item >
+                        <ListGroup.Item className={"description"}>
                             <Form.Control as="textarea"
                                 type="text" value={this.state.description}
-                                className={"description"}
                                 onChange={this.OnChangeHandlerDescription.bind(this)}
                                 placeholder={"Description"} />
                         </ListGroup.Item>
 
-                        <ListGroup.Item>
+                        <ListGroup.Item className="power-kw">
                             <Form.Select
-                                className="power-kw"
                                 value={this.state.power}
                                 onChange={(ev) => { this.setState({ "power": ev.target.value }); }}>
                                 <option>power KW</option>
@@ -143,8 +141,8 @@ class Calculator extends Component {
                                 <option>355</option>
                             </Form.Select>
                         </ListGroup.Item>
-                        <ListGroup.Item>
-                            <InputGroup className="radio-btns">
+                        <ListGroup.Item className="cable">
+                            <InputGroup>
                                 <Form.Check
                                     name="cable"
                                     inline
@@ -164,8 +162,8 @@ class Calculator extends Component {
 
 
                         </ListGroup.Item>
-                        <ListGroup.Item>
-                            <InputGroup className="radio-btns">
+                        <ListGroup.Item className="wire">
+                            <InputGroup>
                                 <Form.Check
                                     name="wire"
                                     inline
@@ -185,9 +183,8 @@ class Calculator extends Component {
                             </InputGroup>
 
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        <ListGroup.Item className="ampacity">
                             <Form.Control
-                                className="ampacity"
                                 type={"number"}
                                 name={"ampacity"}
                                 placeholder={"Ampacity"}
@@ -195,21 +192,21 @@ class Calculator extends Component {
                                 onChange={this.OnChangeHandlerAmp.bind(this)} />
 
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        <ListGroup.Item className="results">
                             <p className="data-result-title">Reserve(%)</p>
                             <p className="data-result-text">{String(this.state.reserve).substring(0, 8)}</p>
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        <ListGroup.Item className="results">
                             <p className="data-result-title">Imax</p>
                             <p className="data-result-text">{String(this.state.imax).substring(0, 8)}</p>
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        <ListGroup.Item className="results">
                             <p className="data-result-title">S[mm^2]</p>
                             <p className="data-result-text">{String(this.state.smm2)}</p>
 
                         </ListGroup.Item>
                         {(this.props.count !== 0) ?
-                            <ListGroup.Item>
+                            <ListGroup.Item className="delete-row">
                                 <CloseButton onClick={this.props.OnDeleteCalc.bind(this, this.props.count - 1)}></CloseButton>
                             </ListGroup.Item > : ""}
 
