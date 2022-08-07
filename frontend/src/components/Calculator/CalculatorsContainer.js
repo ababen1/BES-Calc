@@ -20,18 +20,22 @@ class CalculatorContainer extends Component {
     }
 
     state = {
-        calculators_data: [],
+        calculatorsData: [],
         factor: 1,
+    }
+
+    CalculateAll() {
+        
     }
 
     UpdateFactorCorrection() {
         const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-        let facor_idx = parseInt(clamp(this.state.calculators_data.length, 0, 5));
+        let facor_idx = parseInt(clamp(this.state.calculatorsData.length, 0, 5));
         this.setState({ factor: parseFloat(FACTOR_CORRECTION_VALUES[facor_idx]) });
     }
 
     AddCalculator(data) {
-        let updated_calcs = this.state.calculators_data;
+        let updated_calcs = this.state.calculatorsData;
 
         ;
         // update the data to be correct with the current calc's index
@@ -42,7 +46,7 @@ class CalculatorContainer extends Component {
             data[`cable`] = data[`cable`].substring(0, data['cable'].indexOf('#')) + '#' + count
 
         updated_calcs.push(data);
-        this.setState({ calculators_data: updated_calcs }, this.UpdateFactorCorrection);
+        this.setState({ calculatorsData: updated_calcs }, this.UpdateFactorCorrection);
     }
 
     AddCalculators(data_array) {
@@ -52,15 +56,21 @@ class CalculatorContainer extends Component {
     }
 
     DeleteCalculator(idx) {
-        let filtered_calcs_list = this.state.calculators_data.filter((element, index) => { return index !== idx });
-        this.setState({ calculators_data: [] }, () => { this.AddCalculators(filtered_calcs_list); });
+        let calcsList = this.state.calculatorsData;
+        let newList = [];
+        for (let index = 0; index < calcsList.length; index++) {
+            if (index != idx) {
+                newList.push(calcsList[index]);
+            }
+        }
+        this.setState({calculatorsData: []}, () => { this.AddCalculators(newList) });
     }
 
 
     render() {
         return (
             <Container fluid>
-                {(this.state.calculators_data.length !== 0) ?
+                {(this.state.calculatorsData.length !== 0) ?
                     <Row className="reference-row">
                         <div style={{ "width": "253px" }} >Description</div>
                         <div style={{ width: "150px" }}>Power [Kw]</div>
@@ -75,7 +85,7 @@ class CalculatorContainer extends Component {
 
 
                 <div className="calcs-list">
-                    {this.state.calculators_data.map((value, index) =>
+                    {this.state.calculatorsData.map((value, index) =>
                         <Calculator
                             key={index}
                             OnDeleteCalc={this.DeleteCalculator}

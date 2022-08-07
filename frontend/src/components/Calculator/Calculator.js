@@ -60,7 +60,7 @@ class Calculator extends Component {
     }
 
     OnChangeHandlerAmp(ev) {
-        this.setState({ ampacity: ev.target.value }, this.Calculation);
+        this.setState({ ampacity: ev.target.value });
     }
 
     Calculation() {
