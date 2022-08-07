@@ -33,7 +33,7 @@ class Calculator extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.factor !== this.props.factor) {
-            this.setState({ factor: this.props.factor }, this.Calculation);
+            this.setState({ factor: this.props.factor });
         }
     }
 
