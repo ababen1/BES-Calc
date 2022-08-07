@@ -18,7 +18,7 @@ class CalculatorPage extends Component {
         calculatorRepeatNumber: 0,
         arrCalculators: [],
     }
-    
+
     OnFocusBolderFont(ev) {
         this.setState({ name: "bold" });
     }
@@ -75,7 +75,9 @@ class CalculatorPage extends Component {
                 </Form>
 
                 <br />
-                <Calculator key="main" ref={this.main_calc_ref} count={0}></Calculator>
+                <div className="calcs-list">
+                    <Calculator key="main" ref={this.main_calc_ref} count={0}></Calculator>
+                </div>
                 <br />
                 <Row>
                     <Col md={10}>

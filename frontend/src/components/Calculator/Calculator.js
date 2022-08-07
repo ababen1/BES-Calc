@@ -104,12 +104,12 @@ class Calculator extends Component {
 
     render() {
         return (
-            <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()} className="calc-form">
-                <div className="calculator">
+            <div className="calculator">
+                <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()}>
                     <ListGroup horizontal>
-                        <ListGroup.Item className="add" style={{backgroundColor: "#056e8f", "color": "white"}}>
+                        <div className="calc-number">
                             <span >{(this.props.count === 0) ? "+" : this.props.count}</span>
-                        </ListGroup.Item>
+                        </div>
                         <ListGroup.Item className={"description"}>
                             <Form.Control as="textarea"
                                 type="text" value={this.state.description}
@@ -206,13 +206,14 @@ class Calculator extends Component {
 
                         </ListGroup.Item>
                         {(this.props.count !== 0) ?
-                            <ListGroup.Item className="delete-row">
+                            <div className="delete-row">
                                 <CloseButton onClick={this.props.OnDeleteCalc.bind(this, this.props.count - 1)}></CloseButton>
-                            </ListGroup.Item > : ""}
+                            </div > : ""}
 
                     </ListGroup>
-                </div >
-            </Form>
+                </Form>
+            </div >
+
         );
     }
 }
