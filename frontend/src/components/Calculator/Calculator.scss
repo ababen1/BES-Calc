@@ -111,8 +111,8 @@
     }
 
     .results {
+        @include calc-field(7rem);
         flex-direction: column;
-        @include calc-field(7rem)
     }
 
     .delete-row {

@@ -47,7 +47,7 @@ class Header extends Component {
                         <span>{this.state.username != "" ? this.state.username : "Login"}</span>
                     </div>
                 </Stack>
-                <Stack fluid className='BES-header-info menu-title' >
+                <Stack className='BES-header-info menu-title' >
                     <h1>Electric Cables Cross Section Calculations</h1>
                 </Stack>
             </Container>

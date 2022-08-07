@@ -61,17 +61,17 @@ class CalculatorContainer extends Component {
         return (
             <Container fluid>
                 {(this.state.calculators_data.length !== 0) ?
-                    <row className="reference-row">
-                        <column style={{ "width": "253px" }} >Description</column>
-                        <column style={{ width: "150px" }}>Power [Kw]</column>
-                        <column style={{ width: "143px" }}>Al / Cu</column>
-                        <column style={{ width: "168px" }}>3 wire / single</column>
-                        <column style={{ width: "250px" }}>ampacity [A]</column>
-                        <column style={{ width: "150px" }}>Reserve (%)</column>
-                        <column style={{ width: "80px" }}>Imax</column>
-                        <column style={{ width: "100px" }}>S [mm^2]</column>
+                    <Row className="reference-row">
+                        <div style={{ "width": "253px" }} >Description</div>
+                        <div style={{ width: "150px" }}>Power [Kw]</div>
+                        <div style={{ width: "143px" }}>Al / Cu</div>
+                        <div style={{ width: "168px" }}>3 wire / single</div>
+                        <div style={{ width: "250px" }}>ampacity [A]</div>
+                        <div style={{ width: "150px" }}>Reserve (%)</div>
+                        <div style={{ width: "80px" }}>Imax</div>
+                        <div style={{ width: "100px" }}>S [mm^2]</div>
 
-                    </row> : ""}
+                    </Row> : ""}
 
 
                 <div className="calcs-list">
