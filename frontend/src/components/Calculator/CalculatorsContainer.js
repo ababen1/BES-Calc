@@ -36,14 +36,14 @@ function GetImax(amp, factor) {
     for (const val of imaxValues) {
         let valWithFactor = val * factor;
         if (valWithFactor >= amp) {
-            return valWithFactor
+            return val
         }
     }
 
     // if nothing was found, return the biggest imax for now.
     // in the future, divide the amp into parts and return multiple imax values.
     // (the imax list is sorted)
-    return imaxValues[imaxValues.length - 1] * factor;
+    return imaxValues[imaxValues.length - 1];
 }
 
 class CalculatorContainer extends Component {
