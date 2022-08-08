@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Stack, Button } from "react-bootstrap";
 import Calculator from "./Calculator";
 import "./Calculator.scss"
 
@@ -56,23 +56,29 @@ class CalculatorContainer extends Component {
 
     state = {
         calculatorsData: [],
+        canSave: false,
     }
 
     CalculateAll() {
         let newCalcsList = [];
         let factor = this.GetFactorCorrection();
+        let canSaveCalculation = true;
         for (let calcData of this.state.calculatorsData) {
             // Calculate imax, reserve and smm2
             let imax = GetImax(calcData.ampacity, factor);
-            calcData.imax = imax;
-            calcData.reserve = (Math.abs(imax - calcData.ampacity) / imax) * 100;
-            calcData.smm2 = IMAX_VALUES[GetImax(calcData.ampacity, 1)];
-
+            if (!isNaN(imax)) {
+                calcData.imax = imax;
+                calcData.reserve = (Math.abs(imax - calcData.ampacity) / imax) * 100;
+                calcData.smm2 = IMAX_VALUES[GetImax(calcData.ampacity, 1)];
+            } else {
+                canSaveCalculation = false;
+            }
             // add to the new list
             newCalcsList.push(calcData);
         }
 
         this.UpdateCalculators(newCalcsList);
+        this.setState({canSave: canSaveCalculation});
     }
 
     GetFactorCorrection() {
@@ -101,13 +107,13 @@ class CalculatorContainer extends Component {
     }
 
     UpdateCalculators(newCalcsData) {
-        this.setState({calculatorsData: []}, () => { this.AddCalculators(newCalcsData) });
+        this.setState({ calculatorsData: [] }, () => { this.AddCalculators(newCalcsData) });
     }
 
     UpdateCalculator(idx, data) {
         let calcList = this.state.calculatorsData;
         calcList[idx] = data;
-        this.setState({calculatorsData: calcList});
+        this.setState({ calculatorsData: calcList });
     }
 
     DeleteCalculator(idx) {
@@ -150,6 +156,17 @@ class CalculatorContainer extends Component {
                             factor={this.state.factor}
                         />)}
                 </div>
+                <br />
+                <Row>
+                    <Col md={10}></Col>
+                    <Col>
+                        <Stack direction="horizontal" gap={2}>
+                            <Button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</Button>
+                            <Button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</Button>
+                        </Stack>
+                    </Col>
+
+                </Row>
             </Container>
         );
     }

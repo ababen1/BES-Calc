@@ -27,10 +27,6 @@ class CalculatorPage extends Component {
         this.setState({ focus: "normal" });
     }
 
-    OnCalculatePress() {
-        this.calculators_container_ref.current.CalculateAll();
-    }
-
     //clicking on calculator adding to array in state
     OnAddCalculator() {
         const data = this.main_calc_ref.current.state;
@@ -52,27 +48,31 @@ class CalculatorPage extends Component {
 
         return (
             <div className="main-container">
-                <Form className="customer-info">
-                    <Row>
-                        <Col>
-                            <h5>{this.state.nowDate.toLocaleDateString()}</h5>
-                        </Col>
-                    </Row>
 
-                    <Row>
-                        <Col>
-                            <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer: "} />
-                        </Col>
-                        <Col>
-                            <Form.Control type="text" size="lg" name={"facilityName"} placeholder={"Facility Name"} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Form.Control type="text" size="lg" name={"Remarks"} placeholder={"Remarks"} />
-                        </Col>
-                    </Row>
-                </Form>
+                <Container fluid>
+                    <Form>
+                        <Row>
+                            <Col>
+                                <h5>{this.state.nowDate.toLocaleDateString()}</h5>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col>
+                                <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer: "} />
+                            </Col>
+                            <Col>
+                                <Form.Control type="text" size="lg" name={"facilityName"} placeholder={"Facility Name"} />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Form.Control type="text" size="lg" name={"Remarks"} placeholder={"Remarks"} />
+                            </Col>
+                        </Row>
+                    </Form>
+                </Container>
+
 
                 <br />
                 <div className="calcs-list">
@@ -87,16 +87,6 @@ class CalculatorPage extends Component {
                 </Row>
                 <br></br>
                 <CalculatorContainer ref={this.calculators_container_ref} />
-                <Row>
-                    <Col md={10}></Col>
-                    <Col>
-                        <Stack direction="horizontal" gap={2}>
-                            <Button onClick={this.OnCalculatePress.bind(this)} className="" variant="primary" size="lg" id="calculate_btn">Calculate</Button>
-                            <Button className="" variant="primary" size="lg" id="save_calculation_btn">Save</Button>
-                        </Stack>
-                    </Col>
-
-                </Row>
             </div>
 
         );

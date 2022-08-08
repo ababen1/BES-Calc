@@ -28,30 +28,12 @@ $modal-content-border-color: transparent;
 $modal-title-padding: 0;
 $modal-header-border-color: transparent;
 
-.BES-header {
-    background-color: $white
-}
 
 .main-btn {
     $border-radius: 15px;
 }
 
-.BES-header-info {
-    background: $bes-blue-color;
-    text-align: center;
-    align-items: center;
-    color: $white;
-    height: 100px;
-}
 
-.menu-title {
-    justify-content: center;
-    display: block;
-}
-
-.login-icon {
-    cursor: pointer;
-}
 
 
 /* import bootstrap to set changes */

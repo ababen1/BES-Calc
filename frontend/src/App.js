@@ -8,6 +8,7 @@ import logo from './Assets/Group 35.svg'
 import login_icon from "./Assets/login_icon.svg";
 import UserContext from "./components/context";
 import {Switch, Route} from "react-router-dom"
+import Footer from "./components/Footer";
 
 class App extends Component {
     state = {
@@ -38,11 +39,11 @@ class App extends Component {
     render() {
         return (
             <UserContext.Provider value={{username: undefined}}>
-                <Container fluid className='App'>
+                <div  className='App'>
                     <Header logo={logo} login_icon={login_icon} />
                     <CalculatorPage />
-
-                </Container>
+                    <Footer/>
+                </div>
             </UserContext.Provider>
         );
     }

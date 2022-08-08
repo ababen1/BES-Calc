@@ -3,6 +3,7 @@ import { Container, Stack, Image } from "react-bootstrap";
 import LoginSignUp from "./ModalLoginSignup/LoginSignUpPopup";
 import Cookies from "universal-cookie";
 import axios from "axios";
+import './HeaderFooter.scss'
 
 class Header extends Component {
 
@@ -35,22 +36,22 @@ class Header extends Component {
 
     render() {
         return (
-            <Container fluid className="bg-transparent">
+            <div className="header">
                 <LoginSignUp ref={this.login_signup_ref} />
-                <Stack direction="horizontal" className="BES-header">
-                    <div>
-                        <Image src={this.props.logo} width="50%" />
+                <Stack direction="horizontal">
+                    <div className="BES-logo">
+                        <Image src={this.props.logo} />
                     </div>
-                    <div className="ms-auto" style={{ "textAlign": "center" }}>
-                        <Image className="login-icon" src={this.props.login_icon} roundedCircle="true" width="50"
+                    <div className="ms-auto login-icon">
+                        <Image src={this.props.login_icon} roundedCircle="true" width="50"
                             onClick={(e) => { this.login_signup_ref.current.toggle_modal() }} /> <br />
                         <span>{this.state.username != "" ? this.state.username : "Login"}</span>
                     </div>
                 </Stack>
-                <Stack className='BES-header-info menu-title' >
+                <Stack className='electric-cables-title' >
                     <h1>Electric Cables Cross Section Calculations</h1>
                 </Stack>
-            </Container>
+            </div>
         );
     }
 }
