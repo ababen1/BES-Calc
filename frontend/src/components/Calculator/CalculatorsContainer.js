@@ -26,6 +26,7 @@ const IMAX_VALUES = {
 }
 
 function GetImax(amp, factor) {
+    amp = parseFloat(amp);
     if (isNaN(amp)) {
         return NaN
     }
@@ -75,7 +76,7 @@ class CalculatorContainer extends Component {
 
     GetFactorCorrection() {
         const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-        return FACTOR_CORRECTION_VALUES[parseInt(clamp(this.state.calculatorsData.length, 0, 5))];
+        return FACTOR_CORRECTION_VALUES[parseInt(clamp(this.state.calculatorsData.length - 1, 0, 5))];
     }
 
     AddCalculator(data) {
