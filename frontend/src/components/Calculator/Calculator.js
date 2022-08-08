@@ -21,21 +21,18 @@ class Calculator extends Component {
         super(props);
         this.calc_form = React.createRef();
         this.state = this.getInitialState();
+        this.Update = this.Update.bind(this);
     }
 
     componentDidMount() {
         this.setState(this.props.data);
-        if (this.props.factor) {
-            this.setState({ factor: this.props.factor });
-            console.log(this.props.factor);
-        }
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.factor !== this.props.factor) {
-            this.setState({ factor: this.props.factor });
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.factor !== this.props.factor) {
+    //         this.setState({ factor: this.props.factor });
+    //     }
+    // }
 
     getInitialState() {
         return {
@@ -47,7 +44,6 @@ class Calculator extends Component {
             imax: "",
             reserve: "",
             smm2: "",
-            factor: 1,
         }
     }
 
@@ -55,51 +51,26 @@ class Calculator extends Component {
         this.setState(this.getInitialState());
     }
 
+    Update() {
+        if (this.props.OnUpdateCalc) {
+            this.props.OnUpdateCalc(this.props.count - 1, this.state);
+        }
+    }
+
     OnChangeHandlerDescription(ev) {
-        this.setState({ description: ev.target.value });
+        this.setState({ description: ev.target.value }, this.Update);
     }
 
     OnChangeHandlerAmp(ev) {
-        this.setState({ ampacity: ev.target.value });
-    }
-
-    Calculation() {
-        let imax = this.GetImax();
-        let reserve = (Math.abs(imax - this.state.ampacity) / imax) * 100;
-        let smm2 = this.CalculateSmm2(this.GetImax(this.state.ampacity, 1));
-        this.setState({ imax: imax, reserve: reserve, smm2: smm2 })
+        this.setState({ ampacity: ev.target.value }, this.Update);
     }
 
     OnWireChange(ev) {
-        this.setState({ "wire": ev.target.id })
+        this.setState({ "wire": ev.target.id }, this.Update);
     }
 
     OnCableChange(ev) {
-        this.setState({ "cable": ev.target.id })
-    }
-
-    GetImax(amp = this.state.ampacity, factor = this.state.factor) {
-        if (isNaN(amp)) {
-            return NaN
-        }
-
-        // search for imax value that can contain the given ampacity 
-        const imaxValues = Object.keys(IMAX_VALUES)
-        for (const val of imaxValues) {
-            let valWithFactor = val * factor;
-            if (valWithFactor >= amp) {
-                return valWithFactor
-            }
-        }
-
-        // if nothing was found, return the biggest imax for now.
-        // in the future, divide the amp into parts and return multiple imax values.
-        // (the imax list is sorted)
-        return imaxValues[imaxValues.length - 1] * factor;
-    }
-
-    CalculateSmm2(imax) {
-        return (IMAX_VALUES[parseInt(imax)])
+        this.setState({ "cable": ev.target.id }, this.Update);
     }
 
     render() {

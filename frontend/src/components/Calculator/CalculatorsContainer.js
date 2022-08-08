@@ -51,6 +51,7 @@ class CalculatorContainer extends Component {
     constructor(props) {
         super(props);
         this.DeleteCalculator = this.DeleteCalculator.bind(this);
+        this.UpdateCalculator = this.UpdateCalculator.bind(this);
     }
 
     state = {
@@ -103,6 +104,12 @@ class CalculatorContainer extends Component {
         this.setState({calculatorsData: []}, () => { this.AddCalculators(newCalcsData) });
     }
 
+    UpdateCalculator(idx, data) {
+        let calcList = this.state.calculatorsData;
+        calcList[idx] = data;
+        this.setState({calculatorsData: calcList});
+    }
+
     DeleteCalculator(idx) {
         let calcsList = this.state.calculatorsData;
         let newList = [];
@@ -137,6 +144,7 @@ class CalculatorContainer extends Component {
                         <Calculator
                             key={index}
                             OnDeleteCalc={this.DeleteCalculator}
+                            OnUpdateCalc={this.UpdateCalculator}
                             count={index + 1}
                             data={value}
                             factor={this.state.factor}
