@@ -49,29 +49,17 @@ class CalculatorPage extends Component {
         return (
             <div className="main-container">
 
-                <Container fluid>
+                <div className="customer-info">
                     <Form>
-                        <Row>
-                            <Col>
-                                <h5>{this.state.nowDate.toLocaleDateString()}</h5>
-                            </Col>
-                        </Row>
+                        <h5>{this.state.nowDate.toLocaleDateString()}</h5>
+                        <Stack direction="horizontal">
+                            <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer: "} />
+                            <Form.Control type="text" size="lg" name={"facilityName"} placeholder={"Facility Name"} />
+                        </Stack>
+                        <Form.Control type="text" size="lg" name={"Remarks"} placeholder={"Remarks"} />
 
-                        <Row>
-                            <Col>
-                                <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer: "} />
-                            </Col>
-                            <Col>
-                                <Form.Control type="text" size="lg" name={"facilityName"} placeholder={"Facility Name"} />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Control type="text" size="lg" name={"Remarks"} placeholder={"Remarks"} />
-                            </Col>
-                        </Row>
                     </Form>
-                </Container>
+                </div>
 
 
                 <br />

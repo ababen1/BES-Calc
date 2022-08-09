@@ -130,7 +130,7 @@ class CalculatorContainer extends Component {
 
     render() {
         return (
-            <Container fluid>
+            <div>
                 {(this.state.calculatorsData.length !== 0) ?
                     <Row className="reference-row">
                         <div style={{ "width": "253px" }} >Description</div>
@@ -167,7 +167,7 @@ class CalculatorContainer extends Component {
                     </Col>
 
                 </Row>
-            </Container>
+            </div>
         );
     }
 }

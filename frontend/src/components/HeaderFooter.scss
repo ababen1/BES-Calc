@@ -1,11 +1,15 @@
 @use 'src/theme.scss';
 
 .header {
-    background-color: transparent;
+    background-color: theme.$white;
+    display: flex;
+    flex-direction: column;
 
     .hstack {
         background-color: theme.$white;
-
+        width: 80%;
+        display: flex;
+        align-self: center;
     }
 }
 

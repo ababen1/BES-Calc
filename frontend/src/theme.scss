@@ -17,23 +17,65 @@ $theme-colors: (
 $border-radius: 15px;
 $border-radius-lg: 15px;
 $border-radius-sm: 15px;
-$input-btn-border-width: 0.75px;
+$input-btn-border-width: 0px;
 $input-border-radius: 15px;
 $input-border-radius-lg: 15px;
 $input-border-radius-sm: 15px;
 $body-bg: $page-background;
 $input-bg: $white;
+$input-border-focus: 0;
+$dropdown-bg: $white;
+$dropdown-divider-bg: $light-gray;
+$dropdown-link-hover-color: darken($white, 5%);
+
 $modal-content-bg: transparent;
 $modal-content-border-color: transparent;
 $modal-title-padding: 0;
 $modal-header-border-color: transparent;
 
-
 .main-btn {
     $border-radius: 15px;
 }
 
+* {
+    font-weight: 400;
+    font-family: 'Open Sans';
+    textarea:focus,
+    textarea.form-control:focus,
+    input.form-control:focus,
+    input[type=text]:focus,
+    input[type=password]:focus,
+    input[type=email]:focus,
+    input[type=number]:focus,
+    [type=text].form-control:focus,
+    [type=password].form-control:focus,
+    [type=email].form-control:focus,
+    [type=tel].form-control:focus,
+    [contenteditable].form-control:focus {
+        box-shadow: none;
+        border: none;
+        outline: none;
+        color: #000000;
+    }
 
+    textarea:hover,
+    textarea.form-control:hover,
+    input.form-control:hover,
+    input[type=text]:hover,
+    input[type=password]:hover,
+    input[type=email]:hover,
+    input[type=number]:hover,
+    [type=text].form-control:hover,
+    [type=password].form-control:hover,
+    [type=email].form-control:hover,
+    [type=tel].form-control:hover,
+    [contenteditable].form-control:hover {
+        box-shadow: none;
+        border: none;
+        outline: none;
+        font-weight: 500;
+    }
+}
 
 
 /* import bootstrap to set changes */

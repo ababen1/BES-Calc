@@ -39,7 +39,7 @@ class App extends Component {
     render() {
         return (
             <UserContext.Provider value={{username: undefined}}>
-                <div  className='App'>
+                <div className='App'>
                     <Header logo={logo} login_icon={login_icon} />
                     <CalculatorPage />
                     <Footer/>
