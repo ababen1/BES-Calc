@@ -1,81 +1,97 @@
-import { Component } from "react";
+import { Component, useEffect, useState } from "react";
 import { FloatingLabel, Form, Container, Stack, Button } from "react-bootstrap";
 import './LoginSignupModal.scss'
 import axios from "axios"
-import Cookies from "universal-cookie"
 
-const cookies = new Cookies();
-
-class Login extends Component {
-    state = {
+export default function Login() {
+    const [state, setState] = useState({
         validated: false,
         email: "",
         password: "",
         keep_logged_in: false,
+    });
+
+
+    const handleChange = function (e) {
+        const { id, value } = e.target
+        setState(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
     }
 
-    handleSubmit(event) {
-        const form = event.currentTarget;
-        event.preventDefault();
+    const handleSubmit = (e) => {
+        const form = e.currentTarget;
+        e.preventDefault();
         if (form.checkValidity() === false) {
-            
-            event.stopPropagation();
+            e.stopPropagation();
         }
         else {
-            this.setState({ validated: true }, this.callBackendLogin);
+            setState({ validated: true });
         }
     }
 
-    callBackendLogin() {
-       
+    useEffect(() => {
+        if (state.validated) {
+            callBackendLogin();
+        }
+    }, [state.validated])
+
+    const callBackendLogin = function () {
+
         const configs = {
             method: "POST",
             base_url: "localhost:8080",
             url: "/login",
-            data: {
-                email: this.state.email,
-                password: this.state.password,
-                keep_logged_in: this.state.keep_logged_in
-            }
+            data: state,
         }
         axios(configs)
-        .then((result) => {
-            sessionStorage.setItem("token", result.data.data.token);
-        })
-        .catch((error) => {console.log(error)})
+            .then((result) => {
+                sessionStorage.setItem("token", result.data.data.token);
+            })
+            .catch((error) => { console.log(error) })
     }
 
-    render() {
-        return (
-            <Container fluid className="login-panel">
-                <Container className="title">
-                    welcome back, please
-                    <h2>Login</h2>
-                </Container>
-                <Form validated={this.state.validated} onSubmit={this.handleSubmit.bind(this)} className="login-form">
-                    <Container>
-                        <FloatingLabel
-                            label="Your Email"
-                            className="mb-3"
-                        >
-                            <Form.Control required type="email" placeholder="name@example.com"
-                                value={this.state.email} onChange={(e) => { this.setState({ email: e.target.value }) }} />
-                        </FloatingLabel>
-                        <FloatingLabel controlId="floatingPassword" label="Password">
-                            <Form.Control required type="password" placeholder="Password"
-                                value={this.state.password} onChange={(e) => { this.setState({ password: e.target.value }) }} />
-                        </FloatingLabel>
-                        <Stack gap={2} direction="horizontal">
-                            <Form.Check className="keep-logged-in" type="checkbox" label="Keep me logged in"
-                                checked={this.state.keep_logged_in} onChange={(e) => { this.setState({ keep_logged_in: e.target.checked }) }} />
-                            <Button href="#" className="ms-auto reset-password">Reset Password </Button>
-                        </Stack>
-                    </Container>
-                    <Button size="lg" type="submit" className="login-btn">Log me in</Button>
-                </Form>
+    return (
+        <Container fluid className="login-panel">
+            <Container className="title">
+                welcome back, please
+                <h2>Login</h2>
             </Container>
-        )
-    }
+            <Form validated={state.validated} onSubmit={handleSubmit} className="login-form">
+                <Container>
+                    <FloatingLabel label="Your Email" className="mb-3">
+                        <Form.Control
+                            required
+                            type="email"
+                            id="email"
+                            placeholder="name@example.com"
+                            value={state.email}
+                            onChange={handleChange} />
+                    </FloatingLabel>
+                    <FloatingLabel label="Password">
+                        <Form.Control
+                            required
+                            type="password"
+                            id="password"
+                            placeholder="Password"
+                            value={state.password}
+                            onChange={handleChange} />
+                    </FloatingLabel>
+                    <Stack gap={2} direction="horizontal">
+                        <Form.Check
+                            className="keep-logged-in"
+                            type="checkbox"
+                            id="keep_logged_in"
+                            label="Keep me logged in"
+                            checked={state.keep_logged_in}
+                            onChange={handleChange} />
+                        <Button href="#" className="ms-auto reset-password">Reset Password </Button>
+                    </Stack>
+                </Container>
+                <Button size="lg" type="submit" className="login-btn">Log me in</Button>
+            </Form>
+        </Container>
+    )
 
 }
-export default Login;

@@ -11,8 +11,31 @@
 .main-container {
     @include make-container();
     padding-top: 3%;
-    width: 1600px;
+    width: 80%;
     align-items: center;
+}
+
+.customer-info {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    .form-control {
+        margin: 0;
+    }
+
+    .hstack {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+
+        input[name="CustomerName"] {
+            margin-right: 6rem;
+        }
+    }
+
+    input[name="Remarks"] {
+        width: 100%;
+    }
 }
 
 .calcs-list {
@@ -22,7 +45,7 @@
 
         }
 
-        .delete-row {
+        .smm2 {
             border-top-right-radius: 15px;
         }
     }
@@ -32,7 +55,7 @@
             border-bottom-left-radius: 15px;
         }
 
-        .delete-row {
+        .smm2 {
             border-bottom-right-radius: 15px;
         }
     }
@@ -63,6 +86,8 @@
         .list-group-item {
             flex-grow: 1;
             justify-content: space-evenly;
+            border: 0;
+            padding: 5px 5px 2px 2px;
         }
     }
 
@@ -72,18 +97,32 @@
         display: flex;
         align-items: center;
         flex-grow: 1;
+        font-size: 18px;
     }
 
     .calc-number {
         /* UI Properties */
         @include calc-field(3rem);
         font: normal normal 300 50px/68px Open Sans;
-        border: 1px solid rgba(0, 0, 0, 0.125);
+        border: 0px solid rgba(0, 0, 0, 0.125);
         letter-spacing: 0px;
         border-radius: 0px;
         justify-content: center;
         background-color: #156982;
         color: white;
+    }
+
+    .seperator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+
+        .vline {
+            border-left: 0.75px solid #DBDBDB;
+            height: 45px;
+            opacity: 0.75;
+        }
     }
 
     .description {
@@ -103,7 +142,7 @@
     }
 
     .wire {
-        @include calc-field(12rem);
+        @include calc-field(13rem);
     }
 
     .cable {
@@ -113,14 +152,16 @@
     .results {
         @include calc-field(7rem);
         flex-direction: column;
+        line-height: 1rem;
     }
+
+
 
     .delete-row {
         @include calc-field(3rem);
-        justify-content: center;
-        border-radius: 0;
-        background-color: white;
-        border: 1px solid rgba(0, 0, 0, 0.125);
+        justify-content: flex-start;
+        border: 0;
+        background-color: transparent;
     }
 
     .data-result-title {
@@ -139,7 +180,6 @@
     }
 }
 
-
 .reference-row {
     /* Layout Properties */
     top: 1033px;
@@ -156,30 +196,6 @@
     letter-spacing: 0px;
     color: #828282;
     text-transform: capitalize;
-    opacity: 1;
-}
-
-
-.add-row-btn {
-    /* Layout Properties */
-
-    top: 886px;
-    left: 1510px;
-    width: 200px;
-    height: 60px;
-
-    /* UI Properties */
-
-    background: #828282 0% 0% no-repeat padding-box;
-    border: 0.699999988079071px solid #888787;
-    opacity: 1;
-    text-align: center;
-    letter-spacing: 0px;
-}
-
-.reset-btn {
-    text-align: center;
-    letter-spacing: 0px;
     opacity: 1;
 }
 

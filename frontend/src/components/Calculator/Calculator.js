@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Calculator.scss";
-import { ListGroup, Row, Form, FormControl, Container, InputGroup, CloseButton } from "react-bootstrap";
+import { ListGroup, Row, Form, FormControl, Container, InputGroup, CloseButton, ListGroupItem } from "react-bootstrap";
 
 const IMAX_VALUES = {
     111: "5 x 16",
@@ -88,6 +88,10 @@ class Calculator extends Component {
                                 placeholder={"Description"} />
                         </ListGroup.Item>
 
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
+                        </ListGroup.Item>
+
                         <ListGroup.Item className="power-kw">
                             <Form.Select
                                 value={this.state.power}
@@ -112,48 +116,56 @@ class Calculator extends Component {
                                 <option>355</option>
                             </Form.Select>
                         </ListGroup.Item>
+
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
+                        </ListGroup.Item>
+
                         <ListGroup.Item className="cable">
-                            <InputGroup>
-                                <Form.Check
-                                    name="cable"
-                                    inline
-                                    id={`al#${this.props.count}`}
-                                    label="Al"
-                                    type="radio"
-                                    checked={this.state.cable === `al#${this.props.count}`} onChange={this.OnCableChange.bind(this)} />
-                                <Form.Check
-                                    name="cable"
-                                    inline
-                                    id={`cu#${this.props.count}`}
-                                    label="Cu"
-                                    type="radio"
-                                    checked={this.state.cable === `cu#${this.props.count}`}
-                                    onChange={this.OnCableChange.bind(this)} />
-                            </InputGroup>
-
-
+                            <Form.Check
+                                name="cable"
+                                inline
+                                id={`al#${this.props.count}`}
+                                label="Al"
+                                type="radio"
+                                checked={this.state.cable === `al#${this.props.count}`} onChange={this.OnCableChange.bind(this)} />
+                            <Form.Check
+                                name="cable"
+                                inline
+                                id={`cu#${this.props.count}`}
+                                label="Cu"
+                                type="radio"
+                                checked={this.state.cable === `cu#${this.props.count}`}
+                                onChange={this.OnCableChange.bind(this)} />
                         </ListGroup.Item>
+
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
+                        </ListGroup.Item>
+
                         <ListGroup.Item className="wire">
-                            <InputGroup>
-                                <Form.Check
-                                    name="wire"
-                                    inline
-                                    id={`single#${this.props.count}`}
-                                    label="Single"
-                                    type="radio"
-                                    checked={this.state.wire === `single#${this.props.count}`}
-                                    onChange={this.OnWireChange.bind(this)} />
-                                <Form.Check
-                                    name="wire"
-                                    inline
-                                    id={`3-wire#${this.props.count}`}
-                                    label="3 Wire"
-                                    type="radio"
-                                    checked={this.state.wire === `3-wire#${this.props.count}`}
-                                    onChange={this.OnWireChange.bind(this)} />
-                            </InputGroup>
-
+                            <Form.Check
+                                name="wire"
+                                inline
+                                id={`single#${this.props.count}`}
+                                label="Single"
+                                type="radio"
+                                checked={this.state.wire === `single#${this.props.count}`}
+                                onChange={this.OnWireChange.bind(this)} />
+                            <Form.Check
+                                name="wire"
+                                inline
+                                id={`3-wire#${this.props.count}`}
+                                label="3 Wire"
+                                type="radio"
+                                checked={this.state.wire === `3-wire#${this.props.count}`}
+                                onChange={this.OnWireChange.bind(this)} />
                         </ListGroup.Item>
+
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
+                        </ListGroup.Item>
+
                         <ListGroup.Item className="ampacity">
                             <Form.Control
                                 type={"number"}
@@ -161,17 +173,27 @@ class Calculator extends Component {
                                 placeholder={"Ampacity"}
                                 value={this.state.ampacity}
                                 onChange={this.OnChangeHandlerAmp.bind(this)} />
-
                         </ListGroup.Item>
+
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
+                        </ListGroup.Item>
+
                         <ListGroup.Item className="results">
                             <p className="data-result-title">Reserve(%)</p>
                             <p className="data-result-text">{String(this.state.reserve).substring(0, 8)}</p>
+                        </ListGroup.Item>
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
                         </ListGroup.Item>
                         <ListGroup.Item className="results">
                             <p className="data-result-title">Imax</p>
                             <p className="data-result-text">{String(this.state.imax).substring(0, 8)}</p>
                         </ListGroup.Item>
-                        <ListGroup.Item className="results">
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
+                        </ListGroup.Item>
+                        <ListGroup.Item className="results smm2">
                             <p className="data-result-title">S[mm^2]</p>
                             <p className="data-result-text">{String(this.state.smm2)}</p>
 
