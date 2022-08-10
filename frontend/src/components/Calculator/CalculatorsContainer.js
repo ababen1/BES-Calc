@@ -78,7 +78,7 @@ class CalculatorContainer extends Component {
         }
 
         this.UpdateCalculators(newCalcsList);
-        this.setState({canSave: canSaveCalculation});
+        this.setState({ canSave: canSaveCalculation });
     }
 
     GetFactorCorrection() {
@@ -157,16 +157,11 @@ class CalculatorContainer extends Component {
                         />)}
                 </div>
                 <br />
-                <Row>
-                    <Col md={10}></Col>
-                    <Col>
-                        <Stack direction="horizontal" gap={2}>
-                            <Button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</Button>
-                            <Button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</Button>
-                        </Stack>
-                    </Col>
 
-                </Row>
+                <Stack direction="horizontal" gap={2} style={{"justifyContent": "flex-end"}}>
+                    <Button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</Button>
+                    <Button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</Button>
+                </Stack>
             </div>
         );
     }

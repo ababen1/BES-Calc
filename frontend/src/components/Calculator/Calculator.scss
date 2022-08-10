@@ -117,6 +117,7 @@
         align-items: center;
         justify-content: center;
         justify-items: center;
+
         .vline {
             border-left: 0.75px solid #DBDBDB;
             height: 45px;
@@ -151,6 +152,7 @@
     .results {
         @include calc-field(7rem);
         flex-direction: column;
+        line-height: 1rem;
     }
 
 
@@ -178,7 +180,6 @@
     }
 }
 
-
 .reference-row {
     /* Layout Properties */
     top: 1033px;
@@ -195,30 +196,6 @@
     letter-spacing: 0px;
     color: #828282;
     text-transform: capitalize;
-    opacity: 1;
-}
-
-
-.add-row-btn {
-    /* Layout Properties */
-
-    top: 886px;
-    left: 1510px;
-    width: 200px;
-    height: 60px;
-
-    /* UI Properties */
-
-    background: #828282 0% 0% no-repeat padding-box;
-    border: 0.699999988079071px solid #888787;
-    opacity: 1;
-    text-align: center;
-    letter-spacing: 0px;
-}
-
-.reset-btn {
-    text-align: center;
-    letter-spacing: 0px;
     opacity: 1;
 }
 

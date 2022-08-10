@@ -67,13 +67,11 @@ class CalculatorPage extends Component {
                     <Calculator key="main" ref={this.main_calc_ref} count={0}></Calculator>
                 </div>
                 <br />
-                <Row>
-                    <Col md={10}>
-                        <Button variant="outline-secondary" className="reset-btn" size="lg" id="reset_calculation_btn" onClick={this.OnResetCalculator.bind(this)}>Reset</Button>
-                    </Col>
-                    <Col><Button className="add-row-btn" size="lg" id="add_row_btn" onClick={this.OnAddCalculator.bind(this)}>Add Row</Button></Col>
-                </Row>
-                <br></br>
+                <Stack direction="horizontal" style={{"justifyContent": "space-between"}}>
+                    <Button variant="outline-secondary" className="reset-btn" size="lg" id="reset_calculation_btn" onClick={this.OnResetCalculator.bind(this)}>Reset</Button>
+                    <Button className="add-row-btn" size="lg" id="add_row_btn" onClick={this.OnAddCalculator.bind(this)}>Add Row</Button>
+                </Stack>
+                <br />
                 <CalculatorContainer ref={this.calculators_container_ref} />
             </div>
 
