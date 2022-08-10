@@ -7,7 +7,6 @@ class LoginSignUp extends Component {
 
     constructor(props) {
         super(props);
-        this.login_ref = React.createRef();
     }
 
     state = {
@@ -27,7 +26,7 @@ class LoginSignUp extends Component {
                     <Container fluid className="login-signup-modal">
                         <Row>
                             <Col>
-                                <Login ref={this.login_ref} />
+                                <Login />
                             </Col>
                             <Col>
                                 <Signup />

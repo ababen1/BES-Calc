@@ -85,7 +85,7 @@ export default function Login() {
                             id="keep_logged_in"
                             label="Keep me logged in"
                             checked={state.keep_logged_in}
-                            onChange={handleChange} />
+                            onChange={(e) => {setState(prevState => ({...prevState, ["keep_logged_in"]: e.target.checked}))}}/>
                         <Button href="#" className="ms-auto reset-password">Reset Password </Button>
                     </Stack>
                 </Container>
