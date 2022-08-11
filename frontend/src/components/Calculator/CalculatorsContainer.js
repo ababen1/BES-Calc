@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Stack, Button } from "react-bootstrap";
+import { Container, Row, Col, Stack, Button, ListGroup, Form, CloseButton } from "react-bootstrap";
 import Calculator from "./Calculator";
 import "./Calculator.scss"
 
@@ -132,17 +132,72 @@ class CalculatorContainer extends Component {
         return (
             <div>
                 {(this.state.calculatorsData.length !== 0) ?
-                    <Row className="reference-row">
-                        <div style={{ "width": "253px" }} >Description</div>
-                        <div style={{ width: "150px" }}>Power [Kw]</div>
-                        <div style={{ width: "143px" }}>Al / Cu</div>
-                        <div style={{ width: "168px" }}>3 wire / single</div>
-                        <div style={{ width: "250px" }}>ampacity [A]</div>
-                        <div style={{ width: "150px" }}>Reserve (%)</div>
-                        <div style={{ width: "80px" }}>Imax</div>
-                        <div style={{ width: "100px" }}>S [mm^2]</div>
+                    <Stack direction="horizontal" className="reference-row">
+                            <div className={"description"}>
+                                Description
+                            </div>
 
-                    </Row> : ""}
+                            <div className="seperator">
+                                <div className="vline"></div>
+                            </div>
+
+                            <div className="power-kw">
+                                Power[KW]
+                            </div>
+
+                            <div className="seperator">
+                                <div className="vline"></div>
+                            </div>
+
+                            <div className="cable">
+                                Al / Cu
+                            </div>
+
+                            <div className="seperator">
+                                <div className="vline"></div>
+                            </div>
+
+                            <div className="wire" style={{width: "8rem"}}>
+                                Single / 3 Wire
+                            </div>
+
+                            <div className="seperator">
+                                <div className="vline"></div>
+                            </div>
+
+                            <div className="ampacity">
+                                Amp
+                            </div>
+
+                            <div className="seperator">
+                                <div className="vline"></div>
+                            </div>
+
+                            <div className="results">
+                                Reserve(%)
+
+                            </div>
+                            <div className="seperator">
+                                <div className="vline"></div>
+                            </div>
+                            <div className="results">
+                                Imax
+
+                            </div>
+                            <div className="seperator">
+                                <div className="vline"></div>
+                            </div>
+                            <div className="results smm2">
+                                S[mm^2]
+                            </div>
+                    </Stack >
+                    : ""}
+
+
+
+
+
+
 
 
                 <div className="calcs-list">
@@ -158,7 +213,7 @@ class CalculatorContainer extends Component {
                 </div>
                 <br />
 
-                <Stack direction="horizontal" gap={2} style={{"justifyContent": "flex-end"}}>
+                <Stack direction="horizontal" gap={2} style={{ "justifyContent": "flex-end" }}>
                     <Button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</Button>
                     <Button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</Button>
                 </Stack>

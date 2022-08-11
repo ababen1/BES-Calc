@@ -103,7 +103,7 @@
     .calc-number {
         /* UI Properties */
         @include calc-field(3rem);
-        font: normal normal 300 50px/68px Open Sans;
+        font: normal normal 300 30px/68px Open Sans;
         border: 0px solid rgba(0, 0, 0, 0.125);
         letter-spacing: 0px;
         border-radius: 0px;
@@ -181,22 +181,18 @@
 }
 
 .reference-row {
-    /* Layout Properties */
-    top: 1033px;
-    left: 287px;
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    height: 28px;
-    padding-bottom: 1%;
-    padding-left: 75px;
-
-    /* UI Properties */
-    text-align: center;
-    letter-spacing: 0px;
     color: #828282;
     text-transform: capitalize;
-    opacity: 1;
+    width: 90%;
+    font-size: 14px;
+    margin-left: 5%;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+
+    .seperator {
+        display: none;
+    }
 }
 
 .calculate-btn {
