@@ -62,7 +62,7 @@ class CalculatorPage extends Component {
                     <Form>
                         <h5>{this.state.nowDate.toLocaleDateString()}</h5>
                         <Stack direction="horizontal">
-                            <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer: "} />
+                            <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer "} />
                             <Form.Control type="text" size="lg" name={"facilityName"} placeholder={"Facility Name"} />
                         </Stack>
                         <Form.Control type="text" size="lg" name={"Remarks"} placeholder={"Remarks"} />

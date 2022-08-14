@@ -236,7 +236,7 @@ class CalculatorContainer extends Component {
 
                 </Stack>
 
-                <Modal show={this.state.showResetAllConfirmation}>
+                <Modal onHide={e => {this.setState({showResetAllConfirmation: false})}} show={this.state.showResetAllConfirmation}>
                     <div className="reset-all-confirmation">
                         <Modal.Title>
                             Reset all calculators?
