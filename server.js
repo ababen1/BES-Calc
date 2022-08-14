@@ -71,7 +71,8 @@ app.post("/signup", (req, res) => {
             .then(function () {
                 console.log("new user created");
                 res.json(new_user.toAuthJSON());
-            });
+            })
+            .catch(error => {console.log(error)});
     }
 });
 

@@ -12,6 +12,7 @@ class Signup extends Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.stopPropagation();
@@ -35,7 +36,7 @@ class Signup extends Component {
             }
         }
         axios(configs)
-        .then((result) => {console.log(result)})
+        .then((result) => {window.location.reload()})
         .catch((error) => {console.log(error)})
     }
 

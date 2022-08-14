@@ -27,7 +27,10 @@ export default function Login() {
             e.stopPropagation();
         }
         else {
-            setState({ validated: true });
+            setState(prevState => ({
+                ...prevState,
+                "validated": e.target.checkValidity()
+            }));
         }
     }
 
@@ -47,7 +50,13 @@ export default function Login() {
         }
         axios(configs)
             .then((result) => {
-                sessionStorage.setItem("token", result.data.data.token);
+                if (result.data.success) {
+                    sessionStorage.setItem("token", result.data.data.token);
+                    window.location.reload();
+                } else {
+                    alert(result.data.error)
+                }
+                
             })
             .catch((error) => { console.log(error) })
     }
@@ -58,7 +67,7 @@ export default function Login() {
                 welcome back, please
                 <h2>Login</h2>
             </Container>
-            <Form validated={state.validated} onSubmit={handleSubmit} className="login-form">
+            <Form noValidate validated={state.validated} onSubmit={handleSubmit} className="login-form">
                 <Container>
                     <FloatingLabel label="Your Email" className="mb-3">
                         <Form.Control
