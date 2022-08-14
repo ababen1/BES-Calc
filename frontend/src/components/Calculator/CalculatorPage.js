@@ -17,6 +17,11 @@ class CalculatorPage extends Component {
         nowDate: new Date(),
         calculatorRepeatNumber: 0,
         arrCalculators: [],
+        resetDisabled: true,
+    }
+
+    componentDidMount() {
+
     }
 
     OnFocusBolderFont(ev) {
@@ -36,12 +41,16 @@ class CalculatorPage extends Component {
     OnResetCalculator() {
         const main_calc = this.main_calc_ref.current;
         main_calc.ResetCalc()
+        this.setState({resetDisabled: true})
     }
 
     OnDeleteCalc(idx) {
         this.calculators_container_ref.current.DeleteCalculator(idx);
     }
 
+    updateResetBtn() {
+        this.setState({resetDisabled: this.main_calc_ref.current.IsEmpty()})
+    }
 
 
     render() {
@@ -63,7 +72,7 @@ class CalculatorPage extends Component {
 
 
                 <br />
-                <div className="calcs-list">
+                <div className="calcs-list" onChange={this.updateResetBtn.bind(this)}>
                     <Calculator key="main" ref={this.main_calc_ref} count={0}></Calculator>
                 </div>
                 <br />
@@ -72,7 +81,8 @@ class CalculatorPage extends Component {
                         className="reset-btn shadow-none"
                         size="lg"
                         id="reset_calculation_btn"
-                        onClick={this.OnResetCalculator.bind(this)}>
+                        onClick={this.OnResetCalculator.bind(this)}
+                        disabled ={this.state.resetDisabled}>
                         <span className="icon"></span>
                         <span>Reset</span>
                     </button>

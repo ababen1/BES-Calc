@@ -20,6 +20,7 @@ class Calculator extends Component {
     constructor(props) {
         super(props);
         this.calc_form = React.createRef();
+        this.IsEmpty = this.IsEmpty.bind(this);
         this.state = this.getInitialState();
         this.Update = this.Update.bind(this);
     }
@@ -55,6 +56,10 @@ class Calculator extends Component {
         if (this.props.OnUpdateCalc) {
             this.props.OnUpdateCalc(this.props.count - 1, this.state);
         }
+    }
+
+    IsEmpty() {
+        return this.state === this.getInitialState();
     }
 
     OnChangeHandlerDescription(ev) {

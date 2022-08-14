@@ -211,10 +211,17 @@
     text-align: center;
     font-size: 24px;
     border: 0;
+
     span {
         display: inline-block;
         vertical-align: middle;
         color: #828282;
+    }
+
+    &:disabled {
+        span {
+            color: #C3C1C1
+        }
     }
 
     .icon {
@@ -225,5 +232,5 @@
         vertical-align: middle;
         margin-right: 7px;
     }
-    
+
 }
