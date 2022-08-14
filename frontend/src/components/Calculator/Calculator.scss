@@ -204,10 +204,26 @@
     color: #FFFFFF;
 }
 
-// .reset-btn {
-//     background: transparent url('../../Assets/reset.svg') 0% 0% no-repeat padding-box;
-//     opacity: 1;
-//     text-align: center;
-//     font-size: 24px;
+.reset-btn {
+    background: transparent 0% 0% no-repeat padding-box;
+    background-color: transparent;
+    opacity: 1;
+    text-align: center;
+    font-size: 24px;
+    border: 0;
+    span {
+        display: inline-block;
+        vertical-align: middle;
+        color: #828282;
+    }
+
+    .icon {
+        background: url('../../Assets/reset.svg') no-repeat left center;
+        width: 28px;
+        height: 28px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 7px;
+    }
     
-// }
+}

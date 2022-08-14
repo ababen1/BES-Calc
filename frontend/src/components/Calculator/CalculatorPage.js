@@ -68,12 +68,14 @@ class CalculatorPage extends Component {
                 </div>
                 <br />
                 <Stack direction="horizontal" style={{ "justifyContent": "space-between" }}>
-                    <Button
-                        variant="outline-secondary"
-                        className="reset-btn"
+                    <button
+                        className="reset-btn shadow-none"
                         size="lg"
                         id="reset_calculation_btn"
-                        onClick={this.OnResetCalculator.bind(this)}>Reset</Button>
+                        onClick={this.OnResetCalculator.bind(this)}>
+                        <span className="icon"></span>
+                        <span>Reset</span>
+                    </button>
                     <Button className="add-row-btn" size="lg" id="add_row_btn" onClick={this.OnAddCalculator.bind(this)}>Add Row</Button>
                 </Stack>
                 <br />
