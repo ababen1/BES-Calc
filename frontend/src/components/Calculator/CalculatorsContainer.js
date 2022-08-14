@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Stack, Button } from "react-bootstrap";
+import { Stack, Button, Modal } from "react-bootstrap";
 import Calculator from "./Calculator";
 import "./Calculator.scss"
 
@@ -57,6 +57,7 @@ class CalculatorContainer extends Component {
     state = {
         calculatorsData: [],
         canSave: false,
+        showResetAllConfirmation: false,
     }
 
     CalculateAll() {
@@ -127,69 +128,75 @@ class CalculatorContainer extends Component {
         this.UpdateCalculators(newList);
     }
 
+    OnResetAll() {
+        this.setState({
+            calculatorsData: [],
+            showResetAllConfirmation: false,
+        })
+    }
 
     render() {
         return (
             <div>
                 {(this.state.calculatorsData.length !== 0) ?
                     <Stack direction="horizontal" className="reference-row">
-                            <div className={"description"}>
-                                Description
-                            </div>
+                        <div className={"description"}>
+                            Description
+                        </div>
 
-                            <div className="seperator">
-                                <div className="vline"></div>
-                            </div>
+                        <div className="seperator">
+                            <div className="vline"></div>
+                        </div>
 
-                            <div className="power-kw">
-                                Power[KW]
-                            </div>
+                        <div className="power-kw">
+                            Power[KW]
+                        </div>
 
-                            <div className="seperator">
-                                <div className="vline"></div>
-                            </div>
+                        <div className="seperator">
+                            <div className="vline"></div>
+                        </div>
 
-                            <div className="cable">
-                                Al / Cu
-                            </div>
+                        <div className="cable">
+                            Al / Cu
+                        </div>
 
-                            <div className="seperator">
-                                <div className="vline"></div>
-                            </div>
+                        <div className="seperator">
+                            <div className="vline"></div>
+                        </div>
 
-                            <div className="wire" style={{width: "8rem"}}>
-                                Single / 3 Wire
-                            </div>
+                        <div className="wire" style={{ width: "8rem" }}>
+                            Single / 3 Wire
+                        </div>
 
-                            <div className="seperator">
-                                <div className="vline"></div>
-                            </div>
+                        <div className="seperator">
+                            <div className="vline"></div>
+                        </div>
 
-                            <div className="ampacity">
-                                Amp
-                            </div>
+                        <div className="ampacity">
+                            Amp
+                        </div>
 
-                            <div className="seperator">
-                                <div className="vline"></div>
-                            </div>
+                        <div className="seperator">
+                            <div className="vline"></div>
+                        </div>
 
-                            <div className="results">
-                                Reserve(%)
+                        <div className="results">
+                            Reserve(%)
 
-                            </div>
-                            <div className="seperator">
-                                <div className="vline"></div>
-                            </div>
-                            <div className="results">
-                                Imax
+                        </div>
+                        <div className="seperator">
+                            <div className="vline"></div>
+                        </div>
+                        <div className="results">
+                            Imax
 
-                            </div>
-                            <div className="seperator">
-                                <div className="vline"></div>
-                            </div>
-                            <div className="results smm2">
-                                S[mm^2]
-                            </div>
+                        </div>
+                        <div className="seperator">
+                            <div className="vline"></div>
+                        </div>
+                        <div className="results smm2">
+                            S[mm^2]
+                        </div>
                     </Stack >
                     : ""}
 
@@ -214,9 +221,34 @@ class CalculatorContainer extends Component {
                 <br />
 
                 <Stack direction="horizontal" gap={2} style={{ "justifyContent": "flex-end" }}>
+                    <button
+                        className="reset-btn"
+                        size="lg"
+                        disabled={this.state.calculatorsData.length === 0}
+                        onClick={(e) => { this.setState({ showResetAllConfirmation: true }) }}>
+                        <span className="icon"></span>
+                        <span>Reset All</span>
+                    </button>
+                    <div style={{ "flexGrow": 1 }}></div>
+
                     <Button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</Button>
                     <Button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</Button>
+
                 </Stack>
+
+                <Modal show={this.state.showResetAllConfirmation}>
+                    <div className="reset-all-confirmation">
+                        <Modal.Title>
+                            Reset all calculators?
+                        </Modal.Title>
+                        <Modal.Body>
+                            <Stack direction="horizontal" gap={5}>
+                                <Button onClick={this.OnResetAll.bind(this)}>OK</Button>
+                                <Button onClick={e => {this.setState({showResetAllConfirmation: false})}}>Cancel</Button>
+                            </Stack>
+                        </Modal.Body>
+                    </div>
+                </Modal>
             </div>
         );
     }

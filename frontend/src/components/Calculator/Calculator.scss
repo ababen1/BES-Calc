@@ -234,3 +234,12 @@
     }
 
 }
+
+.reset-all-confirmation {
+    background-color: theme.$bes-blue-color;
+    text-align: center;
+    color: white;
+    .hstack {
+        display: inherit;
+    }
+}
