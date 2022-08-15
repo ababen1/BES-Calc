@@ -28,7 +28,7 @@ class Header extends Component {
         axios(configs)
             .then((result) => {
                 if (result.data.success) {
-                    this.setState({username: result.data.data.username})
+                    this.setState({ username: result.data.data.username })
                 }
             })
             .catch((error) => { console.log(error) })
@@ -38,16 +38,18 @@ class Header extends Component {
         return (
             <div className="header">
                 <LoginSignUp ref={this.login_signup_ref} />
-                <Stack direction="horizontal">
-                    <div className="BES-logo">
-                        <Image src={this.props.logo} />
-                    </div>
-                    <div className="ms-auto login-icon">
-                        <Image src={this.props.login_icon} roundedCircle="true" width="50"
-                            onClick={(e) => { this.login_signup_ref.current.toggle_modal() }} /> <br />
-                        <span>{this.state.username != "" ? this.state.username : "Login"}</span>
-                    </div>
-                </Stack>
+                <div className="logo-and-login-section">
+                    <Stack direction="horizontal">
+                        <div className="BES-logo">
+                            <Image src={this.props.logo} />
+                        </div>
+                        <div className="ms-auto login-icon">
+                            <Image src={this.props.login_icon} roundedCircle="true" width="50"
+                                onClick={(e) => { this.login_signup_ref.current.toggle_modal() }} /> <br />
+                            <span>{this.state.username != "" ? this.state.username : "Login"}</span>
+                        </div>
+                    </Stack>
+                </div>
                 <Stack className='electric-cables-title' >
                     <h1>Electric Cables Cross Section Calculations</h1>
                 </Stack>

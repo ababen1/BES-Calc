@@ -9,10 +9,10 @@
 }
 
 .main-container {
-    @include make-container();
-    padding-top: 3%;
+    @include make-container(0);
     width: 80%;
     align-items: center;
+    height: 100%;
 }
 
 .customer-info {
@@ -96,6 +96,7 @@
         width: $width;
         display: flex;
         align-items: center;
+        justify-items: center;
         flex-grow: 1;
         font-size: 18px;
     }
@@ -150,9 +151,29 @@
     }
 
     .results {
+        @include calc-field(5rem);
+    }
+
+    .smm2 {
         @include calc-field(7rem);
-        flex-direction: column;
-        line-height: 1rem;
+    }
+
+    .smm2-default {
+        color: #828282;
+
+    }
+
+    .smm2-bold {
+        color: #156982;
+        font-weight: bold;
+        font-size: 22;
+    }
+
+    .result-text {
+        color: black;
+        &:empty {
+            color: #828282;
+        }
     }
 
 

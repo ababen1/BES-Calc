@@ -48,6 +48,20 @@ class Calculator extends Component {
         }
     }
 
+    FormatResult(result, defaultText, asInt = false) {
+        if (result === undefined || result === "") {
+            return (defaultText);
+        } else if(!isNaN(result)) {
+            if (asInt) {
+                return parseInt(result);
+            } else{
+                return parseFloat(result).toFixed(2);
+            }
+        } else {
+            return result
+        }
+    }
+
     ResetCalc() {
         this.setState(this.getInitialState());
     }
@@ -184,25 +198,26 @@ class Calculator extends Component {
                             <div className="vline"></div>
                         </ListGroup.Item>
 
-                        <ListGroup.Item className="results">
-                            <p className="data-result-title">Reserve(%)</p>
-                            <p className="data-result-text">{String(this.state.reserve).substring(0, 8)}</p>
+                        <ListGroup.Item className="results reserve" style={{"color": (this.state.reserve === "") ? "#828282" : "#000000"}}>
+                            {this.FormatResult(this.state.reserve, "Reserve(%)")}
                         </ListGroup.Item>
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-                        <ListGroup.Item className="results">
-                            <p className="data-result-title">Imax</p>
-                            <p className="data-result-text">{String(this.state.imax).substring(0, 8)}</p>
-                        </ListGroup.Item>
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-                        <ListGroup.Item className="results smm2">
-                            <p className="data-result-title">S[mm^2]</p>
-                            <p className="data-result-text">{String(this.state.smm2)}</p>
 
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
                         </ListGroup.Item>
+
+                        <ListGroup.Item className="results imax" style={{"color": (this.state.reserve === "") ? "#828282" : "#000000"}}>
+                            {this.FormatResult(this.state.imax, "Imax", true)}
+                        </ListGroup.Item>
+
+                        <ListGroup.Item className="seperator">
+                            <div className="vline"></div>
+                        </ListGroup.Item>
+
+                        <ListGroup.Item className={(this.state.smm2 == "") ? "results smm2 smm2-default" : "results smm2 smm2-bold"}>
+                            {this.FormatResult(this.state.smm2, "S[Mm^2]")}
+                        </ListGroup.Item>
+
                         {(this.props.count !== 0) ?
                             <div className="delete-row">
                                 <CloseButton onClick={this.props.OnDeleteCalc.bind(this, this.props.count - 1)}></CloseButton>
