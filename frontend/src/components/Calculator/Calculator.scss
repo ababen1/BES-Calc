@@ -115,6 +115,7 @@
         justify-content: center;
         background-color: #156982;
         color: white;
+
         span {
             font-family: open_sans_condensed_light;
             font-size: 30px;
@@ -136,10 +137,17 @@
 
     .description {
         @include calc-field(250px);
+        padding: 5px;
 
         textarea {
             resize: none;
+            height: 25px;
+            margin-right: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
+
     }
 
     .power-kw {
@@ -179,6 +187,7 @@
 
     .result-text {
         color: black;
+
         &:empty {
             color: #828282;
         }
@@ -268,6 +277,7 @@
     background-color: theme.$bes-blue-color;
     text-align: center;
     color: white;
+
     .hstack {
         display: inherit;
     }
