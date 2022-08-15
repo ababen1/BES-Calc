@@ -8,6 +8,11 @@
     margin-left: auto;
 }
 
+@font-face {
+    font-family: 'open_sans_condensed_light';
+    src: url('../../Assets/Fonts/OpenSans_Condensed-Light.ttf');
+}
+
 .main-container {
     @include make-container(0);
     width: 80%;
@@ -104,13 +109,16 @@
     .calc-number {
         /* UI Properties */
         @include calc-field(3rem);
-        font: normal normal 300 30px/68px Open Sans;
         border: 0px solid rgba(0, 0, 0, 0.125);
         letter-spacing: 0px;
         border-radius: 0px;
         justify-content: center;
         background-color: #156982;
         color: white;
+        span {
+            font-family: open_sans_condensed_light;
+            font-size: 30px;
+        }
     }
 
     .seperator {
