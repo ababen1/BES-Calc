@@ -92,10 +92,10 @@ class CalculatorContainer extends Component {
 
         // update the data to be correct with the current calc's index
         let idx = updated_calcs.length + 1
-        if (data['wire'] !== '')
-            data[`wire`] = data[`wire`].substring(0, data['wire'].indexOf('#')) + '#' + idx
-        if (data['cable'] !== '')
-            data[`cable`] = data[`cable`].substring(0, data['cable'].indexOf('#')) + '#' + idx
+        // if (data['wire'] !== "not selected")
+        //     data[`wire`] = data[`wire`].substring(0, data['wire'].indexOf('#')) + '#' + idx
+        // if (data['cable'] !== "not selected")
+        //     data[`cable`] = data[`cable`].substring(0, data['cable'].indexOf('#')) + '#' + idx
 
         updated_calcs.push(data);
         this.setState({ calculatorsData: updated_calcs });
@@ -140,61 +140,38 @@ class CalculatorContainer extends Component {
             <div>
                 {(this.state.calculatorsData.length !== 0) ?
                     <Stack direction="horizontal" className="reference-row">
-                        <div className={"description"}>
+                        <div style={{width: "3rem"}}></div>
+                        <div style={{width: "400px", textAlign: "center"}}>
                             Description
                         </div>
 
-                        <div className="seperator">
-                            <div className="vline"></div>
-                        </div>
-
-                        <div className="power-kw">
+                        <div style={{width: "130px", textAlign: "center"}}>
                             Power[KW]
                         </div>
 
-                        <div className="seperator">
-                            <div className="vline"></div>
-                        </div>
-
-                        <div className="cable">
+                        <div style={{width: "130px", textAlign: "center"}}>
                             Al / Cu
                         </div>
 
-                        <div className="seperator">
-                            <div className="vline"></div>
-                        </div>
-
-                        <div className="wire" style={{ width: "8rem" }}>
+                        <div style={{width: "200px", textAlign: "center"}}>
                             Single / 3 Wire
                         </div>
 
-                        <div className="seperator">
-                            <div className="vline"></div>
-                        </div>
-
-                        <div className="ampacity">
+                        <div style={{width: "169px", textAlign: "center"}}>
                             Amp
                         </div>
 
-                        <div className="seperator">
-                            <div className="vline"></div>
-                        </div>
-
-                        <div className="results">
+                        <div style={{width: "137px", textAlign: "center"}}>
                             Reserve(%)
 
                         </div>
-                        <div className="seperator">
-                            <div className="vline"></div>
-                        </div>
-                        <div className="results">
+                       
+                        <div style={{width: "137px", textAlign: "center"}}>
                             Imax
 
                         </div>
-                        <div className="seperator">
-                            <div className="vline"></div>
-                        </div>
-                        <div className="results smm2">
+                        
+                        <div style={{width: "137px", textAlign: "center"}}>
                             S[mm^2]
                         </div>
                     </Stack >
@@ -216,6 +193,7 @@ class CalculatorContainer extends Component {
                             count={index + 1}
                             data={value}
                             factor={this.state.factor}
+                            editable={false}
                         />)}
                 </div>
                 <br />

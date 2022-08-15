@@ -20,10 +20,6 @@ class CalculatorPage extends Component {
         resetDisabled: true,
     }
 
-    componentDidMount() {
-
-    }
-
     OnFocusBolderFont(ev) {
         this.setState({ name: "bold" });
     }
@@ -35,23 +31,27 @@ class CalculatorPage extends Component {
     //clicking on calculator adding to array in state
     OnAddCalculator() {
         const data = this.main_calc_ref.current.state;
-        this.calculators_container_ref.current.AddCalculator(data);
+        if (data.ampacity === "") {
+            // TODO: add a better way to notify this
+            alert("please enter ampacity")
+        } else {
+            this.calculators_container_ref.current.AddCalculator(data);
+        }
     }
 
     OnResetCalculator() {
         const main_calc = this.main_calc_ref.current;
         main_calc.ResetCalc()
-        this.setState({resetDisabled: true})
+        this.setState({ resetDisabled: true })
     }
 
     OnDeleteCalc(idx) {
         this.calculators_container_ref.current.DeleteCalculator(idx);
     }
 
-    updateResetBtn() {
-        this.setState({resetDisabled: this.main_calc_ref.current.IsEmpty()})
+    updateButtons() {
+        this.setState({ resetDisabled: this.main_calc_ref.current.IsEmpty() })
     }
-
 
     render() {
 
@@ -72,8 +72,8 @@ class CalculatorPage extends Component {
 
 
                 <br />
-                <div className="calcs-list" onChange={this.updateResetBtn.bind(this)}>
-                    <Calculator key="main" ref={this.main_calc_ref} count={0}></Calculator>
+                <div className="calcs-list" onChange={this.updateButtons.bind(this)}>
+                    <Calculator key="main" ref={this.main_calc_ref} count={0} editable={true}></Calculator>
                 </div>
                 <br />
                 <Stack direction="horizontal" style={{ "justifyContent": "space-between" }}>
@@ -82,11 +82,17 @@ class CalculatorPage extends Component {
                         size="lg"
                         id="reset_calculation_btn"
                         onClick={this.OnResetCalculator.bind(this)}
-                        disabled ={this.state.resetDisabled}>
+                        disabled={this.state.resetDisabled}>
                         <span className="icon"></span>
                         <span>Reset</span>
                     </button>
-                    <Button className="add-row-btn" size="lg" id="add_row_btn" onClick={this.OnAddCalculator.bind(this)}>Add Row</Button>
+                    <Button
+                        className="add-row-btn"
+                        disabled={this.state.addRowDisabled}
+                        size="lg"
+                        id="add_row_btn"
+                        onClick={this.OnAddCalculator.bind(this)}>Add Row
+                    </Button>
                 </Stack>
                 <br />
                 <CalculatorContainer ref={this.calculators_container_ref} />

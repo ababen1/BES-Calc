@@ -39,9 +39,9 @@ class Calculator extends Component {
         return {
             description: "",
             ampacity: "",
-            power: "",
-            cable: "",
-            wire: "",
+            power: "not selected",
+            cable: "not selected",
+            wire: "not selected",
             imax: "",
             reserve: "",
             smm2: "",
@@ -51,10 +51,10 @@ class Calculator extends Component {
     FormatResult(result, defaultText, asInt = false) {
         if (result === undefined || result === "") {
             return (defaultText);
-        } else if(!isNaN(result)) {
+        } else if (!isNaN(result)) {
             if (asInt) {
                 return parseInt(result);
-            } else{
+            } else {
                 return parseFloat(result).toFixed(2);
             }
         } else {
@@ -100,7 +100,7 @@ class Calculator extends Component {
                         <div className="calc-number">
                             <span >{(this.props.count === 0) ? "+" : this.props.count}</span>
                         </div>
-                        <ListGroup.Item className={"description"}>
+                        <ListGroup.Item className={this.props.editable ? "description" : "description long"}>
                             <Form.Control as="textarea"
                                 type="text" value={this.state.description}
                                 onChange={this.OnChangeHandlerDescription.bind(this)}
@@ -112,28 +112,29 @@ class Calculator extends Component {
                         </ListGroup.Item>
 
                         <ListGroup.Item className="power-kw">
-                            <Form.Select
-                                value={this.state.power}
-                                onChange={(ev) => { this.setState({ "power": ev.target.value }); }}>
-                                <option>power KW</option>
-                                <option>15</option>
-                                <option>18.5</option>
-                                <option>22</option>
-                                <option>30</option>
-                                <option>37</option>
-                                <option>45</option>
-                                <option>55</option>
-                                <option>75</option>
-                                <option>90</option>
-                                <option>110</option>
-                                <option>132</option>
-                                <option>160</option>
-                                <option>200</option>
-                                <option>250</option>
-                                <option>280</option>
-                                <option>315</option>
-                                <option>355</option>
-                            </Form.Select>
+                            {this.props.editable ?
+                                <Form.Select
+                                    value={this.state.power}
+                                    onChange={(ev) => { this.setState({ "power": ev.target.value }); }}>
+                                    <option>power KW</option>
+                                    <option>15</option>
+                                    <option>18.5</option>
+                                    <option>22</option>
+                                    <option>30</option>
+                                    <option>37</option>
+                                    <option>45</option>
+                                    <option>55</option>
+                                    <option>75</option>
+                                    <option>90</option>
+                                    <option>110</option>
+                                    <option>132</option>
+                                    <option>160</option>
+                                    <option>200</option>
+                                    <option>250</option>
+                                    <option>280</option>
+                                    <option>315</option>
+                                    <option>355</option>
+                                </Form.Select> : this.state.power}
                         </ListGroup.Item>
 
                         <ListGroup.Item className="seperator">
@@ -141,21 +142,26 @@ class Calculator extends Component {
                         </ListGroup.Item>
 
                         <ListGroup.Item className="cable">
-                            <Form.Check
-                                name="cable"
-                                inline
-                                id={`al#${this.props.count}`}
-                                label="Al"
-                                type="radio"
-                                checked={this.state.cable === `al#${this.props.count}`} onChange={this.OnCableChange.bind(this)} />
-                            <Form.Check
-                                name="cable"
-                                inline
-                                id={`cu#${this.props.count}`}
-                                label="Cu"
-                                type="radio"
-                                checked={this.state.cable === `cu#${this.props.count}`}
-                                onChange={this.OnCableChange.bind(this)} />
+                            {this.props.editable ?
+                                <div>
+                                    <Form.Check
+                                        name="cable"
+                                        inline
+                                        id={`al`}
+                                        label="Al"
+                                        type="radio"
+                                        checked={this.state.cable === `al`}
+                                        onChange={this.OnCableChange.bind(this)} />
+                                    <Form.Check
+                                        name="cable"
+                                        inline
+                                        id={`cu`}
+                                        label="Cu"
+                                        type="radio"
+                                        checked={this.state.cable === `cu`}
+                                        onChange={this.OnCableChange.bind(this)} />
+                                </div>
+                                : this.state.cable}
                         </ListGroup.Item>
 
                         <ListGroup.Item className="seperator">
@@ -163,22 +169,25 @@ class Calculator extends Component {
                         </ListGroup.Item>
 
                         <ListGroup.Item className="wire">
-                            <Form.Check
-                                name="wire"
-                                inline
-                                id={`single#${this.props.count}`}
-                                label="Single"
-                                type="radio"
-                                checked={this.state.wire === `single#${this.props.count}`}
-                                onChange={this.OnWireChange.bind(this)} />
-                            <Form.Check
-                                name="wire"
-                                inline
-                                id={`3-wire#${this.props.count}`}
-                                label="3 Wire"
-                                type="radio"
-                                checked={this.state.wire === `3-wire#${this.props.count}`}
-                                onChange={this.OnWireChange.bind(this)} />
+                            {this.props.editable ?
+                                <div>
+                                    <Form.Check
+                                        name="wire"
+                                        inline
+                                        id={`single`}
+                                        label="Single"
+                                        type="radio"
+                                        checked={this.state.wire === `single`}
+                                        onChange={this.OnWireChange.bind(this)} />
+                                    <Form.Check
+                                        name="wire"
+                                        inline
+                                        id={`3-wire`}
+                                        label="3 Wire"
+                                        type="radio"
+                                        checked={this.state.wire === `3-wire`}
+                                        onChange={this.OnWireChange.bind(this)} />
+                                </div> : this.state.wire}
                         </ListGroup.Item>
 
                         <ListGroup.Item className="seperator">
@@ -186,19 +195,22 @@ class Calculator extends Component {
                         </ListGroup.Item>
 
                         <ListGroup.Item className="ampacity">
-                            <Form.Control
-                                type={"number"}
-                                name={"ampacity"}
-                                placeholder={"Ampacity"}
-                                value={this.state.ampacity}
-                                onChange={this.OnChangeHandlerAmp.bind(this)} />
+                            {this.props.editable ?
+                                <Form.Control
+                                    required
+                                    type={"number"}
+                                    name={"ampacity"}
+                                    placeholder={"Ampacity"}
+                                    value={this.state.ampacity}
+                                    onChange={this.OnChangeHandlerAmp.bind(this)} />
+                                : this.state.ampacity}
                         </ListGroup.Item>
 
                         <ListGroup.Item className="seperator">
                             <div className="vline"></div>
                         </ListGroup.Item>
 
-                        <ListGroup.Item className="results reserve" style={{"color": (this.state.reserve === "") ? "#828282" : "#000000"}}>
+                        <ListGroup.Item className="results reserve" style={{ "color": (this.state.reserve === "") ? "#828282" : "#000000" }}>
                             {this.FormatResult(this.state.reserve, "Reserve(%)")}
                         </ListGroup.Item>
 
@@ -206,7 +218,7 @@ class Calculator extends Component {
                             <div className="vline"></div>
                         </ListGroup.Item>
 
-                        <ListGroup.Item className="results imax" style={{"color": (this.state.reserve === "") ? "#828282" : "#000000"}}>
+                        <ListGroup.Item className="results imax" style={{ "color": (this.state.reserve === "") ? "#828282" : "#000000" }}>
                             {this.FormatResult(this.state.imax, "Imax", true)}
                         </ListGroup.Item>
 
