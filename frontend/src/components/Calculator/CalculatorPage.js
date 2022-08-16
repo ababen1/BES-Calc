@@ -11,6 +11,7 @@ class CalculatorPage extends Component {
         this.main_calc_ref = React.createRef();
         this.calculators_container_ref = React.createRef();
         this.OnDeleteCalc = this.OnDeleteCalc.bind(this);
+        this.OnAddCalculator = this.OnAddCalculator.bind(this);
     }
 
     state = {
@@ -18,6 +19,7 @@ class CalculatorPage extends Component {
         calculatorRepeatNumber: 0,
         arrCalculators: [],
         resetDisabled: true,
+        mainCalculatorValidated: false,
     }
 
     OnFocusBolderFont(ev) {
@@ -29,13 +31,13 @@ class CalculatorPage extends Component {
     }
 
     //clicking on calculator adding to array in state
-    OnAddCalculator() {
-        const data = this.main_calc_ref.current.state;
+    OnAddCalculator(data) {
         if (data.ampacity === "") {
             // TODO: add a better way to notify this
             alert("please enter ampacity")
         } else {
             this.calculators_container_ref.current.AddCalculator(data);
+            this.OnResetCalculator();
         }
     }
 
@@ -73,7 +75,12 @@ class CalculatorPage extends Component {
 
                 <br />
                 <div className="calcs-list" onChange={this.updateButtons.bind(this)}>
-                    <Calculator key="main" ref={this.main_calc_ref} count={0} editable={true}></Calculator>
+                    <Calculator
+                        key="main"
+                        ref={this.main_calc_ref}
+                        count={0}
+                        editable={true}
+                        addCalc={this.OnAddCalculator}></Calculator>
                 </div>
                 <br />
                 <Stack direction="horizontal" style={{ "justifyContent": "space-between" }}>
@@ -88,10 +95,11 @@ class CalculatorPage extends Component {
                     </button>
                     <Button
                         className="add-row-btn"
-                        disabled={this.state.addRowDisabled}
                         size="lg"
                         id="add_row_btn"
-                        onClick={this.OnAddCalculator.bind(this)}>Add Row
+                        onClick={(e) => {
+                            this.main_calc_ref.current.AddCalculator();
+                        }}>Add Row
                     </Button>
                 </Stack>
                 <br />

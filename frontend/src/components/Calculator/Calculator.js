@@ -45,6 +45,7 @@ class Calculator extends Component {
             imax: "",
             reserve: "",
             smm2: "",
+            formValid: false,
         }
     }
 
@@ -64,9 +65,11 @@ class Calculator extends Component {
 
     ResetCalc() {
         this.setState(this.getInitialState());
+        
     }
 
     Update() {
+        this.calc_form.current.checkValidity();
         if (this.props.OnUpdateCalc) {
             this.props.OnUpdateCalc(this.props.count - 1, this.state);
         }
@@ -92,10 +95,25 @@ class Calculator extends Component {
         this.setState({ "cable": ev.target.id }, this.Update);
     }
 
+    OnSubmit(event) {
+        event.preventDefault();
+        this.AddCalculator();
+    }
+
+    AddCalculator() {
+        const isValid = this.calc_form.current.checkValidity();
+        this.setState({formValid: isValid});
+        if (isValid) {
+            if (this.props.addCalc) {
+                this.props.addCalc(this.state);
+            }
+        }
+    }
+
     render() {
         return (
             <div className="calculator">
-                <Form ref={this.calc_form} onSubmit={(e) => e.preventDefault()}>
+                <Form ref={this.calc_form} onSubmit={this.OnSubmit.bind(this)} noValidate>
                     <ListGroup horizontal>
                         <div className="calc-number">
                             <span >{(this.props.count === 0) ? "+" : this.props.count}</span>
@@ -199,6 +217,7 @@ class Calculator extends Component {
                                 <Form.Control
                                     required
                                     type={"number"}
+                                    step={"any"}
                                     name={"ampacity"}
                                     placeholder={"Ampacity"}
                                     value={this.state.ampacity}
