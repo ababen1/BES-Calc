@@ -2,6 +2,11 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
+@font-face {
+    font-family: 'open_sans_condensed_light';
+    src: url('./Assets/Fonts/OpenSans_Condensed-Light.ttf');
+}
+
 $bes-blue-color: #056e8f;
 $page-background: #edf0f0;
 $dark-gray: #828282;
@@ -37,7 +42,7 @@ $modal-header-border-color: transparent;
     $border-radius: 15px;
 }
 
-* {
+body {
     font-weight: 400;
     font-family: 'Open Sans';
     textarea:focus,
@@ -53,9 +58,7 @@ $modal-header-border-color: transparent;
     [type=tel].form-control:focus,
     [contenteditable].form-control:focus {
         box-shadow: none;
-        border: none;
-        outline: none;
-        color: #000000;
+
     }
 
     textarea:hover,
@@ -71,12 +74,9 @@ $modal-header-border-color: transparent;
     [type=tel].form-control:hover,
     [contenteditable].form-control:hover {
         box-shadow: none;
-        border: none;
-        outline: none;
-        font-weight: 500;
+
     }
 }
-
 
 /* import bootstrap to set changes */
 @import "../node_modules/bootstrap/scss/bootstrap";

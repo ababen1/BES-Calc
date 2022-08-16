@@ -8,11 +8,6 @@
     margin-left: auto;
 }
 
-@font-face {
-    font-family: 'open_sans_condensed_light';
-    src: url('../../Assets/Fonts/OpenSans_Condensed-Light.ttf');
-}
-
 .main-container {
     @include make-container(0);
     width: 80%;

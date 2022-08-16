@@ -1,5 +1,12 @@
 @use 'src/theme.scss';
 
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+  opacity: 1;
+  transform: scale(.95) translateY(-.10rem) translateX(.20rem);
+}
+
 .modal-dialog {
     min-width: 60%;
 }
@@ -28,6 +35,8 @@
         width: 50%;
         background-color: $bg_color;
         color: $color;
+        display: flex;
+        flex-direction: column;
 
     }
 
@@ -36,13 +45,7 @@
         background-color: transparent;
         border-color: $color;
         border-width: 1px;
-
-        input[type=text] {
-            top: 446px;
-            left: 563px;
-            width: 341px;
-            height: 50px;
-        }
+        border-style: solid;
     }
 
     @mixin btns($color_text: theme.$white, $color_bg: theme.$bes-blue-color) {
@@ -68,15 +71,29 @@
 
     .title {
         text-align: center;
+        margin-top: 65px;
+        margin-bottom: 34px;
+        span, h2 {
+            font-family: open sans light;
+            font-weight: 200;
+        }
+        span {
+            font-size: 16px;
+        }
+        h2 {
+            font-size: 50px;
+        }
     }
 
     .login-form,
     .signup-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-left: 57px;
+        margin-right: 57px;
+        margin-bottom: 57px;
         flex-grow: 1;
-
-        button {
-            vertical-align: bottom;
-        }
     }
 
     .login-panel {
@@ -90,6 +107,7 @@
 
         .login-btn {
             @include btns(theme.$bes-blue-color, theme.$white);
+            align-self: center;
         }
 
         .keep-logged-in {
@@ -119,6 +137,7 @@
 
         .signup-btn {
             @include btns(theme.$white, theme.$bes-blue-color);
+            align-self: center;
         }
     }
 }

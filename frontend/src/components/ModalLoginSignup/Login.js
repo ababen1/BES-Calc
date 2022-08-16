@@ -56,51 +56,51 @@ export default function Login() {
                 } else {
                     alert(result.data.error)
                 }
-                
+
             })
             .catch((error) => { console.log(error) })
     }
 
     return (
-        <Container fluid className="login-panel">
-            <Container className="title">
-                welcome back, please
+        <div className="login-panel">
+            <div className="title">
+                <span>welcome back, please</span>
                 <h2>Login</h2>
-            </Container>
+            </div>
             <Form noValidate validated={state.validated} onSubmit={handleSubmit} className="login-form">
-                <Container>
-                    <FloatingLabel label="Your Email" className="mb-3">
-                        <Form.Control
-                            required
-                            type="email"
-                            id="email"
-                            placeholder="name@example.com"
-                            value={state.email}
-                            onChange={handleChange} />
-                    </FloatingLabel>
-                    <FloatingLabel label="Password">
-                        <Form.Control
-                            required
-                            type="password"
-                            id="password"
-                            placeholder="Password"
-                            value={state.password}
-                            onChange={handleChange} />
-                    </FloatingLabel>
-                    <Stack gap={2} direction="horizontal">
-                        <Form.Check
-                            className="keep-logged-in"
-                            type="checkbox"
-                            id="keep_logged_in"
-                            label="Keep me logged in"
-                            checked={state.keep_logged_in}
-                            onChange={(e) => {setState(prevState => ({...prevState, ["keep_logged_in"]: e.target.checked}))}}/>
-                        <Button href="#" className="ms-auto reset-password">Reset Password </Button>
-                    </Stack>
-                </Container>
+
+                <FloatingLabel label="Your Email" className="mb-3">
+                    <Form.Control
+                        required
+                        type="email"
+                        id="email"
+                        placeholder="name@example.com"
+                        value={state.email}
+                        onChange={handleChange} />
+                </FloatingLabel>
+                <FloatingLabel label="Password">
+                    <Form.Control
+                        required
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        value={state.password}
+                        onChange={handleChange} />
+                </FloatingLabel>
+                <Stack direction="horizontal">
+                    <Form.Check
+                        className="keep-logged-in"
+                        type="checkbox"
+                        id="keep_logged_in"
+                        label="Keep me logged in"
+                        checked={state.keep_logged_in}
+                        onChange={(e) => { setState(prevState => ({ ...prevState, ["keep_logged_in"]: e.target.checked })) }} />
+                    <Button href="#" className="ms-auto reset-password">Reset Password </Button>
+                </Stack>
+                <div style={{"flexGrow": 1}}/>
                 <Button size="lg" type="submit" className="login-btn">Log me in</Button>
             </Form>
-        </Container>
+        </div>
     )
 
 }
