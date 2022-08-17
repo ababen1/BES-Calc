@@ -1,12 +1,11 @@
-import { set } from "mongoose";
-import React, { useEffect, useState } from "react";
+import React, {  } from "react";
 import { Modal, Row, Col, Container } from "react-bootstrap";
 import Login from "./Login";
 import Signup from "./Signup";
 
 export default function LoginSignUp(props) {
 
-    const OnHide = function(event) {
+    const OnHide = function(_event) {
         props.setVisible.call(false);
     }
 

@@ -1,7 +1,6 @@
-import React, { Component, useEffect, useState } from "react";
-import { Container, Stack, Image } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Stack, Image } from "react-bootstrap";
 import LoginSignUp from "./ModalLoginSignup/LoginSignUpPopup";
-import Cookies from "universal-cookie";
 import axios from "axios";
 import './HeaderFooter.scss'
 

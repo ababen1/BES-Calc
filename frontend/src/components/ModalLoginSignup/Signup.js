@@ -69,24 +69,33 @@ export default function Signup() {
                 In order to save your calculations, please
                 <h2>Sign up</h2>
             </Container>
-            <Form validated={state.validated} onSubmit={handleSubmit.bind(this)} className="signup-form">
-                <FloatingLabel
-                    label="Your Email"
-                    className="mb-3">
-                    <Form.Control required type="email" placeholder="name@example.com"
-                        value={state.email} onChange={(e) => { setState({ email: e.target.value }) }} />
+            <Form validated={state.validated} onSubmit={handleSubmit} className="signup-form">
+                <FloatingLabel label="Your Email" className="mb-3">
+                    <Form.Control
+                        required
+                        type="email"
+                        placeholder="name@example.com"
+                        value={state.email}
+                        id="email"
+                        onChange={handleChange} />
                 </FloatingLabel>
-                <FloatingLabel
-                    label="Create Username"
-                    className="mb-3">
-                    <Form.Control required type="text" placeholder="username"
-                        value={state.username} onChange={(e) => {setState({ username: e.target.value }) }} />
+                <FloatingLabel label="Create Username" className="mb-3">
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="username"
+                        id="username"
+                        value={state.username}
+                        onChange={handleChange} />
                 </FloatingLabel>
-                <FloatingLabel
-                    label="Create Password"
-                    className="mb-3">
-                    <Form.Control required type="password" placeholder="pass"
-                        value={state.password} onChange={(e) => {setState({ password: e.target.value }) }} />
+                <FloatingLabel label="Create Password" className="mb-3">
+                    <Form.Control 
+                    required 
+                    type="password" 
+                    placeholder="pass"
+                    id="password"
+                    value={state.password} 
+                    onChange={handleChange} />
                 </FloatingLabel>
                 <div style={{ "flexGrow": 1 }} />
                 <Button className="signup-btn" type="submit">Sign me up</Button>

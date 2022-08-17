@@ -98,7 +98,7 @@ export default function Login() {
                     <Button href="#" className="ms-auto reset-password">Reset Password </Button>
                 </Stack>
                 <div style={{"flexGrow": 1}}/>
-                <Button type="submit" className="login-btn">Log me in</Button>
+                <Button size="lg" type="submit" className="login-btn">Log me in</Button>
             </Form>
         </div>
     )
