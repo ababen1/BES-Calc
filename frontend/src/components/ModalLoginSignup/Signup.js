@@ -1,78 +1,97 @@
 import axios from "axios";
-import { Component } from "react";
+import e from "cors";
+import { Component, useState, useEffect } from "react";
 import { FloatingLabel, Form, Container, Button } from "react-bootstrap";
 import './LoginSignupModal.scss'
 
-class Signup extends Component {
-    state = {
+export default function Signup() {
+    const [state, setState] = useState({
         validated: false,
         username: "",
         email: "",
-        password: "",
+        password: ""
+    })
+
+
+    const handleChange = function (event) {
+        const id = event.target.id;
+        const value = event.target.value;
+        setState(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
     }
 
-    handleSubmit(event) {
+    const handleSubmit = function (event) {
+        const form = e.currentTarget;
+        const isValid = form.checkValidity();
         event.preventDefault();
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-            event.preventDefault();
-        }
-        else {
-            this.setState({ validated: true },
-                this.callBackendSignup());
+        if (isValid) {
+            setState(prevState => ({
+                ...prevState,
+                validated: isValid
+            }));
+        } else {
+            e.stopPropagation();
         }
     }
 
-    callBackendSignup() {
+    useEffect(() => {
+        if (state.validated) {
+            callBackendLogin();
+        }
+    }, [state.validated])
+
+
+    const callBackendLogin = function () {
+
         const configs = {
             method: "POST",
             base_url: "localhost:8080",
             url: "/signup",
-            data: {
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password
-            }
+            data: state,
         }
         axios(configs)
-            .then((result) => { window.location.reload() })
+            .then((result) => {
+                if (result.data.success) {
+                    sessionStorage.setItem("token", result.data.data.token);
+                    window.location.reload();
+                } else {
+                    alert(result.data.error)
+                }
+
+            })
             .catch((error) => { console.log(error) })
     }
-
-    render() {
-        return (
-            <div className="signup-panel">
-                <Container className="title">
-                    In order to save your calculations, please
-                    <h2>Sign up</h2>
-                </Container>
-                <Form validated={this.state.validated} onSubmit={this.handleSubmit.bind(this)} className="signup-form">
-                    <FloatingLabel
-                        label="Your Email"
-                        className="mb-3">
-                        <Form.Control required type="email" placeholder="name@example.com"
-                            value={this.state.email} onChange={(e) => { this.setState({ email: e.target.value }) }} />
-                    </FloatingLabel>
-                    <FloatingLabel
-                        label="Create Username"
-                        className="mb-3">
-                        <Form.Control required type="text" placeholder="username"
-                            value={this.state.username} onChange={(e) => { this.setState({ username: e.target.value }) }} />
-                    </FloatingLabel>
-                    <FloatingLabel
-                        label="Create Password"
-                        className="mb-3">
-                        <Form.Control required type="password" placeholder="pass"
-                            value={this.state.password} onChange={(e) => { this.setState({ password: e.target.value }) }} />
-                    </FloatingLabel>
-                    <div style={{"flexGrow": 1}}/>
-                    <Button size="lg" className="signup-btn" type="submit">Sign me up</Button>
-                </Form>
-
-            </div>
-        )
-    }
-
+    return (
+        <div className="signup-panel">
+            <Container className="title">
+                In order to save your calculations, please
+                <h2>Sign up</h2>
+            </Container>
+            <Form validated={state.validated} onSubmit={handleSubmit.bind(this)} className="signup-form">
+                <FloatingLabel
+                    label="Your Email"
+                    className="mb-3">
+                    <Form.Control required type="email" placeholder="name@example.com"
+                        value={state.email} onChange={(e) => { setState({ email: e.target.value }) }} />
+                </FloatingLabel>
+                <FloatingLabel
+                    label="Create Username"
+                    className="mb-3">
+                    <Form.Control required type="text" placeholder="username"
+                        value={state.username} onChange={(e) => {setState({ username: e.target.value }) }} />
+                </FloatingLabel>
+                <FloatingLabel
+                    label="Create Password"
+                    className="mb-3">
+                    <Form.Control required type="password" placeholder="pass"
+                        value={state.password} onChange={(e) => {setState({ password: e.target.value }) }} />
+                </FloatingLabel>
+                <div style={{ "flexGrow": 1 }} />
+                <Button className="signup-btn" type="submit">Sign me up</Button>
+            </Form>
+        </div>
+    )
 }
-export default Signup;
+
