@@ -22,10 +22,10 @@ export default function Signup() {
         }));
     }
 
-    const handleSubmit = function (event) {
+    const handleSubmit = function (e) {
         const form = e.currentTarget;
         const isValid = form.checkValidity();
-        event.preventDefault();
+        e.preventDefault();
         if (isValid) {
             setState(prevState => ({
                 ...prevState,
@@ -38,12 +38,12 @@ export default function Signup() {
 
     useEffect(() => {
         if (state.validated) {
-            callBackendLogin();
+            callBackendSignup();
         }
     }, [state.validated])
 
 
-    const callBackendLogin = function () {
+    const callBackendSignup = function () {
 
         const configs = {
             method: "POST",
@@ -54,7 +54,7 @@ export default function Signup() {
         axios(configs)
             .then((result) => {
                 if (result.data.success) {
-                    sessionStorage.setItem("token", result.data.data.token);
+                    sessionStorage.setItem("token", result.data.token);
                     window.location.reload();
                 } else {
                     alert(result.data.error)

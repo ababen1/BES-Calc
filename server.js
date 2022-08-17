@@ -37,15 +37,15 @@ mongoose.connect(
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
     );
     res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, PATCH, OPTIONS"
     );
     next();
-  });
+});
 
 // simple route
 app.get("/", (req, res) => {
@@ -64,15 +64,18 @@ app.post("/signup", (req, res) => {
     else {
         let new_user = new User({
             email: data.email,
-            username: data.username
+            username: data.username,
         });
         new_user.setPassword(data.password);
         new_user.save()
             .then(function () {
                 console.log("new user created");
-                res.json(new_user.toAuthJSON());
+                res.json({
+                    ...new_user.toAuthJSON(),
+                    "success": true
+                });
             })
-            .catch(error => {console.log(error)});
+            .catch(error => { console.log(error) });
     }
 });
 
@@ -111,9 +114,9 @@ app.get("/user", (req, res) => {
     let decoded;
     try {
         decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
-        res.json({"success": true, data: decoded})
-    } catch(err) {
-        res.json({"success": false, error: err})
+        res.json({ "success": true, data: decoded })
+    } catch (err) {
+        res.json({ "success": false, error: err })
     }
 })
 
