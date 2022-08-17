@@ -1,44 +1,32 @@
-import React, { Component } from "react";
-import { Modal, Row, Col, Container, CloseButton } from "react-bootstrap";
+import { set } from "mongoose";
+import React, { useEffect, useState } from "react";
+import { Modal, Row, Col, Container } from "react-bootstrap";
 import Login from "./Login";
 import Signup from "./Signup";
 
-class LoginSignUp extends Component {
+export default function LoginSignUp(props) {
 
-    constructor(props) {
-        super(props);
+    const OnHide = function(event) {
+        props.setVisible.call(false);
     }
 
-    state = {
-        visible: false,
-    };
+    return (
+        <Modal show={props.visible} onHide={OnHide} centered dialogClassName="modal-dialog">
+            <Modal.Header className="login-modal-header" closeButton>
+            </Modal.Header>
+            <Modal.Body>
+                <Container fluid className="login-signup-modal">
+                    <Row>
+                        <Col>
+                            <Login />
+                        </Col>
+                        <Col>
+                            <Signup />
+                        </Col>
+                    </Row>
+                </Container>
 
-    toggle_modal() {
-        this.setState({ visible: !this.state.visible });
-    }
-
-    render() {
-        return (
-            <Modal show={this.state.visible} onHide={this.toggle_modal.bind(this)} centered dialogClassName="modal-dialog">
-                <Modal.Header className="login-modal-header" closeButton>
-                </Modal.Header>
-                <Modal.Body>
-                    <Container fluid className="login-signup-modal">
-                        <Row>
-                            <Col>
-                                <Login />
-                            </Col>
-                            <Col>
-                                <Signup />
-                            </Col>
-                        </Row>
-                    </Container>
-
-                </Modal.Body>
-            </Modal>
-        );
-    }
+            </Modal.Body>
+        </Modal>
+    )
 }
-
-
-export default LoginSignUp;
