@@ -1,7 +1,6 @@
 import { Component, React } from "react";
 import 'react-loading-skeleton/dist/skeleton.css';
 import CalculatorPage from "./components/Calculator/CalculatorPage";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import logo from './Assets/Group 35.svg'
 import login_icon from "./Assets/login_icon.svg";
