@@ -42,6 +42,9 @@ $modal-content-border-color: transparent;
 $modal-title-padding: 0;
 $modal-header-border-color: transparent;
 
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+
 @mixin button() {
     color: $white;
     font-family: "Open Sans";
@@ -53,20 +56,20 @@ $modal-header-border-color: transparent;
     min-height: 60px;
 }
 
-button {
+.btn {
     @include button(); 
     background-color: $bes-blue-color;
     border-color: $bes-blue-color;
     font-weight: bold;
 }
 
-button:disabled {
+.btn:disabled {
     @include button();
     background-color: #C3C1C1;
     border-color: #888787;
 }
 
-button:hover {
+.btn:hover {
     @include button();
     background-color: #888787;
     border-color: #888787;
@@ -110,4 +113,3 @@ body {
     }
 }
 
-@import "../node_modules/bootstrap/scss/bootstrap";

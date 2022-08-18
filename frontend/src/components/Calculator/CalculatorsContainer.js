@@ -209,8 +209,8 @@ class CalculatorContainer extends Component {
                     </button>
                     <div style={{ "flexGrow": 1 }}></div>
 
-                    <button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</button>
-                    <button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</button>
+                    <Button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</Button>
+                    <Button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</Button>
 
                 </Stack>
 
