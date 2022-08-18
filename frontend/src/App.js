@@ -1,14 +1,14 @@
 import { Component, React } from "react";
 import 'react-loading-skeleton/dist/skeleton.css';
 import CalculatorPage from "./components/Calculator/CalculatorPage";
-import Container from 'react-bootstrap/Container'
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import logo from './Assets/Group 35.svg'
 import login_icon from "./Assets/login_icon.svg";
 import UserContext from "./components/context";
 import {Switch, Route} from "react-router-dom"
 import Footer from "./components/Footer";
+
 
 class App extends Component {
     state = {

@@ -7,6 +7,11 @@
     src: url('./Assets/Fonts/OpenSans_Condensed-Light.ttf');
 }
 
+@font-face {
+    font-family: 'OpenSansLight';
+    src: url('./Assets/Fonts/OpenSans-Light.ttf');
+}
+
 $bes-blue-color: #056e8f;
 $page-background: #edf0f0;
 $dark-gray: #828282;
@@ -43,8 +48,8 @@ $modal-header-border-color: transparent;
 }
 
 body {
+    font-family: "OpenSansLight" !important;
     font-weight: 400;
-    font-family: 'Open Sans';
     textarea:focus,
     textarea.form-control:focus,
     input.form-control:focus,
