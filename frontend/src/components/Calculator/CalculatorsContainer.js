@@ -209,8 +209,8 @@ class CalculatorContainer extends Component {
                     </button>
                     <div style={{ "flexGrow": 1 }}></div>
 
-                    <Button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</Button>
-                    <Button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</Button>
+                    <button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</button>
+                    <button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</button>
 
                 </Stack>
 
@@ -221,8 +221,8 @@ class CalculatorContainer extends Component {
                         </Modal.Title>
                         <Modal.Body>
                             <Stack direction="horizontal" gap={5}>
-                                <Button onClick={this.OnResetAll.bind(this)}>OK</Button>
-                                <Button onClick={e => {this.setState({showResetAllConfirmation: false})}}>Cancel</Button>
+                                <button onClick={this.OnResetAll.bind(this)}>OK</button>
+                                <button onClick={_e => {this.setState({showResetAllConfirmation: false})}}>Cancel</button>
                             </Stack>
                         </Modal.Body>
                     </div>

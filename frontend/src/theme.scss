@@ -42,16 +42,37 @@ $modal-content-border-color: transparent;
 $modal-title-padding: 0;
 $modal-header-border-color: transparent;
 
-button {
-    background-color: $bes-blue-color;
+@mixin button() {
     color: $white;
     font-family: "Open Sans";
-    font-weight: bold;
     font-size: 24px;
     text-align: center;
-    border: 0.7px solid $bes-blue-color;
-    border-radius: 15px;
+    border: 0.7px solid;
+    border-radius: 15px !important;
+    min-width: 200px;
+    min-height: 60px;
 }
+
+button {
+    @include button(); 
+    background-color: $bes-blue-color;
+    border-color: $bes-blue-color;
+    font-weight: bold;
+}
+
+button:disabled {
+    @include button();
+    background-color: #C3C1C1;
+    border-color: #888787;
+}
+
+button:hover {
+    @include button();
+    background-color: #888787;
+    border-color: #888787;
+}
+
+
 
 body {
     font-family: "OpenSansLight" !important;

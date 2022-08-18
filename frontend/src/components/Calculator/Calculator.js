@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Calculator.scss";
-import { ListGroup, Row, Form, FormControl, Container, InputGroup, CloseButton, ListGroupItem } from "react-bootstrap";
+import { ListGroup, Form, CloseButton } from "react-bootstrap";
 
 const IMAX_VALUES = {
     111: "5 x 16",

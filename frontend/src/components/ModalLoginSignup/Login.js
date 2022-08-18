@@ -95,10 +95,10 @@ export default function Login() {
                         label="Keep me logged in"
                         checked={state.keep_logged_in}
                         onChange={(e) => { setState(prevState => ({ ...prevState, ["keep_logged_in"]: e.target.checked })) }} />
-                    <Button href="#" className="ms-auto reset-password">Reset Password </Button>
+                    <button href="#" className="ms-auto reset-password">Reset Password </button>
                 </Stack>
                 <div style={{"flexGrow": 1}}/>
-                <Button type="submit" className="login-btn">Log me in</Button>
+                <button type="submit" className="login-btn">Log me in</button>
             </Form>
         </div>
     )

@@ -98,7 +98,7 @@ export default function Signup() {
                     onChange={handleChange} />
                 </FloatingLabel>
                 <div style={{ "flexGrow": 1 }} />
-                <Button className="signup-btn" type="submit">Sign me up</Button>
+                <button className="signup-btn" type="submit">Sign me up</button>
             </Form>
         </div>
     )

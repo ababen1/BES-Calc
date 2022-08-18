@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Calculator from "./Calculator";
 import "./Calculator.scss";
-import { Form, Container, Row, Col, Button, Stack } from "react-bootstrap";
+import { Form, Button, Stack } from "react-bootstrap";
 import CalculatorContainer from "./CalculatorsContainer";
 
 class CalculatorPage extends Component {
@@ -93,14 +93,13 @@ class CalculatorPage extends Component {
                         <span className="icon"></span>
                         <span>Reset</span>
                     </button>
-                    <Button
-                        className="add-row-btn"
+                    <button
                         size="lg"
                         id="add_row_btn"
                         onClick={(e) => {
                             this.main_calc_ref.current.AddCalculator();
                         }}>Add Row
-                    </Button>
+                    </button>
                 </Stack>
                 <br />
                 <CalculatorContainer ref={this.calculators_container_ref} />
