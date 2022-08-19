@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Stack, Button, Modal } from "react-bootstrap";
 import Calculator from "./Calculator";
 import "./Calculator.scss"
@@ -46,25 +46,16 @@ function GetImax(amp, factor) {
     return imaxValues[imaxValues.length - 1];
 }
 
-class CalculatorContainer extends Component {
+export default function CalculatorContainer(props) {
+    const [calcsData, setCalcsData] = useState([]);
+    const [canSave, setCanSave] = useState(false);
+    const [showResetWarning, setShowResetWarning] = useState(false);
 
-    constructor(props) {
-        super(props);
-        this.DeleteCalculator = this.DeleteCalculator.bind(this);
-        this.UpdateCalculator = this.UpdateCalculator.bind(this);
-    }
-
-    state = {
-        calculatorsData: [],
-        canSave: false,
-        showResetAllConfirmation: false,
-    }
-
-    CalculateAll() {
+    const CalculateAll = function () {
         let newCalcsList = [];
         let factor = this.GetFactorCorrection();
         let canSaveCalculation = true;
-        for (let calcData of this.state.calculatorsData) {
+        for (let calcData of calcsData) {
             // Calculate imax, reserve and smm2
             let imax = GetImax(calcData.ampacity, factor);
             if (!isNaN(imax)) {
@@ -78,157 +69,157 @@ class CalculatorContainer extends Component {
             newCalcsList.push(calcData);
         }
 
-        this.UpdateCalculators(newCalcsList);
-        this.setState({ canSave: canSaveCalculation });
+        setCalcsData(newCalcsList);
+        setCanSave(canSaveCalculation);
     }
 
-    GetFactorCorrection() {
+    const GetFactorCorrection = function () {
         const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-        return FACTOR_CORRECTION_VALUES[parseInt(clamp(this.state.calculatorsData.length - 1, 0, 5))];
+        return FACTOR_CORRECTION_VALUES[parseInt(clamp(calcsData.length - 1, 0, 5))];
     }
 
-    AddCalculator(data) {
-        let updated_calcs = this.state.calculatorsData;
+    const AddCalculator = function (data) {
+        let updated_calcs = calcsData;
 
         // update the data to be correct with the current calc's index
-        let idx = updated_calcs.length + 1
+        // let idx = updated_calcs.length + 1
         // if (data['wire'] !== "not selected")
         //     data[`wire`] = data[`wire`].substring(0, data['wire'].indexOf('#')) + '#' + idx
         // if (data['cable'] !== "not selected")
         //     data[`cable`] = data[`cable`].substring(0, data['cable'].indexOf('#')) + '#' + idx
 
         updated_calcs.push(data);
-        this.setState({ calculatorsData: updated_calcs });
+        setCalcsData(updated_calcs);
     }
 
-    AddCalculators(data_array) {
+    const AddCalculators = function (data_array) {
         data_array.forEach(element => {
-            this.AddCalculator(element);
+            AddCalculator(element);
         });
     }
 
-    UpdateCalculators(newCalcsData) {
-        this.setState({ calculatorsData: [] }, () => { this.AddCalculators(newCalcsData) });
+    // UpdateCalculators(newCalcsData) {
+    //     this.setState({ calculatorsData: [] }, () => { this.AddCalculators(newCalcsData) });
+    // }
+
+    const UpdateCalculator = function (idx, data) {
+        let newCalcList = calcsData;
+        newCalcList[idx] = data;
+        setCalcsData(newCalcList);
     }
 
-    UpdateCalculator(idx, data) {
-        let calcList = this.state.calculatorsData;
-        calcList[idx] = data;
-        this.setState({ calculatorsData: calcList });
-    }
-
-    DeleteCalculator(idx) {
-        let calcsList = this.state.calculatorsData;
+    const DeleteCalculator = function (idx) {
+        let calcsList = calcsData;
         let newList = [];
         for (let index = 0; index < calcsList.length; index++) {
             if (index != idx) {
                 newList.push(calcsList[index]);
             }
         }
-        this.UpdateCalculators(newList);
+        setCalcsData(newList);
     }
 
-    OnResetAll() {
-        this.setState({
-            calculatorsData: [],
-            showResetAllConfirmation: false,
-        })
+    const OnResetAll = function () {
+        setCalcsData([]);
+        setShowResetWarning(false);
     }
 
-    render() {
-        return (
-            <div>
-                {(this.state.calculatorsData.length !== 0) ?
-                    <Stack direction="horizontal" className="reference-row">
-                        <div style={{width: "3rem"}}></div>
-                        <div style={{width: "400px", textAlign: "center"}}>
-                            Description
-                        </div>
-
-                        <div style={{width: "130px", textAlign: "center"}}>
-                            Power[KW]
-                        </div>
-
-                        <div style={{width: "130px", textAlign: "center"}}>
-                            Al / Cu
-                        </div>
-
-                        <div style={{width: "200px", textAlign: "center"}}>
-                            Single / 3 Wire
-                        </div>
-
-                        <div style={{width: "169px", textAlign: "center"}}>
-                            Amp
-                        </div>
-
-                        <div style={{width: "137px", textAlign: "center"}}>
-                            Reserve(%)
-
-                        </div>
-                       
-                        <div style={{width: "137px", textAlign: "center"}}>
-                            Imax
-
-                        </div>
-                        
-                        <div style={{width: "137px", textAlign: "center"}}>
-                            S[mm^2]
-                        </div>
-                    </Stack >
-                    : ""}
-
-
-
-
-
-
-
-
-                <div className="calcs-list">
-                    {this.state.calculatorsData.map((value, index) =>
-                        <Calculator
-                            key={index}
-                            OnDeleteCalc={this.DeleteCalculator}
-                            OnUpdateCalc={this.UpdateCalculator}
-                            count={index + 1}
-                            data={value}
-                            factor={this.state.factor}
-                            editable={false}
-                        />)}
-                </div>
-                <br />
-
-                <Stack direction="horizontal" gap={2} style={{ "justifyContent": "flex-end" }}>
-                    <button
-                        className="reset-btn"
-                        size="lg"
-                        disabled={this.state.calculatorsData.length === 0}
-                        onClick={(e) => { this.setState({ showResetAllConfirmation: true }) }}>
-                        <span className="icon"></span>
-                        <span>Reset All</span>
-                    </button>
-                    <div style={{ "flexGrow": 1 }}></div>
-
-                    <Button onClick={this.CalculateAll.bind(this)} disabled={this.state.calculatorsData.length == 0} variant="primary" size="lg" id="calculate_btn">Calculate</Button>
-                    <Button disabled={!this.state.canSave} variant="primary" size="lg" id="save_calculation_btn">Save</Button>
-
-                </Stack>
-
-                <Modal onHide={e => {this.setState({showResetAllConfirmation: false})}} show={this.state.showResetAllConfirmation}>
-                    <div className="reset-all-confirmation">
-                        <Modal.Title>
-                            Reset all calculators?
-                        </Modal.Title>
-                        <Modal.Body>
-                            <Stack direction="horizontal" gap={5}>
-                                <button onClick={this.OnResetAll.bind(this)}>OK</button>
-                                <button onClick={_e => {this.setState({showResetAllConfirmation: false})}}>Cancel</button>
-                            </Stack>
-                        </Modal.Body>
+    return (
+        <div>
+            {(calcsData.length !== 0) ?
+                <Stack direction="horizontal" className="reference-row">
+                    <div style={{ width: "3rem" }}></div>
+                    <div style={{ width: "400px", textAlign: "center" }}>
+                        Description
                     </div>
-                </Modal>
+
+                    <div style={{ width: "130px", textAlign: "center" }}>
+                        Power[KW]
+                    </div>
+
+                    <div style={{ width: "130px", textAlign: "center" }}>
+                        Al / Cu
+                    </div>
+
+                    <div style={{ width: "200px", textAlign: "center" }}>
+                        Single / 3 Wire
+                    </div>
+
+                    <div style={{ width: "169px", textAlign: "center" }}>
+                        Amp
+                    </div>
+
+                    <div style={{ width: "137px", textAlign: "center" }}>
+                        Reserve(%)
+
+                    </div>
+
+                    <div style={{ width: "137px", textAlign: "center" }}>
+                        Imax
+
+                    </div>
+
+                    <div style={{ width: "137px", textAlign: "center" }}>
+                        S[mm^2]
+                    </div>
+                </Stack >
+                : ""}
+
+            <div className="calcs-list">
+                {calcsData.map((value, index) =>
+                    <Calculator
+                        key={index}
+                        OnDeleteCalc={DeleteCalculator}
+                        OnUpdateCalc={UpdateCalculator}
+                        count={index + 1}
+                        data={value}
+                        editable={false}
+                    />)}
             </div>
-        );
-    }
+
+            <br />
+
+            <Stack direction="horizontal" gap={2} style={{ "justifyContent": "flex-end" }}>
+                <button
+                    className="reset-btn"
+                    size="lg"
+                    disabled={calcsData.length === 0}
+                    onClick={(e) => (setShowResetWarning(true))}>
+                    <span className="icon"></span>
+                    <span>Reset All</span>
+                </button>
+
+                <div style={{ "flexGrow": 1 }}></div>
+
+                <Button
+                    onClick={CalculateAll}
+                    disabled={calcsData.length == 0}
+                    variant="primary"
+                    size="lg"
+                    id="calculate_btn">Calculate
+                </Button>
+                <Button
+                    disabled={!canSave}
+                    variant="primary"
+                    size="lg"
+                    id="save_calculation_btn">Save
+                </Button>
+            </Stack>
+
+            <Modal onHide={e => { setShowResetWarning(false) }} show={showResetWarning}>
+                <div className="reset-all-confirmation">
+                    <Modal.Title>
+                        Reset all calculators?
+                    </Modal.Title>
+                    <Modal.Body>
+                        <Stack direction="horizontal" gap={5}>
+                            <button onClick={OnResetAll}>OK</button>
+                            <button onClick={_e => { setShowResetWarning(false) }}>Cancel</button>
+                        </Stack>
+                    </Modal.Body>
+                </div>
+            </Modal>
+        </div>
+    );
 }
-export default CalculatorContainer;
+
