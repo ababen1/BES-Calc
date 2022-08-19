@@ -75,7 +75,11 @@ $modal-header-border-color: transparent;
     border-color: #888787;
 }
 
-
+.form-floating {
+    label {
+        text-align: initial;
+    }
+}
 
 body {
     font-family: "OpenSansLight" !important;

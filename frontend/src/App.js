@@ -4,8 +4,7 @@ import CalculatorPage from "./components/Calculator/CalculatorPage";
 import Header from './components/Header';
 import logo from './Assets/Group 35.svg'
 import login_icon from "./Assets/login_icon.svg";
-import UserContext from "./components/context";
-import {Switch, Route} from "react-router-dom"
+import { Switch, Route } from "react-router-dom"
 import Footer from "./components/Footer";
 
 
@@ -37,13 +36,11 @@ class App extends Component {
 
     render() {
         return (
-            <UserContext.Provider value={{username: undefined}}>
-                <div className='App'>
-                    <Header logo={logo} login_icon={login_icon} />
-                    <CalculatorPage />
-                    <Footer/>
-                </div>
-            </UserContext.Provider>
+            <div className='App'>
+                <Header logo={logo} login_icon={login_icon} />
+                <CalculatorPage />
+                <Footer />
+            </div>
         );
     }
 

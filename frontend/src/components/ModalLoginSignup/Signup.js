@@ -1,7 +1,6 @@
 import axios from "axios";
-import e from "cors";
-import { Component, useState, useEffect } from "react";
-import { FloatingLabel, Form, Container, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { FloatingLabel, Form, Container } from "react-bootstrap";
 import './LoginSignupModal.scss'
 
 export default function Signup() {

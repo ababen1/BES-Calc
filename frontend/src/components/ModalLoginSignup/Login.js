@@ -1,5 +1,5 @@
 import { Component, useEffect, useState } from "react";
-import { FloatingLabel, Form, Container, Stack, Button } from "react-bootstrap";
+import { FloatingLabel, Form, Container, Stack, Button, NavLink } from "react-bootstrap";
 import './LoginSignupModal.scss'
 import axios from "axios"
 
@@ -95,7 +95,7 @@ export default function Login() {
                         label="Keep me logged in"
                         checked={state.keep_logged_in}
                         onChange={(e) => { setState(prevState => ({ ...prevState, ["keep_logged_in"]: e.target.checked })) }} />
-                    <button href="#" className="ms-auto reset-password">Reset Password </button>
+                    <NavLink href="#" className="ms-auto reset-password">Reset Password </NavLink>
                 </Stack>
                 <div style={{"flexGrow": 1}}/>
                 <button type="submit" className="login-btn">Log me in</button>
