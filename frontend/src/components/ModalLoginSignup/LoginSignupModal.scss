@@ -60,6 +60,7 @@
         background-color: $color_bg;
         color: $color_text;
         border-color: $color_text;
+        border-style: solid;
 
         &:active {
             background-color: $color_text;
