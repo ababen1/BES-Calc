@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { ListGroup, Form, CloseButton } from "react-bootstrap";
 import "./Calculator.scss";
 
