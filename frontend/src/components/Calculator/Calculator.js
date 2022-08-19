@@ -1,20 +1,6 @@
-import React, { useState } from "react";
-import { ListGroup, Form, CloseButton } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { ListGroup, Form, CloseButton, Stack, Button } from "react-bootstrap";
 import "./Calculator.scss";
-
-
-const IMAX_VALUES = {
-    111: "5 x 16",
-    143: "3 x 25 + 16",
-    173: "3 x 35 + 16",
-    205: "3 x 50 + 25",
-    252: "3 x 70 + 35",
-    303: "3 x 95 + 50",
-    346: "3 x 120 + 70",
-    390: "3 x 150 + 70",
-    441: "3 x 185 + 95",
-    551: "3 x 240 + 120",
-}
 
 export default function Calculator(props) {
 
@@ -32,7 +18,12 @@ export default function Calculator(props) {
     }
 
     const [calcData, setCalcData] = useState(GetInitialState());
-    const [formValid, setFormValid] = useState(false);
+
+    useEffect(() => {
+        if (props.data) {
+            setCalcData(props.data);
+        }
+    }, [props.data])
 
     const HandleChange = function (id, value) {
         setCalcData((prevData => ({
@@ -55,54 +46,32 @@ export default function Calculator(props) {
         }
     }
 
-    const ResetCalc = function () {
+    const OnReset = function () {
         setCalcData(GetInitialState());
-        setFormValid(false);
     }
-
-    // Update() {
-    //     this.calc_form.current.checkValidity();
-    //     if (this.props.OnUpdateCalc) {
-    //         this.props.OnUpdateCalc(this.props.count - 1, calcData);
-    //     }
-    // }
 
     const IsEmpty = function () {
-        return calcData === GetInitialState();
+        var isEqualsJson = (obj1, obj2) => {
+            let keys1 = Object.keys(obj1);
+            let keys2 = Object.keys(obj2);
+
+            //return true when the two json has same length and all the properties has same value key by key
+            return keys1.length === keys2.length && Object.keys(obj1).every(key => obj1[key] == obj2[key]);
+        }
+        return isEqualsJson(GetInitialState(), calcData);
     }
-
-    // OnChangeHandlerDescription(ev) {
-    //     this.setState({ description: ev.target.value }, this.Update);
-    // }
-
-    // OnChangeHandlerAmp(ev) {
-    //     this.setState({ ampacity: ev.target.value }, this.Update);
-    // }
-
-    // OnWireChange(ev) {
-    //     this.setState({ "wire": ev.target.id }, this.Update);
-    // }
-
-    // OnCableChange(ev) {
-    //     this.setState({ "cable": ev.target.id }, this.Update);
-    // }
 
     const OnSubmit = function (event) {
         event.preventDefault();
-        if (event.target.current.checkValidity()) {
-            AddCalculator()
-        }
-    }
-
-    const AddCalculator = function () {
-        if (props.addCalc) {
-            props.addCalc.call(calcData);
+        if (event.target.checkValidity()) {
+            props.addCalc(calcData);
+            OnReset();
         }
     }
 
     return (
         <div className="calculator">
-            <Form onSubmit={(e) => OnSubmit(e)} noValidate>
+            <Form onSubmit={OnSubmit} onReset={OnReset} >
                 <ListGroup horizontal>
                     <div className="calc-number">
                         <span >{(props.count === 0) ? "+" : props.count}</span>
@@ -248,6 +217,26 @@ export default function Calculator(props) {
                         </div > : ""}
 
                 </ListGroup>
+
+                {props.editable ?
+                    <div>
+                        <br />
+                        <Stack direction="horizontal" style={{ "justifyContent": "space-between" }}>
+                            <button
+                                className="reset-btn shadow-none"
+                                type="reset"
+                                id="reset_calculation_btn"
+                                disabled={IsEmpty()}>
+                                <span className="icon"></span>
+                                <span>Reset</span>
+                            </button>
+                            <Button
+                                type="submit"
+                                id="add_row_btn">
+                                Add Row
+                            </Button>
+                        </Stack>
+                    </div> : ""}
             </Form>
         </div >
 
