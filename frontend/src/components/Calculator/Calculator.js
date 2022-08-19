@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import "./Calculator.scss";
+import React, { Component, useState } from "react";
 import { ListGroup, Form, CloseButton } from "react-bootstrap";
+import "./Calculator.scss";
+
 
 const IMAX_VALUES = {
     111: "5 x 16",
@@ -15,27 +16,9 @@ const IMAX_VALUES = {
     551: "3 x 240 + 120",
 }
 
-class Calculator extends Component {
+export default function Calculator(props) {
 
-    constructor(props) {
-        super(props);
-        this.calc_form = React.createRef();
-        this.IsEmpty = this.IsEmpty.bind(this);
-        this.state = this.getInitialState();
-        this.Update = this.Update.bind(this);
-    }
-
-    componentDidMount() {
-        this.setState(this.props.data);
-    }
-
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.factor !== this.props.factor) {
-    //         this.setState({ factor: this.props.factor });
-    //     }
-    // }
-
-    getInitialState() {
+    const GetInitialState = function () {
         return {
             description: "",
             ampacity: "",
@@ -45,11 +28,20 @@ class Calculator extends Component {
             imax: "",
             reserve: "",
             smm2: "",
-            formValid: false,
         }
     }
 
-    FormatResult(result, defaultText, asInt = false) {
+    const [calcData, setCalcData] = useState(GetInitialState());
+    const [formValid, setFormValid] = useState(false);
+
+    const HandleChange = function (id, value) {
+        setCalcData((prevData => ({
+            ...prevData,
+            [id]: value
+        })))
+    }
+
+    const FormatResult = function (result, defaultText, asInt = false) {
         if (result === undefined || result === "") {
             return (defaultText);
         } else if (!isNaN(result)) {
@@ -63,202 +55,201 @@ class Calculator extends Component {
         }
     }
 
-    ResetCalc() {
-        this.setState(this.getInitialState());
-        
+    const ResetCalc = function () {
+        setCalcData(GetInitialState());
+        setFormValid(false);
     }
 
-    Update() {
-        this.calc_form.current.checkValidity();
-        if (this.props.OnUpdateCalc) {
-            this.props.OnUpdateCalc(this.props.count - 1, this.state);
-        }
+    // Update() {
+    //     this.calc_form.current.checkValidity();
+    //     if (this.props.OnUpdateCalc) {
+    //         this.props.OnUpdateCalc(this.props.count - 1, calcData);
+    //     }
+    // }
+
+    const IsEmpty = function () {
+        return calcData === GetInitialState();
     }
 
-    IsEmpty() {
-        return this.state === this.getInitialState();
-    }
+    // OnChangeHandlerDescription(ev) {
+    //     this.setState({ description: ev.target.value }, this.Update);
+    // }
 
-    OnChangeHandlerDescription(ev) {
-        this.setState({ description: ev.target.value }, this.Update);
-    }
+    // OnChangeHandlerAmp(ev) {
+    //     this.setState({ ampacity: ev.target.value }, this.Update);
+    // }
 
-    OnChangeHandlerAmp(ev) {
-        this.setState({ ampacity: ev.target.value }, this.Update);
-    }
+    // OnWireChange(ev) {
+    //     this.setState({ "wire": ev.target.id }, this.Update);
+    // }
 
-    OnWireChange(ev) {
-        this.setState({ "wire": ev.target.id }, this.Update);
-    }
+    // OnCableChange(ev) {
+    //     this.setState({ "cable": ev.target.id }, this.Update);
+    // }
 
-    OnCableChange(ev) {
-        this.setState({ "cable": ev.target.id }, this.Update);
-    }
-
-    OnSubmit(event) {
+    const OnSubmit = function (event) {
         event.preventDefault();
-        this.AddCalculator();
-    }
-
-    AddCalculator() {
-        const isValid = this.calc_form.current.checkValidity();
-        this.setState({formValid: isValid});
-        if (isValid) {
-            if (this.props.addCalc) {
-                this.props.addCalc(this.state);
-            }
+        if (event.target.current.checkValidity()) {
+            AddCalculator()
         }
     }
 
-    render() {
-        return (
-            <div className="calculator">
-                <Form ref={this.calc_form} onSubmit={this.OnSubmit.bind(this)} noValidate>
-                    <ListGroup horizontal>
-                        <div className="calc-number">
-                            <span >{(this.props.count === 0) ? "+" : this.props.count}</span>
-                        </div>
-                        <ListGroup.Item className={this.props.editable ? "description" : "description long"}>
-                            <Form.Control as="textarea"
-                                type="text" value={this.state.description}
-                                onChange={this.OnChangeHandlerDescription.bind(this)}
-                                placeholder={"Description"} />
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="power-kw">
-                            {this.props.editable ?
-                                <Form.Select
-                                    value={this.state.power}
-                                    onChange={(ev) => { this.setState({ "power": ev.target.value }); }}>
-                                    <option>power KW</option>
-                                    <option>15</option>
-                                    <option>18.5</option>
-                                    <option>22</option>
-                                    <option>30</option>
-                                    <option>37</option>
-                                    <option>45</option>
-                                    <option>55</option>
-                                    <option>75</option>
-                                    <option>90</option>
-                                    <option>110</option>
-                                    <option>132</option>
-                                    <option>160</option>
-                                    <option>200</option>
-                                    <option>250</option>
-                                    <option>280</option>
-                                    <option>315</option>
-                                    <option>355</option>
-                                </Form.Select> : this.state.power}
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="cable">
-                            {this.props.editable ?
-                                <div>
-                                    <Form.Check
-                                        name="cable"
-                                        inline
-                                        id={`al`}
-                                        label="Al"
-                                        type="radio"
-                                        checked={this.state.cable === `al`}
-                                        onChange={this.OnCableChange.bind(this)} />
-                                    <Form.Check
-                                        name="cable"
-                                        inline
-                                        id={`cu`}
-                                        label="Cu"
-                                        type="radio"
-                                        checked={this.state.cable === `cu`}
-                                        onChange={this.OnCableChange.bind(this)} />
-                                </div>
-                                : this.state.cable}
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="wire">
-                            {this.props.editable ?
-                                <div>
-                                    <Form.Check
-                                        name="wire"
-                                        inline
-                                        id={`single`}
-                                        label="Single"
-                                        type="radio"
-                                        checked={this.state.wire === `single`}
-                                        onChange={this.OnWireChange.bind(this)} />
-                                    <Form.Check
-                                        name="wire"
-                                        inline
-                                        id={`3-wire`}
-                                        label="3 Wire"
-                                        type="radio"
-                                        checked={this.state.wire === `3-wire`}
-                                        onChange={this.OnWireChange.bind(this)} />
-                                </div> : this.state.wire}
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="ampacity">
-                            {this.props.editable ?
-                                <Form.Control
-                                    required
-                                    type={"number"}
-                                    step={"any"}
-                                    name={"ampacity"}
-                                    placeholder={"Ampacity"}
-                                    value={this.state.ampacity}
-                                    onChange={this.OnChangeHandlerAmp.bind(this)} />
-                                : this.state.ampacity}
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="results reserve" style={{ "color": (this.state.reserve === "") ? "#828282" : "#000000" }}>
-                            {this.FormatResult(this.state.reserve, "Reserve(%)")}
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="results imax" style={{ "color": (this.state.reserve === "") ? "#828282" : "#000000" }}>
-                            {this.FormatResult(this.state.imax, "Imax", true)}
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className="seperator">
-                            <div className="vline"></div>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item className={(this.state.smm2 == "") ? "results smm2 smm2-default" : "results smm2 smm2-bold"}>
-                            {this.FormatResult(this.state.smm2, "S[Mm^2]")}
-                        </ListGroup.Item>
-
-                        {(this.props.count !== 0) ?
-                            <div className="delete-row">
-                                <CloseButton onClick={this.props.OnDeleteCalc.bind(this, this.props.count - 1)}></CloseButton>
-                            </div > : ""}
-
-                    </ListGroup>
-                </Form>
-            </div >
-
-        );
+    const AddCalculator = function () {
+        if (props.addCalc) {
+            props.addCalc.call(calcData);
+        }
     }
+
+    return (
+        <div className="calculator">
+            <Form onSubmit={(e) => OnSubmit(e)} noValidate>
+                <ListGroup horizontal>
+                    <div className="calc-number">
+                        <span >{(props.count === 0) ? "+" : props.count}</span>
+                    </div>
+                    <ListGroup.Item className={props.editable ? "description" : "description long"}>
+                        <Form.Control
+                            as="textarea"
+                            type="text"
+                            id="description"
+                            value={calcData.description}
+                            onChange={e => (HandleChange(e.target.id, e.target.value))}
+                            placeholder={"Description"} />
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="seperator">
+                        <div className="vline"></div>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="power-kw">
+                        {props.editable ?
+                            <Form.Select
+                                value={calcData.power}
+                                id="power"
+                                onChange={e => (HandleChange(e.target.id, e.target.value))}>
+                                <option>power KW</option>
+                                <option>15</option>
+                                <option>18.5</option>
+                                <option>22</option>
+                                <option>30</option>
+                                <option>37</option>
+                                <option>45</option>
+                                <option>55</option>
+                                <option>75</option>
+                                <option>90</option>
+                                <option>110</option>
+                                <option>132</option>
+                                <option>160</option>
+                                <option>200</option>
+                                <option>250</option>
+                                <option>280</option>
+                                <option>315</option>
+                                <option>355</option>
+                            </Form.Select> : calcData.power}
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="seperator">
+                        <div className="vline"></div>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="cable">
+                        {props.editable ?
+                            <div>
+                                <Form.Check
+                                    name="cable"
+                                    inline
+                                    id={`al`}
+                                    label="Al"
+                                    type="radio"
+                                    checked={calcData.cable === `al`}
+                                    onChange={e => (HandleChange(e.target.name, e.target.id))} />
+                                <Form.Check
+                                    name="cable"
+                                    inline
+                                    id={`cu`}
+                                    label="Cu"
+                                    type="radio"
+                                    checked={calcData.cable === `cu`}
+                                    onChange={e => (HandleChange(e.target.name, e.target.id))} />
+                            </div>
+                            : calcData.cable}
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="seperator">
+                        <div className="vline"></div>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="wire">
+                        {props.editable ?
+                            <div>
+                                <Form.Check
+                                    name="wire"
+                                    inline
+                                    id={`single`}
+                                    label="Single"
+                                    type="radio"
+                                    checked={calcData.wire === `single`}
+                                    onChange={e => (HandleChange(e.target.name, e.target.id))} />
+                                <Form.Check
+                                    name="wire"
+                                    inline
+                                    id={`3-wire`}
+                                    label="3 Wire"
+                                    type="radio"
+                                    checked={calcData.wire === `3-wire`}
+                                    onChange={e => (HandleChange(e.target.name, e.target.id))} />
+                            </div> : calcData.wire}
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="seperator">
+                        <div className="vline"></div>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="ampacity">
+                        {props.editable ?
+                            <Form.Control
+                                required
+                                type={"number"}
+                                step={"any"}
+                                id={"ampacity"}
+                                placeholder={"Ampacity"}
+                                value={calcData.ampacity}
+                                onChange={e => (HandleChange(e.target.id, e.target.value))} />
+                            : calcData.ampacity}
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="seperator">
+                        <div className="vline"></div>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="results reserve" style={{ "color": (calcData.reserve === "") ? "#828282" : "#000000" }}>
+                        {FormatResult(calcData.reserve, "Reserve(%)")}
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="seperator">
+                        <div className="vline"></div>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="results imax" style={{ "color": (calcData.reserve === "") ? "#828282" : "#000000" }}>
+                        {FormatResult(calcData.imax, "Imax", true)}
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="seperator">
+                        <div className="vline"></div>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className={(calcData.smm2 == "") ? "results smm2 smm2-default" : "results smm2 smm2-bold"}>
+                        {FormatResult(calcData.smm2, "S[Mm^2]")}
+                    </ListGroup.Item>
+
+                    {(props.count !== 0) ?
+                        <div className="delete-row">
+                            <CloseButton onClick={props.OnDeleteCalc.bind(calcData, props.count - 1)}></CloseButton>
+                        </div > : ""}
+
+                </ListGroup>
+            </Form>
+        </div >
+
+    );
 }
-export default Calculator;
