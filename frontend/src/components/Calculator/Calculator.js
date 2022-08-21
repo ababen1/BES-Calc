@@ -233,7 +233,8 @@ export default function Calculator(props) {
                             </button>
                             <Button
                                 type="submit"
-                                id="add_row_btn">
+                                id="add_row_btn"
+                                disabled={IsEmpty()}>
                                 Add Row
                             </Button>
                         </Stack>

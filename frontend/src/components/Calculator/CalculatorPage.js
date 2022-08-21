@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Calculator from "./Calculator";
-import { Form, Button, Stack, Modal } from "react-bootstrap";
+import { Form, Button, Stack, Modal, FloatingLabel } from "react-bootstrap";
 import "./Calculator.scss";
 import resetIcon from '../../Assets/reset.svg'
 
@@ -50,14 +50,21 @@ function GetImax(amp, factor) {
 export default function CalculatorPage(props) {
 
     const [date, setDate] = useState(new Date());
-    const [resetDisabled, setResetDisabled] = useState(true);
     const [mainCalculatorValidated, setMainCalculatorValidated] = useState(false);
     const [calculators, setCalculators] = useState([]);
     const [canSave, setCanSave] = useState(false);
     const [showResetWarning, setShowResetWarning] = useState(false);
+    const [customerData, setCustomerData] = useState({
+        "name": "",
+        "facility": "",
+        "remarks": ""
+    });
 
-    const OnResetMainCalculator = function () {
-        setResetDisabled(true);
+    const HandleChange = function (id, val) {
+        setCustomerData((prev) => ({
+            ...prev,
+            [id]: val
+        }));
     }
 
     const CalculateAll = function () {
@@ -134,11 +141,37 @@ export default function CalculatorPage(props) {
             <div className="customer-info">
                 <Form>
                     <h5>{date.toLocaleDateString()}</h5>
-                    <Stack direction="horizontal">
-                        <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer "} />
-                        <Form.Control type="text" size="lg" name={"facilityName"} placeholder={"Facility Name"} />
+                    <Stack direction="horizontal" gap={5}>
+                        <FloatingLabel label="Customer" style={{ "flexGrow": 1 }}>
+                            <Form.Control
+                                type="text"
+                                size="lg"
+                                id="name"
+                                placeholder={"Customer "}
+                                required
+                                value={customerData.name}
+                                onChange={e => HandleChange(e.target.id, e.target.value)} />
+                        </FloatingLabel>
+                        <FloatingLabel label="Facility Name" style={{ "flexGrow": 1 }}>
+                            <Form.Control
+                                type="text"
+                                size="lg"
+                                id={"facility"}
+                                placeholder={"Facility Name"}
+                                required
+                                value={customerData.facility}
+                                onChange={e => HandleChange(e.target.id, e.target.value)} />
+                        </FloatingLabel>
                     </Stack>
-                    <Form.Control type="text" size="lg" name={"Remarks"} placeholder={"Remarks"} />
+                    <FloatingLabel label="Remarks">
+                        <Form.Control
+                            type="text"
+                            size="lg"
+                            id={"remarks"}
+                            placeholder={"Remarks"}
+                            value={customerData.remarks}
+                            onChange={e => HandleChange(e.target.id, e.target.value)} />
+                    </FloatingLabel>
                 </Form>
             </div>
 
@@ -149,13 +182,12 @@ export default function CalculatorPage(props) {
                     key="main"
                     count={0}
                     editable={true}
-                    addCalc={AddCalculator}
-                    resetCalc={OnResetMainCalculator}></Calculator>
+                    addCalc={AddCalculator} />
             </div>
 
             <br />
 
-            
+
 
             <br />
 

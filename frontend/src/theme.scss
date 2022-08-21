@@ -1,4 +1,3 @@
-
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 @font-face {
@@ -57,7 +56,7 @@ $modal-header-border-color: transparent;
 }
 
 .btn {
-    @include button(); 
+    @include button();
     background-color: $bes-blue-color;
     border-color: $bes-blue-color;
     font-weight: bold;
@@ -84,6 +83,7 @@ $modal-header-border-color: transparent;
 body {
     font-family: "OpenSansLight" !important;
     font-weight: 400;
+
     textarea:focus,
     textarea.form-control:focus,
     input.form-control:focus,
@@ -116,4 +116,3 @@ body {
 
     }
 }
-

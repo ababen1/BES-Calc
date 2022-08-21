@@ -3,8 +3,8 @@
 .form-floating>.form-control:focus~label,
 .form-floating>.form-control:not(:placeholder-shown)~label,
 .form-floating>.form-select~label {
-  opacity: 1;
-  transform: scale(.95) translateY(-.10rem) translateX(.20rem);
+    opacity: 1;
+    transform: scale(.95) translateY(-.10rem) translateX(.20rem);
 }
 
 .modal-dialog {
@@ -21,6 +21,11 @@
     background-color: transparent;
     font-family: "OpenSansLight" !important;
     text-transform: capitalize;
+
+    a,
+    a:hover {
+        color: white;
+    }
 
     .container {
         background-color: transparent;
@@ -48,23 +53,22 @@
         border-color: $color;
         border-width: 1px;
         border-style: solid;
+        color: $color;
     }
 
     @mixin btns($color_text: theme.$white, $color_bg: theme.$bes-blue-color) {
-        top: 736px;
-        left: 636px;
         width: 196px;
         height: 50px;
         border-width: 1px;
-        border-radius: 3px;
+        border-radius: 4px;
         background-color: $color_bg;
         color: $color_text;
         border-color: $color_text;
         border-style: solid;
 
         &:active {
-            background-color: $color_text;
-            color: $color_bg
+            background-color: $color_bg;
+            color: $color_text;
         }
 
         &:hover {
@@ -76,13 +80,17 @@
         text-align: center;
         margin-top: 65px;
         margin-bottom: 34px;
-        span, h2 {
+
+        span,
+        h2 {
             font-family: 'Open Sans';
             font-weight: 200;
         }
+
         span {
             font-size: 16px;
         }
+
         h2 {
             font-size: 50px;
         }
