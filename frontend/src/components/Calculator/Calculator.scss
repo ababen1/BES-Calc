@@ -198,7 +198,7 @@
 
     .delete-row {
         @include calc-field(3rem, 0);
-        justify-content: flex-start;
+        justify-content: flex-end;
         border: 0;
         background-color: transparent;
     }
@@ -249,9 +249,9 @@
     background-color: transparent;
     opacity: 1;
     text-align: center;
-    font-size: 24px;
+    font-size: 14px;
     border: 0;
-
+    
     span {
         display: inline-block;
         vertical-align: middle;
@@ -265,9 +265,8 @@
     }
 
     .icon {
-        background: url('../../Assets/reset.svg') no-repeat left center;
-        width: 28px;
-        height: 28px;
+        width: 18px;
+        height: auto;
         display: inline-block;
         vertical-align: middle;
         margin-right: 7px;
