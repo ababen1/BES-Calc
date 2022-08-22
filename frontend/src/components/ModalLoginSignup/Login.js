@@ -97,7 +97,7 @@ export default function Login() {
                         onChange={(e) => { setState(prevState => ({ ...prevState, ["keep_logged_in"]: e.target.checked })) }} />
                     <NavLink href="#" className="ms-auto reset-password">Reset Password </NavLink>
                 </Stack>
-                <div style={{"flexGrow": 1}}/>
+                <div style={{ "flexGrow": 1 }} />
                 <button type="submit" className="login-btn">Log me in</button>
             </Form>
         </div>

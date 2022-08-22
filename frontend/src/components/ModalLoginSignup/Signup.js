@@ -65,7 +65,7 @@ export default function Signup() {
     return (
         <div className="signup-panel">
             <Container className="title">
-                In order to save your calculations, please
+                <span>In order to save your calculations, please</span>
                 <h2>Sign up</h2>
             </Container>
             <Form validated={state.validated} onSubmit={handleSubmit} className="signup-form">
@@ -88,13 +88,13 @@ export default function Signup() {
                         onChange={handleChange} />
                 </FloatingLabel>
                 <FloatingLabel label="Create Password" className="mb-3">
-                    <Form.Control 
-                    required 
-                    type="password" 
-                    placeholder="pass"
-                    id="password"
-                    value={state.password} 
-                    onChange={handleChange} />
+                    <Form.Control
+                        required
+                        type="password"
+                        placeholder="pass"
+                        id="password"
+                        value={state.password}
+                        onChange={handleChange} />
                 </FloatingLabel>
                 <div style={{ "flexGrow": 1 }} />
                 <button className="signup-btn" type="submit">Sign me up</button>
