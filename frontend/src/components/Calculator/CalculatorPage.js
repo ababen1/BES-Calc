@@ -137,7 +137,7 @@ export default function CalculatorPage(props) {
                         <Form.Control type="text" size="lg" name={"CustomerName"} placeholder={"Customer "} />
                         <Form.Control type="text" size="lg" name={"facilityName"} placeholder={"Facility Name"} />
                     </Stack>
-                    <Form.Control type="text" size="lg" name={"Remarks"} placeholder={"Remarks"} />
+                    <Form.Control type="text" size="lg" name={"emarks"} placeholder={"emarks"} />
                 </Form>
             </div>
 
@@ -161,38 +161,38 @@ export default function CalculatorPage(props) {
             <div>
                 {(calculators.length !== 0) ?
                     <Stack direction="horizontal" className="reference-row">
-                        <div style={{ width: "3rem" }}></div>
-                        <div style={{ width: "400px", textAlign: "center" }}>
+                        <div style={{ width: "4.5em" }}></div>
+                        <div style={{ width: "14em", textAlign: "center" }}>
                             Description
                         </div>
 
-                        <div style={{ width: "130px", textAlign: "center" }}>
+                        <div style={{ width: "10em", textAlign: "center" }}>
                             Power[KW]
                         </div>
 
-                        <div style={{ width: "130px", textAlign: "center" }}>
+                        <div style={{ width: "10em", textAlign: "center" }}>
                             Al / Cu
                         </div>
 
-                        <div style={{ width: "200px", textAlign: "center" }}>
+                        <div style={{ width: "10em", textAlign: "center" }}>
                             Single / 3 Wire
                         </div>
 
-                        <div style={{ width: "169px", textAlign: "center" }}>
+                        <div style={{ width: "10em", textAlign: "center" }}>
                             Amp
                         </div>
 
-                        <div style={{ width: "137px", textAlign: "center" }}>
+                        <div style={{ width: "10em", textAlign: "center" }}>
                             Reserve(%)
 
                         </div>
 
-                        <div style={{ width: "137px", textAlign: "center" }}>
+                        <div style={{ width: "10em", textAlign: "center" }}>
                             Imax
 
                         </div>
 
-                        <div style={{ width: "137px", textAlign: "center" }}>
+                        <div style={{ width: "10em", textAlign: "center" }}>
                             S[mm^2]
                         </div>
                     </Stack >

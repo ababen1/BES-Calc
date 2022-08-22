@@ -155,7 +155,7 @@
     }
 
     .ampacity {
-        @include calc-field(13rem);
+        @include calc-field(5rem);
     }
 
     .wire {
@@ -163,7 +163,7 @@
     }
 
     .cable {
-        @include calc-field(8rem);
+        @include calc-field(200px);
     }
 
     .results {
