@@ -1,5 +1,5 @@
 import React, {  } from "react";
-import { Modal, Row, Col, Container } from "react-bootstrap";
+import { Modal, Row, Col, Container, CloseButton } from "react-bootstrap";
 import Login from "./Login";
 import Signup from "./Signup";
 
@@ -11,8 +11,6 @@ export default function LoginSignUp(props) {
 
     return (
         <Modal show={props.visible} onHide={OnHide} centered dialogClassName="modal-dialog">
-            <Modal.Header className="login-modal-header" closeButton>
-            </Modal.Header>
             <Modal.Body>
                 <Container fluid className="login-signup-modal">
                     <Row>
@@ -23,6 +21,7 @@ export default function LoginSignUp(props) {
                             <Signup />
                         </Col>
                     </Row>
+                    <CloseButton style={{position: "absolute", marginLeft: "21em"}} onClick={OnHide}/>
                 </Container>
 
             </Modal.Body>
