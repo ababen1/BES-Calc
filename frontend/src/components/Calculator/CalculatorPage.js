@@ -108,6 +108,7 @@ export default function CalculatorPage(props) {
             updated_calcs.push(data);
         }
         setCalculators(updated_calcs);
+        setCanSave(false);
     }
 
     const AddCalculators = function (data_array) {

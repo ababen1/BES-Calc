@@ -8,6 +8,14 @@ export default function Header(props) {
     const [loginModalVisible, setLoginModalVisible] = useState(false);
     const [username, setUsername] = useState("");
 
+    const HandleUserIconClick = function(e) {
+        if (!username) {
+            setLoginModalVisible(true);
+        } else {
+            return // TODO
+        }
+    }
+    
     useEffect(() => {
         const configs = {
             method: "GET",
@@ -36,7 +44,7 @@ export default function Header(props) {
                     </div>
                     <div className="ms-auto login-icon">
                         <Image src={props.login_icon} roundedCircle="true" width="50"
-                            onClick={(e) => { setLoginModalVisible(true) }} /> <br />
+                            onClick={HandleUserIconClick} /> <br />
                         <span>{username != "" ? username : "Login"}</span>
                     </div>
                 </Stack>
