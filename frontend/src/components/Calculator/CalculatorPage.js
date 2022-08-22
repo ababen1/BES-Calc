@@ -96,15 +96,17 @@ export default function CalculatorPage(props) {
 
     const AddCalculator = function (data) {
         let updated_calcs = [...calculators];
-
-        // update the data to be correct with the current calc's index
-        // let idx = updated_calcs.length + 1
-        // if (data['wire'] !== "not selected")
-        //     data[`wire`] = data[`wire`].substring(0, data['wire'].indexOf('#')) + '#' + idx
-        // if (data['cable'] !== "not selected")
-        //     data[`cable`] = data[`cable`].substring(0, data['cable'].indexOf('#')) + '#' + idx
-
-        updated_calcs.push(data);
+        const amp = parseFloat(data.ampacity);
+        if (amp > Object.keys(IMAX_VALUES).at(-1)) {
+            var calcA = { ...data };
+            var calcB = { ...data };
+            calcA.ampacity = amp / 2;
+            calcB.ampacity = amp / 2;
+            updated_calcs.push(calcA);
+            updated_calcs.push(calcB);
+        } else {
+            updated_calcs.push(data);
+        }
         setCalculators(updated_calcs);
     }
 
