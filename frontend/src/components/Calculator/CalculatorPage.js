@@ -194,38 +194,38 @@ export default function CalculatorPage(props) {
             <div>
                 {(calculators.length !== 0) ?
                     <Stack direction="horizontal" className="reference-row">
-                        <div style={{ width: "4.5em" }}></div>
-                        <div style={{ width: "14em", textAlign: "center" }}>
+                        <div style={{ flexGrow: "1" }}></div>
+                        <div style={{ flexGrow: "1", textAlign: "center" }}>
                             Description
                         </div>
 
-                        <div style={{ width: "10em", textAlign: "center" }}>
+                        <div style={{ flexGrow: "1", textAlign: "center" }}>
                             Power[KW]
                         </div>
 
-                        <div style={{ width: "10em", textAlign: "center" }}>
+                        <div style={{ flexGrow: "1", textAlign: "center" }}>
                             Al / Cu
                         </div>
 
-                        <div style={{ width: "10em", textAlign: "center" }}>
+                        <div style={{ flexGrow: "1", textAlign: "center" }}>
                             Single / 3 Wire
                         </div>
 
-                        <div style={{ width: "10em", textAlign: "center" }}>
+                        <div style={{ flexGrow: "1", textAlign: "center" }}>
                             Amp
                         </div>
 
-                        <div style={{ width: "10em", textAlign: "center" }}>
+                        <div style={{ flexGrow: "1", textAlign: "center" }}>
                             Reserve(%)
 
                         </div>
 
-                        <div style={{ width: "10em", textAlign: "center" }}>
+                        <div style={{ flexGrow: "1", textAlign: "center" }}>
                             Imax
 
                         </div>
 
-                        <div style={{ width: "10em", textAlign: "center" }}>
+                        <div style={{ flexGrow: "1", textAlign: "center" }}>
                             S[mm^2]
                         </div>
                     </Stack >
