@@ -1,11 +1,11 @@
-import React, {  } from "react";
+import React, { } from "react";
 import { Modal, Row, Col, Container, CloseButton } from "react-bootstrap";
 import Login from "./Login";
 import Signup from "./Signup";
 
 export default function LoginSignUp(props) {
 
-    const OnHide = function(_event) {
+    const OnHide = function (_event) {
         props.setVisible.call(false);
     }
 
@@ -21,7 +21,12 @@ export default function LoginSignUp(props) {
                             <Signup />
                         </Col>
                     </Row>
-                    <CloseButton style={{position: "absolute", marginLeft: "21em"}} onClick={OnHide}/>
+                    <Row>
+                        <Col style={{"display": "flex", "flexDirection": "row-reverse"}}>
+                            <CloseButton style={{ position: "", }} onClick={OnHide} />
+                        </Col>
+                    </Row>
+
                 </Container>
 
             </Modal.Body>
