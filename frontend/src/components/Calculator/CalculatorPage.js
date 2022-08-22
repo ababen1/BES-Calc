@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Calculator from "./Calculator";
 import { Form, Button, Stack, Modal } from "react-bootstrap";
 import "./Calculator.scss";
+import resetIcon from '../../Assets/reset.svg'
 
 const FACTOR_CORRECTION_VALUES = [
     1,
@@ -218,7 +219,7 @@ export default function CalculatorPage(props) {
                         size="lg"
                         disabled={calculators.length === 0}
                         onClick={(e) => (setShowResetWarning(true))}>
-                        <span className="icon"></span>
+                        <img className="icon" src={resetIcon}></img>
                         <span>Reset All</span>
                     </button>
 
