@@ -38,6 +38,7 @@ UserSchema.methods.generateJWT = function () {
     {
       id: this._id,
       username: this.username,
+      email: this.email,
     },
     process.env.JWT_SECRET_KEY
   )

@@ -1,13 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { Stack, Image, OverlayTrigger, Tooltip, Button } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import { Stack, Image, OverlayTrigger, Tooltip, Button, Popover } from "react-bootstrap";
 import LoginSignUp from "components/ModalLoginSignup/LoginSignUpPopup";
 import axios from "axios";
 import 'scss/HeaderFooter.scss'
+import editIcon from 'Assets/edit_icon.svg'
 
 export default function Header(props) {
     const [showModal, setShowModal] = useState(false);
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [showTooltip, setShowTooltip] = useState(false);
+
+
+    const popover = (
+        <Popover placement="bottom" className="user-popover">
+            <Popover.Body>
+                <div className="poopover-content">
+                    <div>
+                        <span className="email">{email}</span> <br />
+                        <span className="edit-email-btn">
+                            <img src={editIcon} /> <span style={{ "minWidth": "8px" }} />
+                            <span className="edit-email">edit mail address</span>
+                        </span>
+                    </div>
+                    <div className="reset-password">
+                        <span>reset password</span>
+                    </div>
+                    <div className="contact-us">
+                        <span>contact us</span>
+                    </div>
+                </div>
+            </Popover.Body>
+        </Popover>
+    )
 
     const HandleUserIconClick = function (e) {
         if (!username) {
@@ -30,6 +55,7 @@ export default function Header(props) {
             .then((result) => {
                 if (result.data.success) {
                     setUsername(result.data.data.username);
+                    setEmail(result.data.data.email);
                 }
             })
             .catch((error) => { console.log(error) })
@@ -45,18 +71,18 @@ export default function Header(props) {
                     </div>
 
                     <div className="ms-auto login-icon">
+                        <Image
+                            src={props.login_icon}
+                            roundedCircle="true"
+                            width="50"
+                            onClick={HandleUserIconClick}
+                            style={{ "filter": showTooltip ? "invert(28%) sepia(93%) saturate(583%) hue-rotate(151deg) brightness(93%) contrast(84%)" : "none" }} />
                         <OverlayTrigger
                             placement={"bottom"}
                             show={showTooltip}
-                            overlay={
-                                <Tooltip>
-                                    ababa
-                                </Tooltip>}>
-                            <Image src={props.login_icon} roundedCircle="true" width="50"
-                                onClick={HandleUserIconClick} />
+                            overlay={popover}>
+                            <span style={{ "color": showTooltip ? "#156982" : "unset" }}>{username != "" ? username : "Login"}</span>
                         </OverlayTrigger>
-                        <br />
-                        <span>{username != "" ? username : "Login"}</span>
                     </div>
 
 

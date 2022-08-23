@@ -2,6 +2,7 @@ import React, { } from "react";
 import { Modal, Row, Col, Container, CloseButton } from "react-bootstrap";
 import Login from "./Login";
 import Signup from "./Signup";
+import 'scss/LoginSignupModal.scss'
 
 export default function LoginSignUp(props) {
 
