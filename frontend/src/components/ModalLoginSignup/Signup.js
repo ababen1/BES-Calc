@@ -50,7 +50,6 @@ export default function Signup() {
             url: "/signup",
             data: state,
 
-
         }
         axios(configs)
             .then((result) => {

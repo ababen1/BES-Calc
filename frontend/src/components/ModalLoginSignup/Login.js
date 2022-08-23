@@ -48,7 +48,6 @@ export default function Login() {
             url: "/login",
             data: state,
 
-
         }
         axios(configs)
             .then((result) => {
