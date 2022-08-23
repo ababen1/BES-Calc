@@ -49,6 +49,8 @@ export default function Signup() {
             base_url: "localhost:8080",
             url: "/signup",
             data: state,
+
+
         }
         axios(configs)
             .then((result) => {

@@ -47,6 +47,8 @@ export default function Login() {
             base_url: "localhost:8080",
             url: "/login",
             data: state,
+
+
         }
         axios(configs)
             .then((result) => {
