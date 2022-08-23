@@ -47,6 +47,11 @@ export default function Login() {
             base_url: "localhost:8080",
             url: "/login",
             data: state,
+            headers: {
+                Accept: "application/json",
+                "User-Agent": "axios 0.21.1"
+            }
+
         }
         axios(configs)
             .then((result) => {
