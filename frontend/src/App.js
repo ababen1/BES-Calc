@@ -1,11 +1,11 @@
 import { Component, React } from "react";
 import 'react-loading-skeleton/dist/skeleton.css';
-import CalculatorPage from "./components/Calculator/CalculatorPage";
-import Header from './components/Header';
-import logo from './Assets/logo.svg';
-import login_icon from "./Assets/login_icon.svg";
+import CalculatorPage from 'pages/CalculatorPage';
+import Header from 'components/Header';
+import logo from 'Assets/logo.svg';
+import login_icon from "Assets/login_icon.svg";
 import { Switch, Route } from "react-router-dom"
-import Footer from "./components/Footer";
+import Footer from "components/Footer";
 
 
 class App extends Component {

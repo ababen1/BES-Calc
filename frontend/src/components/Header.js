@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Stack, Image } from "react-bootstrap";
-import LoginSignUp from "./ModalLoginSignup/LoginSignUpPopup";
+import LoginSignUp from "components/ModalLoginSignup/LoginSignUpPopup";
 import axios from "axios";
-import './HeaderFooter.scss'
+import 'scss/HeaderFooter.scss'
 
 export default function Header(props) {
     const [loginModalVisible, setLoginModalVisible] = useState(false);

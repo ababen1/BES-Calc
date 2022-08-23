@@ -23,7 +23,7 @@ export default function LoginSignUp(props) {
                     </Row>
                     <Row>
                         <Col style={{"display": "flex", "flexDirection": "row-reverse", "zIndex": "1", "padding": "1px"}}>
-                            <CloseButton style={{ position: "fixed", }} onClick={OnHide} />
+                            <CloseButton style={{ position: "absolute", }} onClick={OnHide} />
                         </Col>
                     </Row>
 

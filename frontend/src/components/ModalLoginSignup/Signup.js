@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { FloatingLabel, Form, Container } from "react-bootstrap";
-import './LoginSignupModal.scss'
+import 'scss/LoginSignupModal.scss'
 
 export default function Signup() {
     const [state, setState] = useState({
