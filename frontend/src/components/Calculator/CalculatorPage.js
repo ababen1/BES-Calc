@@ -198,7 +198,7 @@ export default function CalculatorPage(props) {
                 {(calculators.length !== 0) ?
                     <Stack direction="horizontal" className="reference-row">
                         <div style={{ flexGrow: "1" }}></div>
-                        <div style={{ flexGrow: "2", textAlign: "center" }}>
+                        <div style={{ flexGrow: "3", textAlign: "center" }}>
                             Description
                         </div>
 

@@ -59,6 +59,10 @@
         .smm2 {
             border-bottom-right-radius: 15px;
         }
+
+        .hseperator {
+            display: none;
+        }
     }
 }
 
@@ -132,6 +136,22 @@
         }
     }
 
+    .hseperator {
+        display: flex;
+        flex-direction: row;
+
+        .hline {
+            width: 1398px;
+            height: 0.75px;
+            background-color: #DBDBDB;
+            position: absolute;
+            z-index: 1;
+            margin-left: 58px;
+            margin-right: 58px;
+            opacity: 0.6;
+        }
+    }
+
     .description {
         @include calc-field(250px);
         padding: 5px;
@@ -159,11 +179,11 @@
     }
 
     .wire {
-        @include calc-field(200px);
+        @include calc-field(140px);
     }
 
     .cable {
-        @include calc-field(200px);
+        @include calc-field(140px);
     }
 
     .results {
@@ -270,7 +290,7 @@
         display: inline-block;
         vertical-align: middle;
         margin-right: 7px;
-        
+
     }
 
 }

@@ -78,13 +78,15 @@ export default function Calculator(props) {
                         <span >{(props.count === 0) ? "+" : props.count}</span>
                     </div>
                     <ListGroup.Item className={props.editable ? "description" : "description long"}>
+                        {props.editable ?
                         <Form.Control
                             as="textarea"
                             type="text"
                             id="description"
                             value={calcData.description}
+                            disabled={!props.editable}
                             onChange={e => (HandleChange(e.target.id, e.target.value))}
-                            placeholder={"Description"} />
+                            placeholder={"Description"} /> : calcData.description}
                     </ListGroup.Item>
 
                     <ListGroup.Item className="seperator">
@@ -218,6 +220,9 @@ export default function Calculator(props) {
                         </div > : ""}
 
                 </ListGroup>
+                <div className="hseperator">
+                    <div className="hline"/>
+                </div>
 
                 {props.editable ?
                     <div>
