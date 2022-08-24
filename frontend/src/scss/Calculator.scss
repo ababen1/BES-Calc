@@ -1,20 +1,5 @@
 @use 'src/theme.scss';
 
-@mixin make-container($padding-x: theme.$container-padding-x) {
-    width: 100%;
-    padding-right: $padding-x;
-    padding-left: $padding-x;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.main-container {
-    @include make-container(0);
-    width: 80%;
-    align-items: center;
-    height: 100%;
-    font-family: 'OpenSansLight' !important;
-}
 
 .customer-info {
     display: flex;
@@ -136,21 +121,7 @@
         }
     }
 
-    .hseperator {
-        display: flex;
-        flex-direction: row;
 
-        .hline {
-            width: 1398px;
-            height: 0.75px;
-            background-color: #DBDBDB;
-            position: absolute;
-            z-index: 1;
-            margin-left: 58px;
-            margin-right: 58px;
-            opacity: 0.6;
-        }
-    }
 
     .description {
         @include calc-field(250px);
@@ -305,3 +276,19 @@
         display: inherit;
     }
 }
+
+    .hseperator {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        .hline {
+            width: 55em;
+            height: 0.75px;
+            background-color: #DBDBDB;
+            position: absolute;
+            z-index: 1;
+            opacity: 0.6;
+        }
+    }

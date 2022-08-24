@@ -110,3 +110,20 @@ body {
 
     }
 }
+
+
+@mixin make-container($padding-x: theme.$container-padding-x) {
+    width: 100%;
+    padding-right: $padding-x;
+    padding-left: $padding-x;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.main-container {
+    @include make-container(0);
+    width: 80%;
+    align-items: center;
+    height: 100%;
+    font-family: 'OpenSansLight' !important;
+}

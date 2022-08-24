@@ -1,11 +1,12 @@
-import { Component, React, useEffect } from "react";
+import { React, useEffect } from "react";
 import 'react-loading-skeleton/dist/skeleton.css';
 import CalculatorPage from 'pages/CalculatorPage';
 import Header from 'components/Header';
 import logo from 'Assets/logo.svg';
 import login_icon from "Assets/login_icon.svg";
-import { Switch, Route } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import Footer from "components/Footer";
+import SavedCalculations from "pages/SavedCalculations";
 
 
 export default function App() {
@@ -34,7 +35,10 @@ export default function App() {
     return (
         <div className='App'>
             <Header logo={logo} login_icon={login_icon} />
-            <CalculatorPage />
+            <Routes>
+                <Route index element={<CalculatorPage />} />
+                <Route path="/calculations" element={<SavedCalculations/>}/>
+            </Routes>
             <Footer />
         </div>
     );
