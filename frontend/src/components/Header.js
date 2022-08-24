@@ -17,6 +17,9 @@ export default function Header(props) {
             <Popover.Body>
                 <div className="poopover-content">
                     <div>
+                        <a className="link" href="/calculations">My Calculations</a>
+                    </div>
+                    <div>
                         <span className="email">{email}</span> <br />
                         <span className="edit-email-btn">
                             <img src={editIcon} /> <span style={{ "minWidth": "8px" }} />
@@ -24,11 +27,15 @@ export default function Header(props) {
                         </span>
                     </div>
                     <div className="reset-password">
-                        <span>reset password</span>
+                        <a className="link">reset password</a>
                     </div>
                     <div className="contact-us">
-                        <span>contact us</span>
+                        <a className="link">contact us</a>
                     </div>
+                    <a className="link" onClick={_e => {
+                        sessionStorage.removeItem("token")
+                        window.location.reload();
+                    }}>logout</a>
                 </div>
             </Popover.Body>
         </Popover>

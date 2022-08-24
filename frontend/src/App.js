@@ -1,4 +1,4 @@
-import { Component, React } from "react";
+import { Component, React, useEffect } from "react";
 import 'react-loading-skeleton/dist/skeleton.css';
 import CalculatorPage from 'pages/CalculatorPage';
 import Header from 'components/Header';
@@ -8,23 +8,21 @@ import { Switch, Route } from "react-router-dom"
 import Footer from "components/Footer";
 
 
-class App extends Component {
-    state = {
-        data: null,
-    }
-    componentDidMount() {
-        this.connectToExpress()
-    }
+export default function App() {
 
-    connectToExpress() {
-        this.callBackendAPI()
+    useEffect(() => {
+        connectToExpress();
+    }, [])
+
+    const connectToExpress = function () {
+        callBackendAPI()
             .then((res) => {
                 console.log(res)
             })
             .catch((err) => console.log(err))
     }
 
-    callBackendAPI = async () => {
+    const callBackendAPI = async () => {
         const response = await fetch('/');
         const body = await response.json();
 
@@ -33,18 +31,11 @@ class App extends Component {
         }
         return body;
     }
-
-    render() {
-        return (
-            <div className='App'>
-                <Header logo={logo} login_icon={login_icon} />
-                <CalculatorPage />
-                <Footer />
-            </div>
-        );
-    }
-
-
+    return (
+        <div className='App'>
+            <Header logo={logo} login_icon={login_icon} />
+            <CalculatorPage />
+            <Footer />
+        </div>
+    );
 }
-
-export default App;

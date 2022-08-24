@@ -77,6 +77,16 @@
         height: 100%;
     }
 
+    .link {
+        color: black;
+        text-decoration: underline;
+        cursor: pointer;
+        
+        &:hover {
+            color: theme.$bes-blue-color;
+        }
+    }
+
     .poopover-content {
         text-align: center;
         display: flex;
