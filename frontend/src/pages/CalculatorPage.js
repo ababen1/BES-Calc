@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Calculator from "components/Calculator/Calculator";
 import { Form, Button, Stack, Modal, FloatingLabel } from "react-bootstrap";
 import resetIcon from 'Assets/reset.svg'
+import 'scss/Calculator.scss'
 
 const FACTOR_CORRECTION_VALUES = [
     1,
