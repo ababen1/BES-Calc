@@ -197,39 +197,39 @@ export default function CalculatorPage(props) {
             <div>
                 {(calculators.length !== 0) ?
                     <Stack direction="horizontal" className="reference-row">
-                        <div style={{ flexGrow: "1" }}></div>
-                        <div style={{ flexGrow: "3", textAlign: "center" }}>
+                        <div style={{"width": "3em"}}>
+                           
+                        </div>
+                        <div className="description long ref-row-item">
                             Description
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="power-kw ref-row-item">
                             Power[KW]
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="cable ref-row-item">
                             Al / Cu
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="wire ref-row-item">
                             Single / 3 Wire
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
-                            Amp
+                        <div className="ampacity ref-row-item">
+                            Ampacity
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="results reserve ref-row-item">
                             Reserve(%)
-
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="results imax ref-row-item">
                             Imax
-
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
-                            S[mm^2]
+                        <div className="results smm2 ref-row-item">
+                            S[Mm^2]
                         </div>
                     </Stack >
                     : ""}
