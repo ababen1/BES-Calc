@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Calculator from "./Calculator";
+import Calculator from "components/Calculator/Calculator";
 import { Form, Button, Stack, Modal, FloatingLabel } from "react-bootstrap";
-import "./Calculator.scss";
-import resetIcon from '../../Assets/reset.svg'
+import resetIcon from 'Assets/reset.svg'
+import 'scss/Calculator.scss'
 
 const FACTOR_CORRECTION_VALUES = [
     1,
@@ -197,39 +197,42 @@ export default function CalculatorPage(props) {
             <div>
                 {(calculators.length !== 0) ?
                     <Stack direction="horizontal" className="reference-row">
-                        <div style={{ flexGrow: "1" }}></div>
-                        <div style={{ flexGrow: "3", textAlign: "center" }}>
+                        <div style={{ "flexGrow": "1" }}>
+
+                        </div>
+                        <div className="description long ref-row-item">
                             Description
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="power-kw ref-row-item">
                             Power[KW]
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="cable ref-row-item">
                             Al / Cu
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="wire ref-row-item">
                             Single / 3 Wire
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
-                            Amp
+                        <div className="ampacity ref-row-item">
+                            Ampacity
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="results reserve ref-row-item">
                             Reserve(%)
-
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
+                        <div className="results imax ref-row-item">
                             Imax
-
                         </div>
 
-                        <div style={{ flexGrow: "1", textAlign: "center" }}>
-                            S[mm^2]
+                        <div className="results smm2 ref-row-item">
+                            S[Mm^2]
+                        </div>
+                        <div style={{ "flexGrow": "1" }}>
+
                         </div>
                     </Stack >
                     : ""}
@@ -253,7 +256,7 @@ export default function CalculatorPage(props) {
                         className="reset-btn"
                         size="lg"
                         disabled={calculators.length === 0}
-                        onClick={(e) => (setShowResetWarning(true))}>
+                        onClick={() => (setShowResetWarning(true))}>
                         <img className="icon" src={resetIcon}></img>
                         <span>Reset All</span>
                     </button>
@@ -275,7 +278,7 @@ export default function CalculatorPage(props) {
                     </Button>
                 </Stack>
 
-                <Modal onHide={e => { setShowResetWarning(false) }} show={showResetWarning}>
+                <Modal onHide={() => { setShowResetWarning(false) }} show={showResetWarning}>
                     <div className="reset-all-confirmation">
                         <Modal.Title>
                             Reset all calculators?

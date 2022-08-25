@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ListGroup, Form, CloseButton, Stack, Button } from "react-bootstrap";
-import "./Calculator.scss";
-import resetIcon from '../../Assets/reset.svg'
+import "scss/Calculator.scss";
+import resetIcon from 'Assets/reset.svg'
 
 export default function Calculator(props) {
 

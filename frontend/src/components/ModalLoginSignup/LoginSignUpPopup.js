@@ -2,6 +2,7 @@ import React, { } from "react";
 import { Modal, Row, Col, Container, CloseButton } from "react-bootstrap";
 import Login from "./Login";
 import Signup from "./Signup";
+import 'scss/LoginSignupModal.scss'
 
 export default function LoginSignUp(props) {
 
@@ -23,7 +24,7 @@ export default function LoginSignUp(props) {
                     </Row>
                     <Row>
                         <Col style={{"display": "flex", "flexDirection": "row-reverse", "zIndex": "1", "padding": "1px"}}>
-                            <CloseButton style={{ position: "fixed", }} onClick={OnHide} />
+                            <CloseButton style={{ position: "absolute", }} onClick={OnHide} />
                         </Col>
                     </Row>
 

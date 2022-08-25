@@ -107,6 +107,10 @@
         flex-grow: 1;
     }
 
+    .form-floating {
+        text-align: initial;
+    }
+
     .login-panel {
         @include panels;
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FloatingLabel, Form, Stack } from "react-bootstrap";
-import './LoginSignupModal.scss'
+import 'scss/LoginSignupModal.scss'
 import axios from "axios"
 
 export default function Login() {
