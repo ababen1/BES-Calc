@@ -197,8 +197,8 @@ export default function CalculatorPage(props) {
             <div>
                 {(calculators.length !== 0) ?
                     <Stack direction="horizontal" className="reference-row">
-                        <div style={{"width": "3em"}}>
-                           
+                        <div style={{ "flexGrow": "1" }}>
+
                         </div>
                         <div className="description long ref-row-item">
                             Description
@@ -231,6 +231,9 @@ export default function CalculatorPage(props) {
                         <div className="results smm2 ref-row-item">
                             S[Mm^2]
                         </div>
+                        <div style={{ "flexGrow": "1" }}>
+
+                        </div>
                     </Stack >
                     : ""}
 
@@ -253,7 +256,7 @@ export default function CalculatorPage(props) {
                         className="reset-btn"
                         size="lg"
                         disabled={calculators.length === 0}
-                        onClick={(e) => (setShowResetWarning(true))}>
+                        onClick={() => (setShowResetWarning(true))}>
                         <img className="icon" src={resetIcon}></img>
                         <span>Reset All</span>
                     </button>
@@ -275,7 +278,7 @@ export default function CalculatorPage(props) {
                     </Button>
                 </Stack>
 
-                <Modal onHide={e => { setShowResetWarning(false) }} show={showResetWarning}>
+                <Modal onHide={() => { setShowResetWarning(false) }} show={showResetWarning}>
                     <div className="reset-all-confirmation">
                         <Modal.Title>
                             Reset all calculators?

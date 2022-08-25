@@ -53,7 +53,7 @@ export default function Header(props) {
         const configs = {
             method: "GET",
             base_url: "localhost:8080",
-            url: "/user",
+            url: "/loggeduser",
             headers: {
                 "auth": sessionStorage.getItem("token")
             }
