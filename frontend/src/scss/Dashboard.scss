@@ -14,6 +14,28 @@
     margin-bottom: 45px;
 }
 
+.saved-calculation {
+    .icons {
+        display: flex;
+        flex-direction: row;
+        gap: 45px;
+
+        img:hover {
+            filter: invert(28%) sepia(93%) saturate(583%) hue-rotate(151deg) brightness(93%) contrast(84%);
+            cursor: pointer;
+        }
+    }
+
+    .field {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        color: black;
+        font-weight: bold;
+        border-right: 1px solid lightgray;
+    }
+}
+
 .calculations-container {
     margin-top: 68px;
     display: flex;

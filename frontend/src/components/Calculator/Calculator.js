@@ -70,6 +70,12 @@ export default function Calculator(props) {
         }
     }
 
+    const seperator = (
+        <ListGroup.Item className="vseperator">
+            <div className="vline"></div>
+        </ListGroup.Item>
+    )
+
     return (
         <div className="calculator">
             <Form onSubmit={OnSubmit} onReset={OnReset} >
@@ -79,19 +85,17 @@ export default function Calculator(props) {
                     </div>
                     <ListGroup.Item className={props.editable ? "description" : "description long"}>
                         {props.editable ?
-                        <Form.Control
-                            as="textarea"
-                            type="text"
-                            id="description"
-                            value={calcData.description}
-                            disabled={!props.editable}
-                            onChange={e => (HandleChange(e.target.id, e.target.value))}
-                            placeholder={"Description"} /> : calcData.description}
+                            <Form.Control
+                                as="textarea"
+                                type="text"
+                                id="description"
+                                value={calcData.description}
+                                disabled={!props.editable}
+                                onChange={e => (HandleChange(e.target.id, e.target.value))}
+                                placeholder={"Description"} /> : calcData.description}
                     </ListGroup.Item>
 
-                    <ListGroup.Item className="seperator">
-                        <div className="vline"></div>
-                    </ListGroup.Item>
+                    {seperator}
 
                     <ListGroup.Item className="power-kw">
                         {props.editable ?
@@ -120,9 +124,7 @@ export default function Calculator(props) {
                             </Form.Select> : calcData.power}
                     </ListGroup.Item>
 
-                    <ListGroup.Item className="seperator">
-                        <div className="vline"></div>
-                    </ListGroup.Item>
+                    {seperator}
 
                     <ListGroup.Item className="cable">
                         {props.editable ?
@@ -147,9 +149,7 @@ export default function Calculator(props) {
                             : calcData.cable}
                     </ListGroup.Item>
 
-                    <ListGroup.Item className="seperator">
-                        <div className="vline"></div>
-                    </ListGroup.Item>
+                    {seperator}
 
                     <ListGroup.Item className="wire">
                         {props.editable ?
@@ -173,9 +173,7 @@ export default function Calculator(props) {
                             </div> : calcData.wire}
                     </ListGroup.Item>
 
-                    <ListGroup.Item className="seperator">
-                        <div className="vline"></div>
-                    </ListGroup.Item>
+                    {seperator}
 
                     <ListGroup.Item className="ampacity">
                         {props.editable ?
@@ -190,25 +188,19 @@ export default function Calculator(props) {
                             : calcData.ampacity}
                     </ListGroup.Item>
 
-                    <ListGroup.Item className="seperator">
-                        <div className="vline"></div>
-                    </ListGroup.Item>
+                    {seperator}
 
                     <ListGroup.Item className="results reserve" style={{ "color": (calcData.reserve === "") ? "#828282" : "#000000" }}>
                         {FormatResult(calcData.reserve, "Reserve(%)")}
                     </ListGroup.Item>
 
-                    <ListGroup.Item className="seperator">
-                        <div className="vline"></div>
-                    </ListGroup.Item>
+                    {seperator}
 
                     <ListGroup.Item className="results imax" style={{ "color": (calcData.reserve === "") ? "#828282" : "#000000" }}>
                         {FormatResult(calcData.imax, "Imax", true)}
                     </ListGroup.Item>
 
-                    <ListGroup.Item className="seperator">
-                        <div className="vline"></div>
-                    </ListGroup.Item>
+                    {seperator}
 
                     <ListGroup.Item className={(calcData.smm2 == "") ? "results smm2 smm2-default" : "results smm2 smm2-bold"}>
                         {FormatResult(calcData.smm2, "S[Mm^2]")}
@@ -221,7 +213,7 @@ export default function Calculator(props) {
 
                 </ListGroup>
                 <div className="hseperator">
-                    <div className="hline"/>
+                    <div className="hline" />
                 </div>
 
                 {props.editable ?

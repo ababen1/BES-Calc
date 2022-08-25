@@ -127,3 +127,34 @@ body {
     height: 100%;
     font-family: 'OpenSansLight' !important;
 }
+
+
+.hseperator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .hline {
+        width: 75em;
+        height: 0.75px;
+        background-color: #DBDBDB;
+        position: absolute;
+        z-index: 1;
+        opacity: 0.6;
+    }
+}
+
+.vseperator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    max-width: 8px;
+
+    .vline {
+        background-color: #DBDBDB;
+        height: 75%;
+        opacity: 0.75;
+    }
+}

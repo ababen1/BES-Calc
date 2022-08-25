@@ -17,7 +17,7 @@ export default function Header(props) {
             <Popover.Body>
                 <div className="poopover-content">
                     <div>
-                        <a className="link" href="/calculations">My Calculations</a>
+                        <a className="link" href="/dashboard">Dashboard</a>
                     </div>
                     <div>
                         <span className="email">{email}</span> <br />

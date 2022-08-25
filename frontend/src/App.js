@@ -6,7 +6,7 @@ import logo from 'Assets/logo.svg';
 import login_icon from "Assets/login_icon.svg";
 import { Route, Routes } from "react-router-dom"
 import Footer from "components/Footer";
-import SavedCalculations from "pages/SavedCalculations";
+import Dashboard from "pages/Dashboard";
 
 
 export default function App() {
@@ -37,7 +37,7 @@ export default function App() {
             <Header logo={logo} login_icon={login_icon} />
             <Routes>
                 <Route index element={<CalculatorPage />} />
-                <Route path="/calculations" element={<SavedCalculations/>}/>
+                <Route path="/dashboard" element={<Dashboard/>}/>
             </Routes>
             <Footer />
         </div>

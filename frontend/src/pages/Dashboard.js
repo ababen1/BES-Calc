@@ -1,47 +1,18 @@
 import React, { useState } from "react";
-import { Button, Form, InputGroup, ListGroup } from "react-bootstrap";
-import resetIcon from 'Assets/reset.svg'
+import { Button, Form, InputGroup } from "react-bootstrap";
 
-import 'scss/SavedCalculations.scss'
+import 'scss/Dashboard.scss'
 import 'scss/Calculator.scss'
-export default function SavedCalculations(props) {
+import SavedCalculation from "components/Dashboard/SavedCalculation";
+
+export default function Dashboard(props) {
 
     const [calculations, setCalculations] = useState();
     const [user, setUser] = useState();
 
-    const savedCalculation = (
-        <div>
-            <ListGroup horizontal className="saved-calculation">
-                <ListGroup.Item className="icons">
-
-                </ListGroup.Item>
-                <ListGroup.Item className="file-description">
-
-                </ListGroup.Item>
-                <ListGroup.Item className="facility">
-
-                </ListGroup.Item>
-                <ListGroup.Item className="customer">
-                </ListGroup.Item>
-                <ListGroup.Item className="date">
-
-                </ListGroup.Item>
-                <ListGroup.Item className="delete">
-
-                </ListGroup.Item>
-
-
-            </ListGroup>
-
-            <div className="hseperator">
-                <div className="hline" />
-            </div>
-        </div>
-    )
-
     return (
         <div className="main-container">
-            <h3 className="welcome">Welcome</h3>
+            <h3 className="welcome">Welcome {user}</h3>
 
             <div className="search">
                 <div className="big-search">
@@ -69,9 +40,9 @@ export default function SavedCalculations(props) {
 
 
             <div className="calculations-container">
-                {savedCalculation}
-                {savedCalculation}
-                {savedCalculation}
+                <SavedCalculation />
+                <SavedCalculation />
+                <SavedCalculation />
             </div>
         </div>
     )
