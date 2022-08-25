@@ -295,7 +295,4 @@ export default function CalculatorPage(props) {
         </div>
 
     );
-
 }
-
-
