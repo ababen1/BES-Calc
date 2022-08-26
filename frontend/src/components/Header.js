@@ -7,8 +7,6 @@ import editIcon from 'Assets/edit_icon.svg'
 
 export default function Header(props) {
     const [showModal, setShowModal] = useState(false);
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
     const [showTooltip, setShowTooltip] = useState(false);
 
 
@@ -20,7 +18,7 @@ export default function Header(props) {
                         <a className="link" href="/dashboard">Dashboard</a>
                     </div>
                     <div>
-                        <span className="email">{email}</span> <br />
+                        <span className="email">{props.email}</span> <br />
                         <span className="edit-email-btn">
                             <img src={editIcon} /> <span style={{ "minWidth": "8px" }} />
                             <span className="edit-email">edit mail address</span>
@@ -42,31 +40,12 @@ export default function Header(props) {
     )
 
     const HandleUserIconClick = function (e) {
-        if (!username) {
+        if (!props.username) {
             setShowModal(true);
         } else {
             setShowTooltip(!showTooltip);
         }
     }
-
-    useEffect(() => {
-        const configs = {
-            method: "GET",
-            base_url: "localhost:8080",
-            url: "/loggeduser",
-            headers: {
-                "auth": sessionStorage.getItem("token")
-            }
-        }
-        axios(configs)
-            .then((result) => {
-                if (result.data.success) {
-                    setUsername(result.data.data.username);
-                    setEmail(result.data.data.email);
-                }
-            })
-            .catch((error) => { console.log(error) })
-    }, [])
 
     return (
         <div className="header">
@@ -88,7 +67,7 @@ export default function Header(props) {
                             placement={"bottom"}
                             show={showTooltip}
                             overlay={popover}>
-                            <span style={{ "color": showTooltip ? "#156982" : "unset" }}>{username != "" ? username : "Login"}</span>
+                            <span style={{ "color": showTooltip ? "#156982" : "unset" }}>{props.username ? props.username : "Login"}</span>
                         </OverlayTrigger>
                     </div>
 

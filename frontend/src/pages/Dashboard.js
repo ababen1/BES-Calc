@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 import 'scss/Dashboard.scss'
@@ -8,11 +8,16 @@ import SavedCalculation from "components/Dashboard/SavedCalculation";
 export default function Dashboard(props) {
 
     const [calculations, setCalculations] = useState();
-    const [user, setUser] = useState();
+
+    useEffect(() => {
+        if (!props.userdata) {
+            window.location.href = '/'
+        }
+    })
 
     return (
         <div className="main-container">
-            <h3 className="welcome">Welcome {user}</h3>
+            <h3 className="welcome">Welcome {props.userdata.username}</h3>
 
             <div className="search">
                 <div className="big-search">

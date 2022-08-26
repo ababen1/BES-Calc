@@ -5,12 +5,12 @@ import axios from "axios"
 
 export default function Login() {
     const [state, setState] = useState({
-        validated: false,
         email: "",
         password: "",
         keep_logged_in: false,
     });
 
+    const [validated, setValidated] = useState(false);
 
     const handleChange = function (e) {
         const { id, value } = e.target
@@ -27,18 +27,15 @@ export default function Login() {
             e.stopPropagation();
         }
         else {
-            setState(prevState => ({
-                ...prevState,
-                "validated": e.target.checkValidity()
-            }));
+            setValidated(true);
         }
     }
 
     useEffect(() => {
-        if (state.validated) {
+        if (validated) {
             callBackendLogin();
         }
-    }, [state.validated])
+    }, [validated])
 
     const callBackendLogin = function () {
 
@@ -56,10 +53,14 @@ export default function Login() {
                     window.location.reload();
                 } else {
                     alert(result.data.error)
+                    setValidated(false)
                 }
 
             })
-            .catch((error) => { console.log(error) })
+            .catch((error) => {
+                console.log(error)
+                setValidated(false)
+            })
     }
 
     return (
@@ -68,7 +69,7 @@ export default function Login() {
                 <span>welcome back, please</span>
                 <h2>Login</h2>
             </div>
-            <Form noValidate validated={state.validated} onSubmit={handleSubmit} className="login-form">
+            <Form noValidate onSubmit={handleSubmit} className="login-form">
 
                 <FloatingLabel label="Your Email" className="mb-3">
                     <Form.Control

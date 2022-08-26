@@ -5,11 +5,12 @@ import 'scss/LoginSignupModal.scss'
 
 export default function Signup() {
     const [state, setState] = useState({
-        validated: false,
         username: "",
         email: "",
         password: ""
     })
+
+    const [validated, setValidated] = useState(false);
 
 
     const handleChange = function (event) {
@@ -26,20 +27,17 @@ export default function Signup() {
         const isValid = form.checkValidity();
         e.preventDefault();
         if (isValid) {
-            setState(prevState => ({
-                ...prevState,
-                validated: isValid
-            }));
+            setValidated(true);
         } else {
             e.stopPropagation();
         }
     }
 
     useEffect(() => {
-        if (state.validated) {
+        if (validated) {
             callBackendSignup();
         }
-    }, [state.validated])
+    }, [validated])
 
 
     const callBackendSignup = function () {
@@ -58,10 +56,15 @@ export default function Signup() {
                     window.location.reload();
                 } else {
                     alert(result.data.error)
+                    setValidated(false)
                 }
 
             })
-            .catch((error) => { console.log(error) })
+            .catch((error) => {
+                console.log(error)
+                alert(error.response.data.message)
+                setValidated(false)
+            })
     }
     return (
         <div className="signup-panel">
@@ -69,7 +72,7 @@ export default function Signup() {
                 <span>In order to save your calculations, please</span>
                 <h2>Sign up</h2>
             </Container>
-            <Form validated={state.validated} onSubmit={handleSubmit} className="signup-form">
+            <Form onSubmit={handleSubmit} className="signup-form" noValidate>
                 <FloatingLabel label="Your Email" className="mb-3">
                     <Form.Control
                         required
