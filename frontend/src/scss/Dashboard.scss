@@ -6,6 +6,23 @@
     font-weight: bolder;
 }
 
+.search {
+    input {
+        height: 70px;
+        background: url('../Assets/search.svg') no-repeat;
+        background-position: 15px;
+        padding-left: 55px !important;
+        background-color: white;
+    }
+
+    input:hover {
+        &::placeholder {
+            color: black;
+            font-weight: bold;
+        }
+    }
+}
+
 .small-searches {
     display: flex;
     flex-direction: row;
@@ -67,7 +84,7 @@
             .list-group-item:last-of-type {
                 border-top-right-radius: 15px;
             }
-            
+
         }
     }
 
