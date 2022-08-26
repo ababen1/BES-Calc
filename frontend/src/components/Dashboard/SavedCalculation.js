@@ -15,7 +15,7 @@ export default function SavedCalculation(props) {
     })
 
     const seperator = (
-        <ListGroup.Item className="vseperator">
+        <ListGroup.Item className="vseperator" style={{"maxWidth": "41px"}}>
             <div className="vline"></div>
         </ListGroup.Item>
     )
@@ -53,8 +53,6 @@ export default function SavedCalculation(props) {
                 <ListGroup.Item className="date field">
                     {data.date.toLocaleDateString()}
                 </ListGroup.Item>
-
-                {seperator}
 
                 <ListGroup.Item className="delete">
 

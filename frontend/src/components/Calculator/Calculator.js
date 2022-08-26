@@ -71,7 +71,7 @@ export default function Calculator(props) {
     }
 
     const seperator = (
-        <ListGroup.Item className="vseperator">
+        <ListGroup.Item className="vseperator" style={{"minWidth": "8px", "maxWidth": "8px"}}>
             <div className="vline"></div>
         </ListGroup.Item>
     )
