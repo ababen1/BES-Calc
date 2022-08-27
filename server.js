@@ -45,6 +45,7 @@ app.use((req, res, next) => {
 
 app.use(require('./routes/api/Signup'));
 app.use(require('./routes/api/Login'));
+app.use(require('./routes/api/Calculations'))
 
 
 // simple route

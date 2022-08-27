@@ -1,15 +1,19 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = async (request, response, next) => {
+const VerifyToken = async (request, response, next) => {
 
     try {
-        const token = await request.headers.authorization.split(" ")[1];
+        const token = request.body.token || request.headers["token"];
+        if (!token) {
+            return response.status(401).send("no token found");
+        }
         const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const user = await decoded.userId;
-        if (request.body.userId && request.body.userId !== user) {
-            throw 'invalid user ID'
+        const user = await decoded;
+        if (!user) {
+            return response.status(401).send("invalid token");
         } else {
-            next();
+            request.user = user;
+           return next();
         }
 
 
@@ -20,3 +24,5 @@ module.exports = async (request, response, next) => {
     }
 
 }
+
+module.exports = VerifyToken;
