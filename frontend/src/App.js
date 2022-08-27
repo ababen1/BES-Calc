@@ -49,7 +49,7 @@ export default function App() {
         <div className='App'>
             <Header logo={logo} login_icon={login_icon} email={loggedUser.email} username={loggedUser.username} />
             <Routes>
-                <Route index element={<CalculatorPage />} />
+                <Route index element={<CalculatorPage userdata={loggedUser}/>} />
                 <Route path="/dashboard" element={<Dashboard userdata={loggedUser}/>} />
             </Routes>
             <Footer />
