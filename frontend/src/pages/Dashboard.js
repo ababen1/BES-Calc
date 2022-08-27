@@ -4,16 +4,32 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import 'scss/Dashboard.scss'
 import 'scss/Calculator.scss'
 import SavedCalculation from "components/Dashboard/SavedCalculation";
+import axios from "axios";
 
 export default function Dashboard(props) {
 
-    const [calculations, setCalculations] = useState();
+    const [calculations, setCalculations] = useState([]);
 
     useEffect(() => {
-        if (!props.userdata) {
-            window.location.href = '/'
+        if (props.userdata.id) {
+            fetchCalculations();
         }
-    })
+    }, [props.userdata])
+
+    const fetchCalculations = function () {
+        axios.get(`http://localhost:8080/calculations/${props.userdata.id}`, {'headers': {token: sessionStorage.getItem("token")}})
+            .then((result) => {
+                if (result.data.success) {
+                    setCalculations(result.data.data)
+                } else {
+                    alert(result.data.error)
+                }
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     return (
         <div className="main-container">
@@ -45,9 +61,9 @@ export default function Dashboard(props) {
 
 
             <div className="calculations-container">
-                <SavedCalculation />
-                <SavedCalculation />
-                <SavedCalculation />
+                {calculations.map((value, idx) => 
+                    <SavedCalculation data={value} key={idx}/>
+                )}
             </div>
         </div>
     )

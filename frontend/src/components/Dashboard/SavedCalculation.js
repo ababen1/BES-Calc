@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import viewIcon from 'Assets/view file.svg'
 import copyIcon from 'Assets/copy file.svg'
@@ -11,11 +11,17 @@ export default function SavedCalculation(props) {
         fileDescription: "File description",
         facility: "Facility name",
         customer: "Customer",
-        date: new Date(),
+        date: "",
     })
 
+    useEffect(() => {
+        if (props.data) {
+            setData(props.data);
+        }
+    }, [props.data])
+
     const seperator = (
-        <ListGroup.Item className="vseperator" style={{"maxWidth": "41px"}}>
+        <ListGroup.Item className="vseperator" style={{ "maxWidth": "41px" }}>
             <div className="vline"></div>
         </ListGroup.Item>
     )
@@ -33,25 +39,25 @@ export default function SavedCalculation(props) {
                 {seperator}
 
                 <ListGroup.Item className="file-description field">
-                    {data.fileDescription}
+                    {data.fileDescription ? data.fileDescription : "..."}
                 </ListGroup.Item>
 
                 {seperator}
 
                 <ListGroup.Item className="facility field">
-                    {data.facility}
+                    {data.facility ? data.facility : '...'}
                 </ListGroup.Item>
 
                 {seperator}
 
                 <ListGroup.Item className="customer field">
-                    {data.customer}
+                    {data.customer ? data.customer : '...'}
                 </ListGroup.Item>
 
                 {seperator}
 
                 <ListGroup.Item className="date field">
-                    {data.date.toLocaleDateString()}
+                    {data.date}
                 </ListGroup.Item>
 
                 <ListGroup.Item className="delete">
