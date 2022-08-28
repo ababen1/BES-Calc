@@ -5,6 +5,7 @@ const auth = require('../auth');
 const SavedCalculation = mongoose.model('SavedCalculation');
 
 router.post('/calculations', auth, async (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
     var userId = request.body.userId;
     if (userId != request.user.id) {
         return response.status(401).json({ error: "Unauthorized user. please log in again." });
@@ -37,6 +38,7 @@ router.post('/calculations', auth, async (request, response) => {
 })
 
 router.get('/calculations/:userId/', auth, async (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
     var userId = request.params.userId
     if (userId != request.user.id) {
         return response.status(401).json({ error: "Unauthorized. please log in again." });
@@ -52,6 +54,7 @@ router.get('/calculations/:userId/', auth, async (request, response) => {
 })
 
 router.get('/calculations/:userId/:calcId', auth, async (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
     var calculationId = request.params.calcId
 
     try {
