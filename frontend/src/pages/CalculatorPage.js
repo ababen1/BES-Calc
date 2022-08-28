@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calculator from "components/Calculator/Calculator";
 import { Form, Button, Stack, Modal, FloatingLabel } from "react-bootstrap";
 import resetIcon from 'Assets/reset.svg'
 import 'scss/Calculator.scss'
-import { GetImax, FACTOR_CORRECTION_VALUES, IMAX_VALUES } from 'utils/calculationsUtils'
+import 'utils/calculationsUtils'
 import axios from "axios";
+import { AddCalculator, Calculate, DeleteCalculator, UpdateCalculator } from "utils/calculationsUtils";
 
 export default function CalculatorPage(props) {
 
@@ -18,7 +19,41 @@ export default function CalculatorPage(props) {
         "remarks": ""
     });
 
-    const HandleChange = function (id, val) {
+    useEffect(() => {
+        if (props.isLoaded) {
+            setCustomerData(props.customerData)
+            setCalculators(props.calculatorsData)
+        }
+    }, [props.isLoaded])
+
+    // Event handlers 
+    const OnAllCalcsReset = function () {
+        setCalculators([]);
+        setShowResetWarning(false);
+    }
+
+    const OnAddCalculator = function (data) {
+        setCalculators(AddCalculator(calculators, data));
+        setCanSave(false);
+    }
+
+    const OnDeleteCalculator = function (idxToDelete) {
+        setCalculators(DeleteCalculator(calculators, idxToDelete));
+        setCanSave(false);
+    }
+
+    const OnUpdateCalculator = function (idxToUpdate, data) {
+        setCalculators(UpdateCalculator(calculators, idxToUpdate, data))
+    }
+
+    const OnCalculate = function () {
+        console.log("old: ", calculators)
+        setCalculators(Calculate(calculators));
+        console.log("new: ", calculators)
+        setCanSave(true);
+    }
+
+    const UpdateCustomerData = function (id, val) {
         setCustomerData((prev) => ({
             ...prev,
             [id]: val
@@ -54,183 +89,128 @@ export default function CalculatorPage(props) {
         })
     }
 
-    const CalculateAll = function () {
-        let newCalcsList = [];
-        let factor = GetFactorCorrection();
-        let canSaveCalculation = true;
-        for (let calcData of calculators) {
-            // Calculate imax, reserve and smm2
-            let imax = GetImax(calcData.ampacity, factor);
-            if (!isNaN(imax)) {
-                calcData.imax = imax;
-                calcData.reserve = (Math.abs(imax - calcData.ampacity) / imax) * 100;
-                calcData.smm2 = IMAX_VALUES[GetImax(calcData.ampacity, 1)];
-            } else {
-                canSaveCalculation = false;
-            }
-            // add to the new list
-            newCalcsList.push(calcData);
-        }
+    // Forms & Components
+    const customerForm = (
+        <Form>
+            <h5>{date.toLocaleDateString()}</h5>
+            <Stack direction="horizontal" gap={5}>
+                <FloatingLabel label="Customer" style={{ "flexGrow": 1 }}>
+                    <Form.Control
+                        type="text"
+                        size="lg"
+                        id="name"
+                        placeholder={"Customer "}
+                        required
+                        value={customerData.name}
+                        onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
+                </FloatingLabel>
+                <FloatingLabel label="Facility Name" style={{ "flexGrow": 1 }}>
+                    <Form.Control
+                        type="text"
+                        size="lg"
+                        id={"facility"}
+                        placeholder={"Facility Name"}
+                        required
+                        value={customerData.facility}
+                        onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
+                </FloatingLabel>
+            </Stack>
+            <FloatingLabel label="Remarks">
+                <Form.Control
+                    type="text"
+                    size="lg"
+                    id={"remarks"}
+                    placeholder={"Remarks"}
+                    value={customerData.remarks}
+                    onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
+            </FloatingLabel>
+        </Form>
+    )
 
-        setCalculators([...newCalcsList]);
-        setCanSave(canSaveCalculation);
-    }
+    const referenceRow = (
+        <Stack direction="horizontal" className="reference-row">
+            <div style={{ "flexGrow": "1" }}>
 
-    const GetFactorCorrection = function () {
-        const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-        return FACTOR_CORRECTION_VALUES[parseInt(clamp(calculators.length - 1, 0, 5))];
-    }
+            </div>
+            <div className="description long ref-row-item">
+                Description
+            </div>
 
-    const AddCalculator = function (data) {
-        let updated_calcs = [...calculators];
-        const amp = parseFloat(data.ampacity);
-        if (amp > Object.keys(IMAX_VALUES).at(-1)) {
-            var calcA = { ...data };
-            var calcB = { ...data };
-            calcA.ampacity = amp / 2;
-            calcB.ampacity = amp / 2;
-            updated_calcs.push(calcA);
-            updated_calcs.push(calcB);
-        } else {
-            updated_calcs.push(data);
-        }
-        setCalculators(updated_calcs);
-        setCanSave(false);
-    }
+            <div className="power-kw ref-row-item">
+                Power[KW]
+            </div>
 
-    const AddCalculators = function (data_array) {
-        data_array.forEach(element => {
-            AddCalculator(element);
-        });
-    }
+            <div className="cable ref-row-item">
+                Al / Cu
+            </div>
 
-    const UpdateCalculator = function (idx, data) {
-        let newCalcList = calculators;
-        newCalcList[idx] = data;
-        setCalculators(newCalcList);
-    }
+            <div className="wire ref-row-item">
+                Single / 3 Wire
+            </div>
 
-    const DeleteCalculator = function (idx) {
-        let calcsList = calculators;
-        let newList = [];
-        for (let index = 0; index < calcsList.length; index++) {
-            if (index != idx) {
-                newList.push(calcsList[index]);
-            }
-        }
-        setCalculators([...newList]);
-        setCanSave(false);
-    }
+            <div className="ampacity ref-row-item">
+                Ampacity
+            </div>
 
-    const OnAllCalcsReset = function () {
-        setCalculators([]);
-        setShowResetWarning(false);
-    }
+            <div className="results reserve ref-row-item">
+                Reserve(%)
+            </div>
+
+            <div className="results imax ref-row-item">
+                Imax
+            </div>
+
+            <div className="results smm2 ref-row-item">
+                S[Mm^2]
+            </div>
+            <div style={{ "flexGrow": "1" }}>
+
+            </div>
+        </Stack >)
+
+    const resetWarning = (
+        <Modal onHide={() => { setShowResetWarning(false) }} show={showResetWarning}>
+            <div className="reset-all-confirmation">
+                <Modal.Title>
+                    Reset all calculators?
+                </Modal.Title>
+                <Modal.Body>
+                    <Stack direction="horizontal" gap={5}>
+                        <Button onClick={OnAllCalcsReset}>OK</Button>
+                        <Button onClick={_e => { setShowResetWarning(false) }}>Cancel</Button>
+                    </Stack>
+                </Modal.Body>
+            </div>
+        </Modal>
+    )
 
     return (
         <div className="main-container">
             <div className="customer-info">
-                <Form>
-                    <h5>{date.toLocaleDateString()}</h5>
-                    <Stack direction="horizontal" gap={5}>
-                        <FloatingLabel label="Customer" style={{ "flexGrow": 1 }}>
-                            <Form.Control
-                                type="text"
-                                size="lg"
-                                id="name"
-                                placeholder={"Customer "}
-                                required
-                                value={customerData.name}
-                                onChange={e => HandleChange(e.target.id, e.target.value)} />
-                        </FloatingLabel>
-                        <FloatingLabel label="Facility Name" style={{ "flexGrow": 1 }}>
-                            <Form.Control
-                                type="text"
-                                size="lg"
-                                id={"facility"}
-                                placeholder={"Facility Name"}
-                                required
-                                value={customerData.facility}
-                                onChange={e => HandleChange(e.target.id, e.target.value)} />
-                        </FloatingLabel>
-                    </Stack>
-                    <FloatingLabel label="Remarks">
-                        <Form.Control
-                            type="text"
-                            size="lg"
-                            id={"remarks"}
-                            placeholder={"Remarks"}
-                            value={customerData.remarks}
-                            onChange={e => HandleChange(e.target.id, e.target.value)} />
-                    </FloatingLabel>
-                </Form>
+                {customerForm}
             </div>
 
             <br />
 
-            <div className="calcs-list">
+            <div className="round-corners">
                 <Calculator
                     key="main"
                     count={0}
                     editable={true}
-                    addCalc={AddCalculator} />
+                    addCalc={OnAddCalculator} />
             </div>
 
             <br />
 
-
-
-            <br />
-
             <div>
-                {(calculators.length !== 0) ?
-                    <Stack direction="horizontal" className="reference-row">
-                        <div style={{ "flexGrow": "1" }}>
+                {(calculators.length !== 0) ? referenceRow : ""}
 
-                        </div>
-                        <div className="description long ref-row-item">
-                            Description
-                        </div>
-
-                        <div className="power-kw ref-row-item">
-                            Power[KW]
-                        </div>
-
-                        <div className="cable ref-row-item">
-                            Al / Cu
-                        </div>
-
-                        <div className="wire ref-row-item">
-                            Single / 3 Wire
-                        </div>
-
-                        <div className="ampacity ref-row-item">
-                            Ampacity
-                        </div>
-
-                        <div className="results reserve ref-row-item">
-                            Reserve(%)
-                        </div>
-
-                        <div className="results imax ref-row-item">
-                            Imax
-                        </div>
-
-                        <div className="results smm2 ref-row-item">
-                            S[Mm^2]
-                        </div>
-                        <div style={{ "flexGrow": "1" }}>
-
-                        </div>
-                    </Stack >
-                    : ""}
-
-                <div className="calcs-list">
+                <div className="round-corners">
                     {calculators.map((value, index) =>
                         <Calculator
                             key={index}
-                            OnDeleteCalc={DeleteCalculator}
-                            OnUpdateCalc={UpdateCalculator}
+                            OnDeleteCalc={OnDeleteCalculator}
+                            OnUpdateCalc={OnUpdateCalculator}
                             count={index + 1}
                             data={value}
                             editable={false}
@@ -252,7 +232,7 @@ export default function CalculatorPage(props) {
                     <div style={{ "flexGrow": 1 }}></div>
 
                     <Button
-                        onClick={CalculateAll}
+                        onClick={OnCalculate}
                         disabled={calculators.length == 0}
                         variant="primary"
                         size="lg"
@@ -267,21 +247,9 @@ export default function CalculatorPage(props) {
                     </Button>
                 </Stack>
 
-                <Modal onHide={() => { setShowResetWarning(false) }} show={showResetWarning}>
-                    <div className="reset-all-confirmation">
-                        <Modal.Title>
-                            Reset all calculators?
-                        </Modal.Title>
-                        <Modal.Body>
-                            <Stack direction="horizontal" gap={5}>
-                                <Button onClick={OnAllCalcsReset}>OK</Button>
-                                <Button onClick={_e => { setShowResetWarning(false) }}>Cancel</Button>
-                            </Stack>
-                        </Modal.Body>
-                    </div>
-                </Modal>
+                {resetWarning}
+
             </div>
         </div>
-
     );
 }

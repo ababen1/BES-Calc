@@ -40,3 +40,58 @@ export function GetImax(amp, factor) {
     // (the imax list is sorted)
     return imaxValues[imaxValues.length - 1];
 }
+
+export function GetFactorCorrection(numOfCalcs) {
+    const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+    return FACTOR_CORRECTION_VALUES[parseInt(clamp(numOfCalcs - 1, 0, 5))];
+}
+
+export function AddCalculator(calcsList, dataToAdd) {
+    let updated_calcs = [...calcsList];
+    const amp = parseFloat(dataToAdd.ampacity);
+    if (amp > Object.keys(IMAX_VALUES).at(-1)) {
+        var calcA = { ...dataToAdd };
+        var calcB = { ...dataToAdd };
+        calcA.ampacity = amp / 2;
+        calcB.ampacity = amp / 2;
+        updated_calcs.push(calcA);
+        updated_calcs.push(calcB);
+    } else {
+        updated_calcs.push(dataToAdd);
+    }
+    return updated_calcs;
+}
+
+export function Calculate(calcs) {
+    let newCalcsList = [];
+    let factor = GetFactorCorrection(calcs.length);
+    for (let calcData of calcs) {
+        // Calculate imax, reserve and smm2
+        let imax = GetImax(calcData.ampacity, factor);
+        if (!isNaN(imax)) {
+            calcData.imax = imax;
+            calcData.reserve = (Math.abs(imax - calcData.ampacity) / imax) * 100;
+            calcData.smm2 = IMAX_VALUES[GetImax(calcData.ampacity, 1)];
+        }
+        // add to the new list
+        newCalcsList.push(calcData);
+    }
+
+    return newCalcsList
+}
+
+export function UpdateCalculator(calcsList, idx, data) {
+    let newCalcsList = [...calcsList];
+    newCalcsList[idx] = data;
+    return newCalcsList;
+}
+
+export function DeleteCalculator (calcsList, idxToDelete) {
+    let newList = [];
+    for (let index = 0; index < calcsList.length; index++) {
+        if (index !== idxToDelete) {
+            newList.push(calcsList[index]);
+        }
+    }
+    return newList;
+}

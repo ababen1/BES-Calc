@@ -48,19 +48,19 @@ $modal-header-border-color: transparent;
 @mixin button() {
     color: $white;
     font-family: "Open Sans";
-    font-size: 24px;
+    font-size: 18px;
     text-align: center;
     border: 0.7px solid;
     border-radius: 15px !important;
-    min-width: 200px;
-    min-height: 60px;
+    min-width: 170px;
+    min-height: 50px;
+    font-weight: normal;
 }
 
 .btn {
     @include button();
     background-color: $bes-blue-color;
     border-color: $bes-blue-color;
-    font-weight: bold;
 }
 
 .btn:disabled {
@@ -73,6 +73,7 @@ $modal-header-border-color: transparent;
     @include button();
     background-color: #888787;
     border-color: #888787;
+    font-weight: bold;
 }
 
 body {

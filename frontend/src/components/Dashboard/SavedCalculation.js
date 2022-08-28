@@ -39,25 +39,25 @@ export default function SavedCalculation(props) {
                 {seperator}
 
                 <ListGroup.Item className="file-description field">
-                    {data.fileDescription ? data.fileDescription : "..."}
+                    {data.fileDescription ? data.fileDescription : " "}
                 </ListGroup.Item>
 
                 {seperator}
 
                 <ListGroup.Item className="facility field">
-                    {data.facility ? data.facility : '...'}
+                    {data.facility ? data.facility : ' '}
                 </ListGroup.Item>
 
                 {seperator}
 
                 <ListGroup.Item className="customer field">
-                    {data.customer ? data.customer : '...'}
+                    {data.customer ? data.customer : ' '}
                 </ListGroup.Item>
 
                 {seperator}
 
                 <ListGroup.Item className="date field">
-                    {data.date}
+                    {data.date.split('T')[0]}
                 </ListGroup.Item>
 
                 <ListGroup.Item className="delete">
