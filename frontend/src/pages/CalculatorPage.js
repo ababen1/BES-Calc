@@ -94,16 +94,18 @@ export default function CalculatorPage(props) {
         <Form>
             <h5>{date.toLocaleDateString()}</h5>
             <Stack direction="horizontal" gap={5}>
-                <FloatingLabel label="Customer" style={{ "flexGrow": 1 }}>
+                <Form.Floating label="Customer" style={{ "flexGrow": 1 }}>
                     <Form.Control
                         type="text"
                         size="lg"
                         id="name"
                         placeholder={"Customer "}
                         required
+                        isValid={false}
                         value={customerData.name}
                         onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
-                </FloatingLabel>
+                        <label htmlFor="name">Name</label>
+                </Form.Floating>
                 <FloatingLabel label="Facility Name" style={{ "flexGrow": 1 }}>
                     <Form.Control
                         type="text"
