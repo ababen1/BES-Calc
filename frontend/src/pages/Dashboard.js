@@ -17,7 +17,10 @@ export default function Dashboard(props) {
     }, [props.userdata])
 
     const fetchCalculations = function () {
-        axios.get(`http://localhost:8080/calculations/${props.userdata.id}`, {'headers': {token: sessionStorage.getItem("token")}})
+        axios.get(`http://localhost:8080/calculations/${props.userdata.id}`, {
+            'headers': { token: sessionStorage.getItem("token") },
+            crossDomain: true,
+        })
             .then((result) => {
                 if (result.data.success) {
                     setCalculations(result.data.data)
@@ -61,8 +64,8 @@ export default function Dashboard(props) {
 
 
             <div className="calculations-container">
-                {calculations.map((value, idx) => 
-                    <SavedCalculation data={value} key={idx}/>
+                {calculations.map((value, idx) =>
+                    <SavedCalculation data={value} key={idx} />
                 )}
             </div>
         </div>
