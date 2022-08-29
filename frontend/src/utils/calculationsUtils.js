@@ -23,7 +23,7 @@ export const IMAX_VALUES = {
 export function GetImax(amp, factor) {
     amp = parseFloat(amp);
     if (isNaN(amp)) {
-        return NaN
+        return undefined
     }
 
     // search for imax value that can contain the given ampacity 
@@ -31,7 +31,10 @@ export function GetImax(amp, factor) {
     for (const val of imaxValues) {
         let valWithFactor = val * factor;
         if (valWithFactor >= amp) {
-            return val
+            return {
+                imax: val,
+                imaxWithFactor: valWithFactor
+            }
         }
     }
 
@@ -67,11 +70,11 @@ export function Calculate(calcs) {
     let factor = GetFactorCorrection(calcs.length);
     for (let calcData of calcs) {
         // Calculate imax, reserve and smm2
-        let imax = GetImax(calcData.ampacity, factor);
-        if (!isNaN(imax)) {
-            calcData.imax = imax;
-            calcData.reserve = (Math.abs(imax - calcData.ampacity) / imax) * 100;
-            calcData.smm2 = IMAX_VALUES[GetImax(calcData.ampacity, 1)];
+        let imaxResults = GetImax(calcData.ampacity, factor);
+        if (imaxResults) {
+            calcData.imax = imaxResults.imax;
+            calcData.reserve = (Math.abs(imaxResults.imaxWithFactor - calcData.ampacity) / imaxResults.imaxWithFactor) * 100;
+            calcData.smm2 = IMAX_VALUES[imaxResults.imax];
         }
         // add to the new list
         newCalcsList.push(calcData);
