@@ -13,6 +13,7 @@ export default function CalculatorPage(props) {
     const [calculators, setCalculators] = useState([]);
     const [canSave, setCanSave] = useState(false);
     const [showResetWarning, setShowResetWarning] = useState(false);
+    const [customerFormValid, setCustomerFormValid] = useState(false);
     const [customerData, setCustomerData] = useState({
         "name": "",
         "facility": "",
@@ -60,9 +61,16 @@ export default function CalculatorPage(props) {
         }));
     }
 
-    const handleSave = function () {
+    const handleSave = function (event) {
+        event.preventDefault();
+        const form = event.target
         if (!canSave) {
             alert("Please add rows and press 'calculate' before saving");
+            return
+        }
+        else if (!form.checkValidity()) {
+            setCustomerFormValid(false);
+            event.stopPropagation();
             return
         }
 
@@ -91,41 +99,48 @@ export default function CalculatorPage(props) {
 
     // Forms & Components
     const customerForm = (
-        <Form>
-            <h5>{date.toLocaleDateString()}</h5>
-            <Stack direction="horizontal" gap={5}>
-                <Form.Floating label="Customer" style={{ "flexGrow": 1 }}>
+        <Form onSubmit={handleSave} id="info-form" validated={false}>
+            <div className="customer-info">
+                <h5>{date.toLocaleDateString()}</h5>
+                <Stack direction="horizontal" gap={5}>
+                    <Form.Group style={{ "flexGrow": 1 }}>
+                        <Form.Floating label="Customer">
+                            <Form.Control
+                                type="text"
+                                size="lg"
+                                id="name"
+                                placeholder={"Customer "}
+                                required
+                                value={customerData.name}
+                                onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
+                            <label htmlFor="name">Name</label>
+                        </Form.Floating>
+                    </Form.Group>
+                    <Form.Group style={{ "flexGrow": 1 }}>
+                        <Form.Floating>
+                            <Form.Control
+                                type="text"
+                                size="lg"
+                                id={"facility"}
+                                placeholder={"Facility Name"}
+                                required
+                                value={customerData.facility}
+                                onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
+                            <label htmlFor="facility">Facility Name</label>
+                        </Form.Floating>
+                    </Form.Group>
+                </Stack>
+                <Form.Floating>
                     <Form.Control
                         type="text"
                         size="lg"
-                        id="name"
-                        placeholder={"Customer "}
-                        required
-                        isValid={false}
-                        value={customerData.name}
+                        id={"remarks"}
+                        placeholder={"Remarks"}
+                        value={customerData.remarks}
                         onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
-                        <label htmlFor="name">Name</label>
+                    <label htmlFor="remarks" className="form-label">Remarks</label>
                 </Form.Floating>
-                <FloatingLabel label="Facility Name" style={{ "flexGrow": 1 }}>
-                    <Form.Control
-                        type="text"
-                        size="lg"
-                        id={"facility"}
-                        placeholder={"Facility Name"}
-                        required
-                        value={customerData.facility}
-                        onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
-                </FloatingLabel>
-            </Stack>
-            <FloatingLabel label="Remarks">
-                <Form.Control
-                    type="text"
-                    size="lg"
-                    id={"remarks"}
-                    placeholder={"Remarks"}
-                    value={customerData.remarks}
-                    onChange={e => UpdateCustomerData(e.target.id, e.target.value)} />
-            </FloatingLabel>
+            </div>
         </Form>
     )
 
@@ -188,9 +203,8 @@ export default function CalculatorPage(props) {
 
     return (
         <div className="main-container">
-            <div className="customer-info">
-                {customerForm}
-            </div>
+
+            {customerForm}
 
             <br />
 
@@ -238,20 +252,22 @@ export default function CalculatorPage(props) {
                         disabled={calculators.length == 0}
                         variant="primary"
                         size="lg"
-                        id="calculate_btn">Calculate
+                        id="calculate_btn"> Calculate
                     </Button>
                     <Button
                         disabled={!canSave}
                         variant="primary"
                         size="lg"
                         id="save_calculation_btn"
-                        onClick={handleSave}>Save
+                        form="info-form"
+                        type="submit"> Save
                     </Button>
                 </Stack>
 
                 {resetWarning}
 
             </div>
-        </div>
+
+        </div >
     );
 }

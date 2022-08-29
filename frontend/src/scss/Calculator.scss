@@ -35,6 +35,10 @@
     }
 }
 
+.form-label[type="error"] {
+    color: red;
+}
+
 .round-corners {
     .calculator:first-child {
         .calc-number {

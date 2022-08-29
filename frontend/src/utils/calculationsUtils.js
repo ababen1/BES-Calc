@@ -41,7 +41,10 @@ export function GetImax(amp, factor) {
     // if nothing was found, return the biggest imax for now.
     // in the future, divide the amp into parts and return multiple imax values.
     // (the imax list is sorted)
-    return imaxValues[imaxValues.length - 1];
+    return {
+        imax: Object.keys(IMAX_VALUES).at(-1),
+        imaxWithFactor: Object.keys(IMAX_VALUES).at(-1) * factor
+    }
 }
 
 export function GetFactorCorrection(numOfCalcs) {

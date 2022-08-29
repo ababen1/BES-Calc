@@ -72,7 +72,7 @@ export default function Signup() {
                 <span>In order to save your calculations, please</span>
                 <h2>Sign up</h2>
             </Container>
-            <Form onSubmit={handleSubmit} className="signup-form" noValidate>
+            <Form onSubmit={handleSubmit} className="signup-form">
                 <FloatingLabel label="Your Email" className="mb-3">
                     <Form.Control
                         required

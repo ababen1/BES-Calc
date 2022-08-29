@@ -69,7 +69,7 @@ export default function Login() {
                 <span>welcome back, please</span>
                 <h2>Login</h2>
             </div>
-            <Form noValidate onSubmit={handleSubmit} className="login-form">
+            <Form onSubmit={handleSubmit} className="login-form">
 
                 <FloatingLabel label="Your Email" className="mb-3">
                     <Form.Control
